@@ -9,22 +9,6 @@ export const state = () => ({
       submenus: [],
     },
     {
-      label: 'Estore',
-      to: '/estore',
-      icon: 'category',
-      place: 'main',
-      roleGuard: ['admin'],
-      submenus: [],
-    },
-    {
-      label: 'Partner',
-      to: '/partner',
-      icon: 'work',
-      place: 'main',
-      roleGuard: ['admin'],
-      submenus: [],
-    },
-    {
       label: 'Setting',
       to: '/setting/user',
       icon: 'setting',
