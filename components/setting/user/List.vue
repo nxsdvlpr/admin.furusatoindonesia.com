@@ -76,9 +76,7 @@ export default defineComponent({
     }
 
     const onDelete = (rows) => {
-      methods.destroyItems(rows, () => {
-        // todo after destroy success
-      })
+      methods.destroyItems(rows)
 
       emit('delete', rows)
     }
