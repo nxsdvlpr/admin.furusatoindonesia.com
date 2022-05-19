@@ -1,0 +1,142 @@
+/*! purgecss start ignore */
+
+.n-table table.custom-table {
+  @apply w-full;
+  @apply table-auto;
+  @apply border-0;
+  @apply shadow-none;
+  overflow-x: scroll;
+
+  thead {
+    @apply hidden;
+
+    @screen md {
+      @apply table-header-group;
+    }
+  }
+
+  tbody {
+    @apply divide-y;
+
+    tr {
+      @apply py-3;
+      @apply relative;
+      @apply flex;
+      @apply flex-col;
+      @apply gap-y-3;
+
+      @screen md {
+        @apply table-row;
+        @apply gap-y-0;
+      }
+
+      td {
+        @apply px-1;
+        vertical-align: center;
+
+        @screen md {
+          @apply px-4;
+          @apply py-4;
+          @apply ml-0;
+
+          /* Adjust n-thumbnail inline block element problem. Need to refactor */
+          .n-thumbnail {
+            @apply mt-1;
+          }
+        }
+
+        &.n-table-cell-action {
+          @apply absolute;
+          @apply bottom-3;
+          @apply right-0;
+
+          @screen md {
+            @apply relative;
+            @apply bottom-auto;
+            @apply right-auto;
+            @apply text-center;
+          }
+        }
+      }
+
+      .vgt-checkbox-col {
+        @apply p-0;
+        @apply absolute;
+        @apply h-full;
+        @apply w-10 md:w-12;
+
+        input {
+          @apply left-0;
+          @apply top-1/2;
+          @apply -mt-10;
+
+          @screen md {
+            @apply left-auto;
+            @apply top-auto;
+            @apply mt-0;
+          }
+        }
+
+        & ~ td {
+          @apply ml-12;
+        }
+
+        @screen md {
+          @apply relative;
+          @apply h-auto;
+        }
+      }
+    }
+  }
+
+  tr {
+    td {
+      @screen md {
+        vertical-align: center;
+      }
+    }
+
+    @screen md {
+      @apply py-0;
+      vertical-align: center;
+    }
+  }
+
+  tr.clickable {
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-user-select: none !important;
+    -khtml-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+
+    &:hover {
+      @apply bg-app-lightest;
+    }
+  }
+}
+
+.n-table-action {
+  @apply absolute;
+  @apply flex;
+  @apply bottom-3;
+  @apply left-14;
+  @apply gap-x-2;
+  @apply items-center;
+
+  @screen md {
+    @apply relative;
+    @apply bottom-auto;
+    @apply left-auto;
+  }
+}
+
+.n-table table.has-action {
+  tbody tr {
+    @apply pb-12 md:pb-0;
+  }
+}
+
+/*! purgecss end ignore */

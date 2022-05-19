@@ -1,0 +1,67 @@
+@import '_config.pcss';
+
+.v-context {
+  &,
+  & ul {
+    background-color: $menu-bg;
+    background-clip: padding-box;
+    border-radius: 0.25rem;
+    border: 1px solid $menu-border;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+      0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    display: block;
+    margin: 0;
+    padding: 0;
+    min-width: 8rem;
+    z-index: 1500;
+    position: fixed;
+    list-style: none;
+    box-sizing: border-box;
+    max-height: calc(100% - 50px);
+    overflow-y: auto;
+
+    > li {
+      margin: 0;
+      padding: 0 !important;
+      position: relative;
+
+      > a {
+        font-size: $item-font-size !important;
+        display: block;
+        padding: 0.85rem 2rem;
+        font-weight: 400;
+        color: $item-color;
+        text-decoration: none;
+        white-space: nowrap;
+        border: 0;
+
+        &:hover,
+        &:focus {
+          text-decoration: none;
+          color: $item-hover-color;
+          background-color: $item-hover-bg !important;
+        }
+
+        &:focus {
+          outline: 0;
+        }
+      }
+    }
+
+    &:focus {
+      outline: 0;
+    }
+  }
+
+  &__sub {
+    > a:after {
+      content: '\203A';
+      float: right;
+      padding-left: 1rem;
+    }
+
+    > ul {
+      display: none;
+    }
+  }
+}
