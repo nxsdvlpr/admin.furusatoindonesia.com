@@ -6,7 +6,6 @@
     :rows="rows"
     :columns="columns"
     :create-options="{ label: 'Add Role' }"
-    :select-options="{ enabled: false }"
     :pagination-options="{
       enabled: true,
       perPage: 20,
@@ -33,6 +32,7 @@
 import { defineComponent, ref } from '@nuxtjs/composition-api'
 import useNTableCursorRemoteData from '@/components/nboard/composables/useNTableCursorRemoteData'
 import { GET_ROLES } from '@/graphql/setting/role/queries/GET_ROLES'
+import { DESTROY_ROLES } from '@/graphql/setting/role/mutations/DESTROY_ROLES'
 
 export default defineComponent({
   setup(props, { emit }) {
@@ -50,6 +50,7 @@ export default defineComponent({
     const { rows, totalRecords, pageInfo, loading, methods } =
       useNTableCursorRemoteData({
         getQuery: GET_ROLES,
+        destroyQuery: DESTROY_ROLES,
         dataProperty: 'roles',
       })
 
@@ -62,9 +63,7 @@ export default defineComponent({
     }
 
     const onDelete = (rows) => {
-      methods.destroyItems(rows, () => {
-        // todo after destroy success
-      })
+      methods.destroyItems(rows)
 
       emit('delete', rows)
     }
