@@ -1,37 +1,128 @@
 <template>
   <NForm>
     <NFormSection id="site" caption="Site" description="Basic site information">
-      <NColumn>
-        <NInputGroup label="Site Name">
-          <NInput v-model="form.setting.site_name" type="text" />
-        </NInputGroup>
-
-        <NInputGroup label="Site Title">
-          <NInput v-model="form.setting.site_title" type="text" />
-        </NInputGroup>
-      </NColumn>
+      <NInputGroup
+        v-for="(option, index) in options"
+        :key="option.name"
+        :label="option.name.replace('_', ' ')"
+      >
+        <div class="flex w-full gap-x-2">
+          <div v-if="langMode === 'id'" class="w-full">
+            <NInput
+              v-if="option.type === 'varchar'"
+              v-model="options[index].value"
+              type="text"
+            />
+            <NTextarea
+              v-else-if="option.type === 'text'"
+              v-model="options[index].value"
+            />
+          </div>
+          <div v-else class="w-full">
+            <NInput
+              v-if="option.type === 'varchar'"
+              v-model="options[index].valueJp"
+              type="text"
+            />
+            <NTextarea
+              v-else-if="option.type === 'text'"
+              v-model="options[index].valueJp"
+            />
+          </div>
+          <div>
+            <NSelect
+              v-model="langMode"
+              :clearable="false"
+              :options="[
+                { value: 'ja', text: 'Japanese' },
+                { value: 'id', text: 'Indonesian' },
+              ]"
+            />
+          </div>
+        </div>
+      </NInputGroup>
     </NFormSection>
 
     <NFormAction>
-      <NButton class="primary">Save</NButton>
+      <NButton :disabled="loading" class="primary" @click="onSave">
+        Save
+      </NButton>
     </NFormAction>
   </NForm>
 </template>
 
 <script>
-import { defineComponent, reactive } from '@nuxtjs/composition-api'
+import { defineComponent, ref, useContext } from '@nuxtjs/composition-api'
+import { useQuery, useMutation } from '@vue/apollo-composable'
+
+import { GET_OPTIONS } from '@/graphql/setting/general/queries/GET_OPTIONS'
+import { UPDATE_OPTIONS } from '@/graphql/setting/general/mutations/UPDATE_OPTIONS'
 
 export default defineComponent({
   setup(props, { emit }) {
-    const form = reactive({
-      setting: {
-        site_name: null,
-        site_title: null,
+    const { $toast } = useContext()
+
+    const langMode = ref('id')
+
+    const options = ref([])
+
+    const { onResult: onResultOptions } = useQuery(GET_OPTIONS, {
+      paging: {
+        first: 50,
       },
     })
 
+    onResultOptions(({ data }) => {
+      options.value = data.options.edges.map(({ node }) => ({
+        name: node.name,
+        value: node.value,
+        valueJp: node.valueJp,
+        type: node.type,
+      }))
+    })
+
+    const refetchQueries = [
+      {
+        query: GET_OPTIONS,
+        variables: {
+          paging: {
+            first: 50,
+          },
+        },
+      },
+    ]
+
+    const {
+      mutate: updateOptions,
+      onDone: onUpdateOptionsDone,
+      onError: onUpdateOptionsError,
+      loading,
+    } = useMutation(UPDATE_OPTIONS, {
+      refetchQueries,
+    })
+
+    const onSave = () => {
+      updateOptions({
+        input: {
+          options: options.value,
+        },
+      })
+    }
+
+    onUpdateOptionsDone(({ data }) => {
+      $toast.success('Options successfully updated!')
+      emit('save')
+    })
+
+    onUpdateOptionsError((error) => {
+      $toast.error(error.message)
+    })
+
     return {
-      form,
+      onSave,
+      options,
+      langMode,
+      loading,
     }
   },
 })

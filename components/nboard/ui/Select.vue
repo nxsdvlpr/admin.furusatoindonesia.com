@@ -4,14 +4,7 @@
       {{ prefix }}
     </div>
     <t-select
-      class="
-        w-full
-        border-t border-b
-        outline-none
-        text-gray-dark
-        border-gray-light
-        focus:border-gray-400
-      "
+      class="w-full border-t border-b outline-none text-gray-dark border-gray-light focus:border-gray-400"
       :class="{
         'border-l rounded-l': !hasPrefix,
         'border-r rounded-r': !hasSuffix,

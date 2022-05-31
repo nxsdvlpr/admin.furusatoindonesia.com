@@ -5,34 +5,33 @@
       caption="Overview"
       description="Basic profile information"
     >
-      <NColumn>
-        <NInputGroup :feedback="validation.error('user.name')" label="Name">
-          <NInput v-model="form.user.name" type="text" />
-        </NInputGroup>
+      <NInputGroup :feedback="validation.error('blog.subject')" label="Subject">
+        <NInput v-model="form.blog.subject" type="text" />
+      </NInputGroup>
 
-        <NInputGroup :feedback="validation.error('user.phone')" label="Phone">
-          <NInput v-model="form.user.phone" type="text" />
+      <NInputGroup :feedback="validation.error('blog.excerpt')" label="Excerpt">
+        <NTextarea v-model="form.blog.excerpt" />
+      </NInputGroup>
+
+      <NInputGroup :feedback="validation.error('blog.body')" label="Body">
+        <NTextarea v-model="form.blog.body" />
+      </NInputGroup>
+
+      <NColumn>
+        <NInputGroup
+          :feedback="validation.error('blog.publishedAt')"
+          label="Published At"
+        >
+          <NDatepicker v-model="form.blog.publishedAt" :clearable="false" />
         </NInputGroup>
       </NColumn>
 
       <NColumn>
         <NInputGroup
-          :feedback="validation.error('user.username')"
-          label="Username"
+          :feedback="validation.error('blog.published')"
+          label="Published"
         >
-          <NInput v-model="form.user.username" type="text" />
-        </NInputGroup>
-        <NInputGroup
-          :feedback="validation.error('user.password')"
-          label="Password"
-        >
-          <NInput v-model="form.user.password" type="password" />
-        </NInputGroup>
-      </NColumn>
-
-      <NColumn>
-        <NInputGroup :feedback="validation.error('user.roleId')" label="Role">
-          <SettingRoleSelect v-model="form.role" />
+          <t-toggle v-model="form.blog.published" />
         </NInputGroup>
       </NColumn>
     </NFormSection>
@@ -46,10 +45,10 @@ import { defineComponent, useContext } from '@nuxtjs/composition-api'
 import { useMutation } from '@vue/apollo-composable'
 
 import useNTableCursorRemoteData from '@/components/nboard/composables/useNTableCursorRemoteData'
-import useFormUser from '@/components/setting/user/useFormUser'
+import useFormBlog from '@/components/publication/blog/useFormBlog'
 
-import { CREATE_USER } from '@/graphql/setting/user/mutations/CREATE_USER'
-import { GET_USERS } from '@/graphql/setting/user/queries/GET_USERS'
+import { CREATE_BLOG } from '@/graphql/publication/blog/mutations/CREATE_BLOG'
+import { GET_BLOGS } from '@/graphql/publication/blog/queries/GET_BLOGS'
 
 export default defineComponent({
   setup(props, { emit }) {
@@ -57,21 +56,21 @@ export default defineComponent({
 
     const { variables } = useNTableCursorRemoteData()
 
-    const { form, validation, resetFormData } = useFormUser()
+    const { form, validation, resetFormData } = useFormBlog()
 
     const refetchQueries = [
       {
-        query: GET_USERS,
+        query: GET_BLOGS,
         variables,
       },
     ]
 
     const {
-      mutate: createUser,
-      onDone: onCreateUserDone,
-      onError: onCreateUserError,
+      mutate: createBlog,
+      onDone: onCreateBlogDone,
+      onError: onCreateBlogError,
       loading,
-    } = useMutation(CREATE_USER, {
+    } = useMutation(CREATE_BLOG, {
       refetchQueries,
     })
 
@@ -84,10 +83,8 @@ export default defineComponent({
         return false
       }
 
-      createUser({
-        input: {
-          user: form.user,
-        },
+      createBlog({
+        input: form.blog,
       })
     }
 
@@ -96,13 +93,13 @@ export default defineComponent({
       resetFormData()
     }
 
-    onCreateUserDone(({ data }) => {
-      $toast.success('User successfully added!')
+    onCreateBlogDone(({ data }) => {
+      $toast.success('Blog successfully added!')
       emit('save')
       resetFormData()
     })
 
-    onCreateUserError((error) => {
+    onCreateBlogError((error) => {
       $toast.error(error.message)
     })
 

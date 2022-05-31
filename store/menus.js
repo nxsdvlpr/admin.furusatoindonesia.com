@@ -9,15 +9,34 @@ export const state = () => ({
       submenus: [],
     },
     {
+      label: 'Publication',
+      to: '/publication/blog',
+      icon: 'paper',
+      place: 'main',
+      roleGuard: ['admin'],
+      submenus: [
+        {
+          label: 'Blog',
+          to: '/publication/blog',
+          roleGuard: ['admin'],
+        },
+        {
+          label: 'Timeline',
+          to: '/publication/timeline',
+          roleGuard: ['admin'],
+        },
+      ],
+    },
+    {
       label: 'Setting',
-      to: '/setting/user',
+      to: '/setting/general#site',
       icon: 'setting',
       place: 'bottom',
       roleGuard: ['admin'],
       submenus: [
         {
           label: 'General',
-          to: '/setting/general',
+          to: '/setting/general#site',
           roleGuard: ['admin'],
         },
         {
