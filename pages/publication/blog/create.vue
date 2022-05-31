@@ -1,12 +1,12 @@
 <template>
   <div>
     <NAppHeader>
-      <h1>Estore</h1>
-      <p>Estore &raquo; Create Estore</p>
+      <h1>Blog</h1>
+      <p>Blog &raquo; Create Blog</p>
       <template slot="more">
         <NButtonGroup>
-          <NButton class="outline" @click="$router.push('/estore')"
-            >&laquo; ESTORES</NButton
+          <NButton class="outline" @click="$router.push('/publication/blog')"
+            >&laquo; BLOGS</NButton
           >
         </NButtonGroup>
       </template>
@@ -16,7 +16,7 @@
     </NAppHeader>
     <NAppMain>
       <NPanel>
-        <EstoreFormCreate @save="onSave" @discard="onDiscard" />
+        <PublicationBlogFormCreate @save="onSave" @discard="onDiscard" />
       </NPanel>
     </NAppMain>
   </div>
@@ -40,11 +40,11 @@ export default defineComponent({
     ])
 
     const onSave = () => {
-      router.push('/estore')
+      router.push('/publication/blog')
     }
 
     const onDiscard = () => {
-      router.push('/estore')
+      router.push('/publication/blog')
     }
 
     return {

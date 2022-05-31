@@ -1,11 +1,11 @@
 <template>
   <div>
     <NAppHeader>
-      <h1>{{ estore.name }}</h1>
-      Estore &raquo; Detail Estore
+      <h1>{{ blog.subject }}</h1>
+      Blog &raquo; Detail Blog
       <template slot="more">
-        <NButton class="outline" @click="$router.push('/estore')"
-          >&laquo; ESTORES</NButton
+        <NButton class="outline" @click="$router.push('/publication/blog')"
+          >&laquo; BLOGS</NButton
         >
       </template>
       <template slot="after">
@@ -14,7 +14,7 @@
     </NAppHeader>
     <NAppMain>
       <NPanel>
-        <EstoreFormEdit @save="onSave" @discard="onDiscard" />
+        <PublicationBlogFormEdit @save="onSave" @discard="onDiscard" />
       </NPanel>
     </NAppMain>
   </div>
@@ -28,7 +28,7 @@ import {
   ref,
 } from '@nuxtjs/composition-api'
 import { useQuery, useResult } from '@vue/apollo-composable'
-import { GET_ESTORE } from '@/graphql/estore/queries/GET_ESTORE'
+import { GET_BLOG } from '@/graphql/publication/blog/queries/GET_BLOG'
 
 export default defineComponent({
   meta: {
@@ -47,24 +47,24 @@ export default defineComponent({
     ])
 
     const onSave = () => {
-      router.push('/estore')
+      router.push('/publication/blog')
     }
 
     const onDiscard = () => {
-      router.push('/estore')
+      router.push('/publication/blog')
     }
 
-    const { result } = useQuery(GET_ESTORE, {
-      id: route.value.params.estore_id,
+    const { result } = useQuery(GET_BLOG, {
+      id: route.value.params.blog_id,
     })
 
-    const estore = useResult(result, {}, (data) => {
-      return data.user
+    const blog = useResult(result, {}, (data) => {
+      return data.blog
     })
 
     return {
       tabs,
-      estore,
+      blog,
       onSave,
       onDiscard,
     }

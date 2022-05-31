@@ -30,7 +30,7 @@ export const mutations = {
       name: payload.name,
       username: payload.username,
       phone: payload.phone,
-      role: payload.role.shortname,
+      role: payload.role,
     }
   },
   UNSET_AUTH: (state) => {

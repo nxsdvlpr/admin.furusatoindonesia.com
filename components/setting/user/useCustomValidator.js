@@ -15,32 +15,13 @@ export default function useCustomValidator() {
     if (
       value === '' ||
       !validators.required.$validator(value) ||
-      !validators.minLength(3).$validator(value) ||
-      !custom.validUsername.$validator(value)
+      !validators.email.$validator(value) ||
+      !validators.minLength(3).$validator(value)
     ) {
       return false
     }
 
     return true
-  }
-
-  custom.validUsername = {
-    $validator: (value) => {
-      // if (value.search(/^[a-zA-Z0-9-_@.]+$/) === -1) {
-      //   return false
-      // }
-
-      if (value.search(/^[\S]+$/) === -1) {
-        return false
-      }
-
-      return true
-    },
-    // $message: 'Value only acepts alphanumeric, dash and underscore',
-    $message: 'Value can not contain whitespaces',
-    $params: {
-      type: 'validUsername',
-    },
   }
 
   custom.uniqueUsername = {

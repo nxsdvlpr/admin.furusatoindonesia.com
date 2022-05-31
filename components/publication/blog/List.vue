@@ -5,7 +5,7 @@
     :is-loading.sync="loading"
     :rows="rows"
     :columns="columns"
-    :create-options="{ label: 'Add Estore' }"
+    :create-options="{ label: 'Add Blog' }"
     :pagination-options="{
       enabled: true,
       perPage: 20,
@@ -20,11 +20,14 @@
     @on-delete="onDelete"
   >
     <template #table-row="props">
-      <div v-if="props.column.field === 'name'">
-        <div class="font-medium">{{ props.row.name }}</div>
-        <div class="font-sm text-green-500">
-          {{ props.row.username.toLowerCase() }}
+      <div v-if="props.column.field === 'subject'">
+        <div class="font-medium">{{ props.row.subject }}</div>
+        <div class="font-xs text-gray-500">
+          {{ props.row.excerpt }}
         </div>
+      </div>
+      <div v-else-if="props.column.field === 'user'">
+        <div class="font-medium">{{ props.row.user.name }}</div>
       </div>
       <NTableCellResponsive v-else :props="props"></NTableCellResponsive>
     </template>
@@ -34,27 +37,32 @@
 <script>
 import { defineComponent, ref } from '@nuxtjs/composition-api'
 import useNTableCursorRemoteData from '@/components/nboard/composables/useNTableCursorRemoteData'
-import { GET_ESTORES } from '@/graphql/estore/queries/GET_ESTORES'
-import { DESTROY_ESTORES } from '@/graphql/estore/mutations/DESTROY_ESTORES'
+import { GET_BLOGS } from '@/graphql/publication/blog/queries/GET_BLOGS'
+import { DESTROY_BLOGS } from '@/graphql/publication/blog/mutations/DESTROY_BLOGS'
 
 export default defineComponent({
   setup(props, { emit }) {
     const columns = ref([
       {
-        label: 'Name',
-        field: 'name',
+        label: 'Subject',
+        field: 'subject',
       },
       {
-        label: 'Phone',
-        field: 'phone',
+        label: 'Body',
+        field: 'body',
+      },
+      {
+        label: 'User',
+        field: 'user',
+        sortable: false,
       },
     ])
 
     const { rows, totalRecords, pageInfo, loading, methods } =
       useNTableCursorRemoteData({
-        getQuery: GET_ESTORES,
-        destroyQuery: DESTROY_ESTORES,
-        dataProperty: 'users',
+        getQuery: GET_BLOGS,
+        destroyQuery: DESTROY_BLOGS,
+        dataProperty: 'blogs',
       })
 
     const onCreate = () => {

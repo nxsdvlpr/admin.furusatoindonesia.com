@@ -37,6 +37,10 @@ export default defineComponent({
         name: 'Overview',
         to: '#overview',
       },
+      {
+        name: 'Role Access',
+        to: '#role-access',
+      },
     ])
 
     const onSave = () => {

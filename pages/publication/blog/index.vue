@@ -1,12 +1,16 @@
 <template>
   <div>
     <NAppHeader>
-      <h1>Estore</h1>
-      <p>Estore &raquo; Lists</p>
+      <h1>Blog</h1>
+      <p>Blog &raquo; Lists</p>
     </NAppHeader>
     <NAppMain>
       <NPanel>
-        <EstoreList @row-tap="onRowTap" @create="onCreate" @delete="onDelete" />
+        <PublicationBlogList
+          @row-tap="onRowTap"
+          @create="onCreate"
+          @delete="onDelete"
+        />
       </NPanel>
     </NAppMain>
   </div>
@@ -23,11 +27,11 @@ export default defineComponent({
     const router = useRouter()
 
     const onRowTap = (row) => {
-      router.push(`/estore/${row.id}/edit#overview`)
+      router.push(`/publication/blog/${row.id}/edit#overview`)
     }
 
     const onCreate = () => {
-      router.push('/estore/create#overview')
+      router.push('/publication/blog/create#overview')
     }
 
     const onDelete = (rows) => {}
