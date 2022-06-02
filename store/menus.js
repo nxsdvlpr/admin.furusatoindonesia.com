@@ -28,6 +28,14 @@ export const state = () => ({
       ],
     },
     {
+      label: 'Resource',
+      to: '/resource',
+      icon: 'document',
+      place: 'main',
+      roleGuard: ['admin'],
+      submenus: [],
+    },
+    {
       label: 'Setting',
       to: '/setting/general#site',
       icon: 'setting',
