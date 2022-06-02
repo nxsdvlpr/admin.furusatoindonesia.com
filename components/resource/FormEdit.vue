@@ -5,33 +5,39 @@
       caption="Overview"
       description="Basic expertise information"
     >
-      <NInputGroup :feedback="validation.error('blog.subject')" label="Subject">
-        <NInput v-model="form.blog.subject" type="text" />
+      <NInputGroup
+        :feedback="validation.error('resource.subject')"
+        label="Subject"
+      >
+        <NInput v-model="form.resource.subject" type="text" />
       </NInputGroup>
 
-      <NInputGroup :feedback="validation.error('blog.excerpt')" label="Excerpt">
-        <NTextarea v-model="form.blog.excerpt" />
+      <NInputGroup
+        :feedback="validation.error('resource.excerpt')"
+        label="Excerpt"
+      >
+        <NTextarea v-model="form.resource.excerpt" />
       </NInputGroup>
 
-      <NInputGroup :feedback="validation.error('blog.body')" label="Body">
-        <NTextarea v-model="form.blog.body" />
+      <NInputGroup :feedback="validation.error('resource.body')" label="Body">
+        <NTextarea v-model="form.resource.body" />
       </NInputGroup>
 
       <NColumn>
         <NInputGroup
-          :feedback="validation.error('blog.publishedAt')"
+          :feedback="validation.error('resource.publishedAt')"
           label="Published At"
         >
-          <NDatepicker v-model="form.blog.publishedAt" :clearable="false" />
+          <NDatepicker v-model="form.resource.publishedAt" :clearable="false" />
         </NInputGroup>
       </NColumn>
 
       <NColumn>
         <NInputGroup
-          :feedback="validation.error('blog.published')"
+          :feedback="validation.error('resource.published')"
           label="Published"
         >
-          <t-toggle v-model="form.blog.published" />
+          <t-toggle v-model="form.resource.published" />
         </NInputGroup>
       </NColumn>
     </NFormSection>
@@ -45,11 +51,11 @@ import { defineComponent, useContext, useRoute } from '@nuxtjs/composition-api'
 import { useMutation, useQuery } from '@vue/apollo-composable'
 
 import useNTableCursorRemoteData from '@/components/nboard/composables/useNTableCursorRemoteData'
-import useFormBlog from '@/components/publication/blog/useFormBlog'
+import useFormResource from '@/components/resource/useFormResource'
 
-import { UPDATE_BLOG } from '@/graphql/publication/blog/mutations/UPDATE_BLOG'
-import { GET_BLOGS } from '@/graphql/publication/blog/queries/GET_BLOGS'
-import { GET_BLOG } from '@/graphql/publication/blog/queries/GET_BLOG'
+import { UPDATE_RESOURCE } from '@/graphql/resource/mutations/UPDATE_RESOURCE'
+import { GET_RESOURCES } from '@/graphql/resource/queries/GET_RESOURCES'
+import { GET_RESOURCE } from '@/graphql/resource/queries/GET_RESOURCE'
 
 export default defineComponent({
   setup(props, { emit }) {
@@ -59,41 +65,41 @@ export default defineComponent({
 
     const { variables } = useNTableCursorRemoteData()
 
-    const { form, validation, resetFormData } = useFormBlog()
+    const { form, validation, resetFormData } = useFormResource()
 
     const refetchQueries = [
       {
-        query: GET_BLOGS,
+        query: GET_RESOURCES,
         variables,
       },
       {
-        query: GET_BLOG,
+        query: GET_RESOURCE,
         variables: {
-          id: route.value.params.blog_id,
+          id: route.value.params.resource_id,
         },
       },
     ]
 
-    const { onResult: onResultBlog } = useQuery(GET_BLOG, {
-      id: route.value.params.blog_id,
+    const { onResult: onResultResource } = useQuery(GET_RESOURCE, {
+      id: route.value.params.resource_id,
     })
 
     const {
-      mutate: updateBlog,
-      onDone: onUpdateBlogDone,
-      onError: onUpdateBlogError,
+      mutate: updateResource,
+      onDone: onUpdateResourceDone,
+      onError: onUpdateResourceError,
       loading,
-    } = useMutation(UPDATE_BLOG, {
+    } = useMutation(UPDATE_RESOURCE, {
       refetchQueries,
     })
 
-    onResultBlog(({ data }) => {
-      if (!data.blog) {
+    onResultResource(({ data }) => {
+      if (!data.resource) {
         return error({ statusCode: 404, message: 'Not Found' })
       }
 
-      const { id, __typename, ...result } = data.blog
-      form.blog = result
+      const { id, __typename, ...result } = data.resource
+      form.resource = result
     })
 
     const onSave = async () => {
@@ -105,10 +111,10 @@ export default defineComponent({
         return false
       }
 
-      updateBlog({
+      updateResource({
         input: {
-          id: route.value.params.blog_id,
-          update: form.blog,
+          id: route.value.params.resource_id,
+          update: form.resource,
         },
       })
     }
@@ -118,13 +124,13 @@ export default defineComponent({
       resetFormData()
     }
 
-    onUpdateBlogDone(({ data }) => {
-      $toast.success('Blog successfully updated!')
+    onUpdateResourceDone(({ data }) => {
+      $toast.success('Resource successfully updated!')
       emit('save')
       resetFormData()
     })
 
-    onUpdateBlogError((error) => {
+    onUpdateResourceError((error) => {
       $toast.error(error.message)
     })
 

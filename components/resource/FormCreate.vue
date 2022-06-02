@@ -5,33 +5,39 @@
       caption="Overview"
       description="Basic expertise information"
     >
-      <NInputGroup :feedback="validation.error('blog.subject')" label="Subject">
-        <NInput v-model="form.blog.subject" type="text" />
+      <NInputGroup
+        :feedback="validation.error('resource.subject')"
+        label="Subject"
+      >
+        <NInput v-model="form.resource.subject" type="text" />
       </NInputGroup>
 
-      <NInputGroup :feedback="validation.error('blog.excerpt')" label="Excerpt">
-        <NTextarea v-model="form.blog.excerpt" />
+      <NInputGroup
+        :feedback="validation.error('resource.excerpt')"
+        label="Excerpt"
+      >
+        <NTextarea v-model="form.resource.excerpt" />
       </NInputGroup>
 
-      <NInputGroup :feedback="validation.error('blog.body')" label="Body">
-        <NTextarea v-model="form.blog.body" />
+      <NInputGroup :feedback="validation.error('resource.body')" label="Body">
+        <NTextarea v-model="form.resource.body" />
       </NInputGroup>
 
       <NColumn>
         <NInputGroup
-          :feedback="validation.error('blog.publishedAt')"
+          :feedback="validation.error('resource.publishedAt')"
           label="Published At"
         >
-          <NDatepicker v-model="form.blog.publishedAt" :clearable="false" />
+          <NDatepicker v-model="form.resource.publishedAt" :clearable="false" />
         </NInputGroup>
       </NColumn>
 
       <NColumn>
         <NInputGroup
-          :feedback="validation.error('blog.published')"
+          :feedback="validation.error('resource.published')"
           label="Published"
         >
-          <t-toggle v-model="form.blog.published" />
+          <t-toggle v-model="form.resource.published" />
         </NInputGroup>
       </NColumn>
     </NFormSection>
@@ -45,10 +51,10 @@ import { defineComponent, useContext } from '@nuxtjs/composition-api'
 import { useMutation } from '@vue/apollo-composable'
 
 import useNTableCursorRemoteData from '@/components/nboard/composables/useNTableCursorRemoteData'
-import useFormBlog from '@/components/publication/blog/useFormBlog'
+import useFormResource from '@/components/resource/useFormResource'
 
-import { CREATE_BLOG } from '@/graphql/publication/blog/mutations/CREATE_BLOG'
-import { GET_BLOGS } from '@/graphql/publication/blog/queries/GET_BLOGS'
+import { CREATE_RESOURCE } from '@/graphql/resource/mutations/CREATE_RESOURCE'
+import { GET_RESOURCES } from '@/graphql/resource/queries/GET_RESOURCES'
 
 export default defineComponent({
   setup(props, { emit }) {
@@ -56,21 +62,21 @@ export default defineComponent({
 
     const { variables } = useNTableCursorRemoteData()
 
-    const { form, validation, resetFormData } = useFormBlog()
+    const { form, validation, resetFormData } = useFormResource()
 
     const refetchQueries = [
       {
-        query: GET_BLOGS,
+        query: GET_RESOURCES,
         variables,
       },
     ]
 
     const {
-      mutate: createBlog,
-      onDone: onCreateBlogDone,
-      onError: onCreateBlogError,
+      mutate: createResource,
+      onDone: onCreateResourceDone,
+      onError: onCreateResourceError,
       loading,
-    } = useMutation(CREATE_BLOG, {
+    } = useMutation(CREATE_RESOURCE, {
       refetchQueries,
     })
 
@@ -83,8 +89,8 @@ export default defineComponent({
         return false
       }
 
-      createBlog({
-        input: form.blog,
+      createResource({
+        input: form.resource,
       })
     }
 
@@ -93,13 +99,13 @@ export default defineComponent({
       resetFormData()
     }
 
-    onCreateBlogDone(({ data }) => {
-      $toast.success('Blog successfully added!')
+    onCreateResourceDone(({ data }) => {
+      $toast.success('Resource successfully added!')
       emit('save')
       resetFormData()
     })
 
-    onCreateBlogError((error) => {
+    onCreateResourceError((error) => {
       $toast.error(error.message)
     })
 
