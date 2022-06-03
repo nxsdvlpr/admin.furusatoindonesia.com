@@ -1,5 +1,8 @@
 <template>
   <NForm>
+    <div class="flex justify-end">
+      <FormLangSelect v-model="form.displayLanguage" />
+    </div>
     <NFormSection
       id="overview"
       caption="Overview"
@@ -9,18 +12,23 @@
         :feedback="validation.error('project.subject')"
         label="Subject"
       >
-        <NInput v-model="form.project.subject" type="text" />
+        <NInput
+          v-if="form.displayLanguage === 'ID'"
+          v-model="form.project.subject"
+          type="text"
+        />
+        <NInput v-else v-model="form.project.subjectJp" type="text" />
       </NInputGroup>
 
       <NInputGroup
         :feedback="validation.error('project.excerpt')"
         label="Excerpt"
       >
-        <NTextarea v-model="form.project.excerpt" />
-      </NInputGroup>
-
-      <NInputGroup :feedback="validation.error('project.body')" label="Body">
-        <NTextarea v-model="form.project.body" />
+        <NTextarea
+          v-if="form.displayLanguage === 'ID'"
+          v-model="form.project.excerpt"
+        />
+        <NTextarea v-else v-model="form.project.excerptJp" />
       </NInputGroup>
     </NFormSection>
 
@@ -42,7 +50,14 @@ export default defineComponent({
   setup(props, { emit }) {
     const { $toast } = useContext()
 
-    const { variables } = useNTableCursorRemoteData()
+    const { variables } = useNTableCursorRemoteData({
+      customVariables: {
+        sorting: {
+          field: 'sequence',
+          direction: 'ASC',
+        },
+      },
+    })
 
     const { form, validation, resetFormData } = useFormProject()
 

@@ -4,11 +4,13 @@ export const GET_EXPERTISE = gql`
   query getExpertise($id: ID!) {
     article(id: $id) {
       id
-      name
       group
       subject
+      subjectJp
       excerpt
+      excerptJp
       body
+      bodyJp
       image
       sequence
     }

@@ -2,7 +2,7 @@
   <div>
     <NAppHeader>
       <h1>Project</h1>
-      <p>Project &raquo; Lists</p>
+      <p>Program &raquo; Project &raquo; Lists</p>
     </NAppHeader>
     <NAppMain>
       <NPanel>

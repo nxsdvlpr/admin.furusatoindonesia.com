@@ -22,9 +22,6 @@
     <template #table-row="props">
       <div v-if="props.column.field === 'subject'">
         <div class="font-medium">{{ props.row.subject }}</div>
-        <div class="font-xs text-gray-500">
-          {{ props.row.excerpt }}
-        </div>
       </div>
       <NTableCellResponsive v-else :props="props"></NTableCellResponsive>
     </template>
@@ -45,8 +42,8 @@ export default defineComponent({
         field: 'subject',
       },
       {
-        label: 'Body',
-        field: 'body',
+        label: 'Excerpt',
+        field: 'excerpt',
       },
     ])
 
@@ -55,6 +52,12 @@ export default defineComponent({
         getQuery: GET_IMPACTS,
         destroyQuery: DESTROY_IMPACTS,
         dataProperty: 'articles',
+        customVariables: {
+          sorting: {
+            field: 'sequence',
+            direction: 'ASC',
+          },
+        },
       })
 
     const onCreate = () => {

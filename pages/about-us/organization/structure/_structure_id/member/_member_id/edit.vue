@@ -1,11 +1,13 @@
 <template>
   <div>
     <NAppHeader>
-      <h1>{{ organizationPeople.fullname }}</h1>
-      Organization People &raquo; Detail Organization People
+      <h1>{{ organizationMember.fullname }}</h1>
+      <p>
+        About Us &raquo; Organization Structure &raquo; Member &raquo; Detail
+      </p>
       <template slot="more">
         <NButton class="outline" @click="back()"
-          >&laquo; ORGANIZATION PEOPLES</NButton
+          >&laquo; ORGANIZATION MEMBERS</NButton
         >
       </template>
       <template slot="after">
@@ -14,7 +16,7 @@
     </NAppHeader>
     <NAppMain>
       <NPanel>
-        <AboutUsOrganizationPeopleFormEdit
+        <AboutUsOrganizationMemberFormEdit
           @save="onSave"
           @discard="onDiscard"
         />
@@ -32,7 +34,7 @@ import {
   computed,
 } from '@nuxtjs/composition-api'
 import { useQuery, useResult } from '@vue/apollo-composable'
-import { GET_ORGANIZATION_PEOPLE } from '@/graphql/about-us/organization/people/queries/GET_ORGANIZATION_PEOPLE'
+import { GET_ORGANIZATION_MEMBER } from '@/graphql/about-us/organization/member/queries/GET_ORGANIZATION_MEMBER'
 
 export default defineComponent({
   meta: {
@@ -53,7 +55,7 @@ export default defineComponent({
     const id = computed(() => route.value.params.structure_id)
 
     const back = () => {
-      router.push(`/about-us/organization/structure/${id.value}/people`)
+      router.push(`/about-us/organization/structure/${id.value}/member`)
     }
 
     const onSave = () => {
@@ -64,17 +66,17 @@ export default defineComponent({
       back()
     }
 
-    const { result } = useQuery(GET_ORGANIZATION_PEOPLE, {
-      id: route.value.params.people_id,
+    const { result } = useQuery(GET_ORGANIZATION_MEMBER, {
+      id: route.value.params.member_id,
     })
 
-    const organizationPeople = useResult(result, {}, (data) => {
-      return data.organizationPeople
+    const organizationMember = useResult(result, {}, (data) => {
+      return data.organizationMember
     })
 
     return {
       tabs,
-      organizationPeople,
+      organizationMember,
       back,
       onSave,
       onDiscard,

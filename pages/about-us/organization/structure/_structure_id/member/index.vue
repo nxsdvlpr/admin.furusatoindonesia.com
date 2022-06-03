@@ -1,8 +1,10 @@
 <template>
   <div>
     <NAppHeader>
-      <h1>Organization People</h1>
-      <p>Organization People &raquo; Lists</p>
+      <h1>Organization Member</h1>
+      <p>
+        About Us &raquo; Organization Structure &raquo; Member &raquo; Lists
+      </p>
       <template slot="more">
         <NButton
           class="outline"
@@ -13,7 +15,7 @@
     </NAppHeader>
     <NAppMain>
       <NPanel>
-        <AboutUsOrganizationPeopleList
+        <AboutUsOrganizationMemberList
           :key="id"
           :organization-id="id"
           @row-tap="onRowTap"
@@ -46,13 +48,13 @@ export default defineComponent({
 
     const onRowTap = (row) => {
       router.push(
-        `/about-us/organization/structure/${id.value}/people/${row.id}/edit#overview`
+        `/about-us/organization/structure/${id.value}/member/${row.id}/edit#overview`
       )
     }
 
     const onCreate = () => {
       router.push(
-        `/about-us/organization/structure/${id.value}/people/create#overview`
+        `/about-us/organization/structure/${id.value}/member/create#overview`
       )
     }
 

@@ -4,25 +4,27 @@ import useNFormValidation from '@/components/nboard/composables/useNFormValidati
 import useNFormValidators from '@/components/nboard/composables/useNFormValidators'
 
 const defaultData = () => ({
-  organizationPeople: {
+  organizationMember: {
     organizationStructureId: null,
     fullname: null,
     profession: null,
+    professionJp: null,
     image: null,
     sequence: 0,
   },
+  displayLanguage: 'ID',
 })
 
 const form = reactive(defaultData())
 
-export default function useFormResource() {
+export default function useFormOrganizationMember() {
   const { required } = useNFormValidators()
 
   const route = useRoute()
 
   const rules = computed(() => {
     return {
-      organizationPeople: {
+      organizationMember: {
         organizationStructureId: {
           required,
         },
@@ -54,7 +56,7 @@ export default function useFormResource() {
   }
 
   const handleOrganizationStructureIdChange = (value) => {
-    form.organizationPeople.organizationStructureId = value
+    form.organizationMember.organizationStructureId = value
   }
 
   watch(organizationStructureId, handleOrganizationStructureIdChange, {

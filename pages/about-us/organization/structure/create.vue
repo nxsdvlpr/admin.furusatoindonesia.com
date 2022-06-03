@@ -2,7 +2,7 @@
   <div>
     <NAppHeader>
       <h1>Organization Structure</h1>
-      <p>Organization Structure &raquo; Create Organization Structure</p>
+      <p>About Us &raquo; Organization Structure &raquo; Create</p>
       <template slot="more">
         <NButtonGroup>
           <NButton

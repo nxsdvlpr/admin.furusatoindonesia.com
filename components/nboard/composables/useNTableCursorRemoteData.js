@@ -12,6 +12,7 @@ export default function useNTableCursorRemoteData(config = {}) {
   const client = app.apolloProvider.clients.defaultClient
 
   const defaultVariables = defaults(
+    config.customVariables ? config.customVariables : {},
     {
       paging: {
         after: null,
@@ -21,8 +22,7 @@ export default function useNTableCursorRemoteData(config = {}) {
         field: 'id',
         direction: 'DESC',
       },
-    },
-    config.customVariables ? config.customVariables : {}
+    }
   )
 
   const defaultPageInfo = {

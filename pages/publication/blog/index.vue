@@ -2,7 +2,7 @@
   <div>
     <NAppHeader>
       <h1>Blog</h1>
-      <p>Blog &raquo; Lists</p>
+      <p>Publication &raquo; Blog &raquo; Lists</p>
     </NAppHeader>
     <NAppMain>
       <NPanel>

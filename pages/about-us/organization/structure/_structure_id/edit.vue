@@ -2,7 +2,7 @@
   <div>
     <NAppHeader>
       <h1>{{ organizationStructure.subject }}</h1>
-      Organization Structure &raquo; Detail Organization Structure
+      <p>About Us &raquo; Organization Structure &raquo; Detail</p>
       <template slot="more">
         <NButton
           class="outline"

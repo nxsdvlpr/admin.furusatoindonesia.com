@@ -4,11 +4,13 @@ export const GET_IMPACT = gql`
   query getImpact($id: ID!) {
     article(id: $id) {
       id
-      name
       group
       subject
+      subjectJp
       excerpt
+      excerptJp
       body
+      bodyJp
       image
       sequence
     }

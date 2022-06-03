@@ -67,7 +67,7 @@ export default function useFormRole() {
     assign(form, reactive(defaultData()))
   }
 
-  const handlecomputedRoleAccessChange = (value) => {
+  const handleComputedRoleAccessChange = (value) => {
     form.currentRoleAccess = value
   }
 
@@ -75,7 +75,7 @@ export default function useFormRole() {
     form.role.access = value
   }
 
-  watch(computedRoleAccess, handlecomputedRoleAccessChange, {
+  watch(computedRoleAccess, handleComputedRoleAccessChange, {
     immediate: true,
   })
 

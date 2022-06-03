@@ -1,44 +1,36 @@
 <template>
   <NForm>
+    <div class="flex justify-end">
+      <FormLangSelect v-model="displayLanguage" />
+    </div>
+
     <NFormSection id="site" caption="Site" description="Basic site information">
       <NInputGroup
         v-for="(option, index) in options"
         :key="option.name"
         :label="option.name.replace('_', ' ')"
       >
-        <div class="flex w-full gap-x-2">
-          <div v-if="langMode === 'id'" class="w-full">
-            <NInput
-              v-if="option.type === 'varchar'"
-              v-model="options[index].value"
-              type="text"
-            />
-            <NTextarea
-              v-else-if="option.type === 'text'"
-              v-model="options[index].value"
-            />
-          </div>
-          <div v-else class="w-full">
-            <NInput
-              v-if="option.type === 'varchar'"
-              v-model="options[index].valueJp"
-              type="text"
-            />
-            <NTextarea
-              v-else-if="option.type === 'text'"
-              v-model="options[index].valueJp"
-            />
-          </div>
-          <div>
-            <NSelect
-              v-model="langMode"
-              :clearable="false"
-              :options="[
-                { value: 'ja', text: 'Japanese' },
-                { value: 'id', text: 'Indonesian' },
-              ]"
-            />
-          </div>
+        <div v-if="displayLanguage === 'ID'" class="w-full">
+          <NInput
+            v-if="option.type === 'varchar'"
+            v-model="options[index].value"
+            type="text"
+          />
+          <NTextarea
+            v-else-if="option.type === 'text'"
+            v-model="options[index].value"
+          />
+        </div>
+        <div v-else class="w-full">
+          <NInput
+            v-if="option.type === 'varchar'"
+            v-model="options[index].valueJp"
+            type="text"
+          />
+          <NTextarea
+            v-else-if="option.type === 'text'"
+            v-model="options[index].valueJp"
+          />
         </div>
       </NInputGroup>
     </NFormSection>
@@ -62,7 +54,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const { $toast } = useContext()
 
-    const langMode = ref('id')
+    const displayLanguage = ref('ID')
 
     const options = ref([])
 
@@ -121,7 +113,7 @@ export default defineComponent({
     return {
       onSave,
       options,
-      langMode,
+      displayLanguage,
       loading,
     }
   },

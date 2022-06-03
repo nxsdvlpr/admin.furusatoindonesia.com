@@ -28,11 +28,13 @@
         class="n-table-action-group"
         @click.stop
       >
-        <NIconButton
-          class="secondary"
-          icon="users"
-          @click="onPeoplesClick(props.row)"
-        />
+        <div class="flex">
+          <NIconButton
+            class="secondary"
+            icon="users"
+            @click="onMembersClick(props.row)"
+          />
+        </div>
       </div>
       <NTableCellResponsive v-else :props="props"></NTableCellResponsive>
     </template>
@@ -88,8 +90,8 @@ export default defineComponent({
       emit('delete', rows)
     }
 
-    const onPeoplesClick = (row) => {
-      emit('peoples-click', row)
+    const onMembersClick = (row) => {
+      emit('members-click', row)
     }
 
     return {
@@ -102,7 +104,7 @@ export default defineComponent({
       onCreate,
       onRowTap,
       onDelete,
-      onPeoplesClick,
+      onMembersClick,
     }
   },
 })

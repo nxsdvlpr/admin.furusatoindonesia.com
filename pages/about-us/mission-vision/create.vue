@@ -2,7 +2,7 @@
   <div>
     <NAppHeader>
       <h1>Mission and Vision</h1>
-      <p>Mission and Vision &raquo; Create Mission and Vision</p>
+      <p>About Us &raquo; Mission and Vision &raquo; Create</p>
       <template slot="more">
         <NButtonGroup>
           <NButton

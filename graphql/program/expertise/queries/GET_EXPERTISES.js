@@ -17,11 +17,13 @@ export const GET_EXPERTISES = gql`
       edges {
         node {
           id
-          name
           group
           subject
+          subjectJp
           excerpt
+          excerptJp
           body
+          bodyJp
           image
           sequence
         }

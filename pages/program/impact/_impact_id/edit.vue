@@ -2,7 +2,7 @@
   <div>
     <NAppHeader>
       <h1>{{ article.subject }}</h1>
-      Impact &raquo; Detail Impact
+      <p>Program &raquo; Impact &raquo; Detail</p>
       <template slot="more">
         <NButton class="outline" @click="$router.push('/program/impact')"
           >&laquo; IMPACTS</NButton

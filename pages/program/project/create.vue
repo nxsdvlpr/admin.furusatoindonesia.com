@@ -2,7 +2,7 @@
   <div>
     <NAppHeader>
       <h1>Project</h1>
-      <p>Project &raquo; Create Project</p>
+      <p>Program &raquo; Project &raquo; Create</p>
       <template slot="more">
         <NButtonGroup>
           <NButton class="outline" @click="$router.push('/program/project')"
