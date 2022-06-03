@@ -45,19 +45,11 @@
 </template>
 
 <script>
-import {
-  defineComponent,
-  useContext,
-  computed,
-  reactive,
-  useRoute,
-} from '@nuxtjs/composition-api'
+import { defineComponent, useContext, useRoute } from '@nuxtjs/composition-api'
 import { useMutation, useQuery } from '@vue/apollo-composable'
 
 import useNTableCursorRemoteData from '@/components/nboard/composables/useNTableCursorRemoteData'
-import useNFormValidation from '@/components/nboard/composables/useNFormValidation'
-import useNFormValidators from '@/components/nboard/composables/useNFormValidators'
-import useCustomValidator from '@/components/setting/user/useCustomValidator'
+import useFormUser from '@/components/setting/user/useFormUser'
 
 import { UPDATE_USER } from '@/graphql/setting/user/mutations/UPDATE_USER'
 import { GET_USERS } from '@/graphql/setting/user/queries/GET_USERS'
@@ -71,53 +63,7 @@ export default defineComponent({
 
     const { variables } = useNTableCursorRemoteData()
 
-    const { validUsername, uniqueUsername } = useCustomValidator()
-
-    const { numeric, required, minLength, maxLength } = useNFormValidators()
-
-    const form = reactive({
-      user: {
-        roleId: 1,
-        pointId: null,
-        name: null,
-        username: null,
-        password: null,
-        phone: null,
-      },
-      oldUsername: null,
-      role: null,
-    })
-
-    const rules = computed(() => {
-      const usernameRule = {
-        required,
-        minLengthValue: minLength(3),
-        maxLengthValue: maxLength(150),
-        uniqueUsername,
-        validUsername,
-      }
-
-      return {
-        user: {
-          name: {
-            required,
-            minLengthValue: minLength(3),
-            maxLengthValue: maxLength(150),
-          },
-          username: form.oldUsername === form.user.username ? {} : usernameRule,
-          password: {
-            minLengthValue: minLength(5),
-            maxLengthValue: maxLength(32),
-          },
-          phone: {
-            required,
-            numeric,
-            minLengthValue: minLength(9),
-            maxLengthValue: maxLength(15),
-          },
-        },
-      }
-    })
+    const { form, validation, resetFormData } = useFormUser()
 
     const refetchQueries = [
       {
@@ -156,8 +102,6 @@ export default defineComponent({
       form.role = data.user.role
     })
 
-    const { validation } = useNFormValidation(rules, form)
-
     const onSave = async () => {
       const validationResult = await validation.validate()
 
@@ -177,11 +121,13 @@ export default defineComponent({
 
     const onDiscard = () => {
       emit('discard')
+      resetFormData()
     }
 
     onUpdateUserDone(({ data }) => {
       $toast.success('User successfully updated!')
       emit('save')
+      resetFormData()
     })
 
     onUpdateUserError((error) => {

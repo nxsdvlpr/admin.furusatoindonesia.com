@@ -75,9 +75,9 @@ export default defineComponent({
   setup(props, { emit }) {
     const { $toast, store } = useContext()
 
-    const { validUsername, uniqueUsername } = useCustomValidator()
+    const { uniqueUsername } = useCustomValidator()
 
-    const { helpers, required, numeric, minLength, maxLength, sameAs } =
+    const { helpers, required, numeric, email, minLength, maxLength, sameAs } =
       useNFormValidators()
 
     const { withMessage } = helpers
@@ -98,10 +98,9 @@ export default defineComponent({
     const rules = computed(() => {
       const usernameRule = {
         required,
+        email,
         minLengthValue: minLength(3),
-        maxLengthValue: maxLength(150),
         uniqueUsername,
-        validUsername,
       }
       return {
         profile: {

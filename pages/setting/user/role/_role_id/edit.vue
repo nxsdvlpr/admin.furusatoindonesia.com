@@ -1,7 +1,7 @@
 <template>
   <div>
     <NAppHeader>
-      <h1>{{ user.name }}</h1>
+      <h1>{{ role.name }}</h1>
       Role &raquo; Detail Role
       <template slot="more">
         <NButton class="outline" @click="$router.push('/setting/user/role')"
@@ -28,7 +28,7 @@ import {
   ref,
 } from '@nuxtjs/composition-api'
 import { useQuery, useResult } from '@vue/apollo-composable'
-import { GET_USER } from '@/graphql/setting/user/queries/GET_USER'
+import { GET_ROLE } from '@/graphql/setting/role/queries/GET_ROLE'
 
 export default defineComponent({
   meta: {
@@ -44,6 +44,10 @@ export default defineComponent({
         name: 'Overview',
         to: '#overview',
       },
+      {
+        name: 'Role Access',
+        to: '#role-access',
+      },
     ])
 
     const onSave = () => {
@@ -54,17 +58,17 @@ export default defineComponent({
       router.push('/setting/user/role')
     }
 
-    const { result } = useQuery(GET_USER, {
-      id: route.value.params.user_id,
+    const { result } = useQuery(GET_ROLE, {
+      id: route.value.params.role_id,
     })
 
-    const user = useResult(result, {}, (data) => {
-      return data.user
+    const role = useResult(result, {}, (data) => {
+      return data.role
     })
 
     return {
       tabs,
-      user,
+      role,
       onSave,
       onDiscard,
     }

@@ -16,7 +16,7 @@
       </div>
       <div class="flex-grow-0">
         <NButton type="button" class="sm outline" @click="openFileDialog">
-          Add more
+          Add {{ multiple ? 'more' : 'file' }}
         </NButton>
       </div>
     </div>

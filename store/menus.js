@@ -9,15 +9,95 @@ export const state = () => ({
       submenus: [],
     },
     {
+      label: 'Program',
+      to: '/program/expertise',
+      icon: 'category',
+      place: 'main',
+      roleGuard: ['admin'],
+      submenus: [
+        {
+          label: 'Expertise',
+          to: '/program/expertise',
+          roleGuard: ['admin'],
+        },
+        {
+          label: 'Project',
+          to: '/program/project',
+          roleGuard: ['admin'],
+        },
+        {
+          label: 'Impact',
+          to: '/program/impact',
+          roleGuard: ['admin'],
+        },
+        {
+          label: 'Work With Us',
+          to: '/program/work-with-us',
+          roleGuard: ['admin'],
+        },
+      ],
+    },
+    {
+      label: 'Publication',
+      to: '/publication/blog',
+      icon: 'document',
+      place: 'main',
+      roleGuard: ['admin'],
+      submenus: [
+        {
+          label: 'Blog',
+          to: '/publication/blog',
+          roleGuard: ['admin'],
+        },
+        {
+          label: 'Timeline',
+          to: '/publication/timeline',
+          roleGuard: ['admin'],
+        },
+      ],
+    },
+    {
+      label: 'Resource',
+      to: '/resource',
+      icon: 'folder',
+      place: 'main',
+      roleGuard: ['admin'],
+      submenus: [],
+    },
+    {
+      label: 'About Us',
+      to: '/about-us',
+      icon: 'info-circle',
+      place: 'main',
+      roleGuard: ['admin'],
+      submenus: [
+        {
+          label: 'Mission and Vision',
+          to: '/about-us/mission-vision',
+          roleGuard: ['admin'],
+        },
+        {
+          label: 'Organization',
+          to: '/about-us/organization/structure',
+          roleGuard: ['admin'],
+        },
+        {
+          label: 'Our History',
+          to: '/about-us/our-history',
+          roleGuard: ['admin'],
+        },
+      ],
+    },
+    {
       label: 'Setting',
-      to: '/setting/user',
+      to: '/setting/general#site',
       icon: 'setting',
       place: 'bottom',
       roleGuard: ['admin'],
       submenus: [
         {
           label: 'General',
-          to: '/setting/general',
+          to: '/setting/general#site',
           roleGuard: ['admin'],
         },
         {

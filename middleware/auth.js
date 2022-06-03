@@ -61,7 +61,7 @@ export default async function ({ app, $toast, route, error, store, redirect }) {
 
       const me = store.getters['auth/me']
 
-      if (!allowedRoles.includes(me?.role)) {
+      if (!allowedRoles.includes(me?.role?.shortname)) {
         return error({
           message: "You don't have permission to access this page",
           statusCode: 403,
