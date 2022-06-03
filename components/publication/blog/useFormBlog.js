@@ -8,7 +8,7 @@ const defaultData = () => ({
     subject: null,
     excerpt: null,
     body: null,
-    published: false,
+    published: true,
     publishedAt: new Date(),
   },
 })

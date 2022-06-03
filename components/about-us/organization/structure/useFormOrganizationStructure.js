@@ -6,9 +6,12 @@ import useNFormValidators from '@/components/nboard/composables/useNFormValidato
 const defaultData = () => ({
   organizationStructure: {
     subject: null,
+    subjectJp: null,
     description: null,
+    descriptionJp: null,
     sequence: 0,
   },
+  displayLanguage: 'ID',
 })
 
 const form = reactive(defaultData())

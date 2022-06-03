@@ -2,7 +2,7 @@
   <div>
     <NAppHeader>
       <h1>Organization Structure</h1>
-      <p>Organization Structure &raquo; Lists</p>
+      <p>About Us &raquo; Organization Structure &raquo; Lists</p>
     </NAppHeader>
     <NAppMain>
       <NPanel>
@@ -10,7 +10,7 @@
           @row-tap="onRowTap"
           @create="onCreate"
           @delete="onDelete"
-          @peoples-click="onPeoplesClick"
+          @members-click="onMembersClick"
         />
       </NPanel>
     </NAppMain>
@@ -37,15 +37,15 @@ export default defineComponent({
 
     const onDelete = (rows) => {}
 
-    const onPeoplesClick = (row) => {
-      router.push(`/about-us/organization/structure/${row.id}/people`)
+    const onMembersClick = (row) => {
+      router.push(`/about-us/organization/structure/${row.id}/member`)
     }
 
     return {
       onRowTap,
       onCreate,
       onDelete,
-      onPeoplesClick,
+      onMembersClick,
     }
   },
 })

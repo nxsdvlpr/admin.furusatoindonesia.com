@@ -2,7 +2,7 @@
   <div>
     <NAppHeader>
       <h1>Mission and Vision</h1>
-      <p>Mission and Vision &raquo; Lists</p>
+      <p>About Us &raquo; Mission and Vision &raquo; Lists</p>
     </NAppHeader>
     <NAppMain>
       <NPanel>

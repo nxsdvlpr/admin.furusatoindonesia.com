@@ -2,7 +2,7 @@
   <div>
     <NAppHeader>
       <h1>Expertise</h1>
-      <p>Expertise &raquo; Create Expertise</p>
+      <p>Program &raquo; Expertise &raquo; Create</p>
       <template slot="more">
         <NButtonGroup>
           <NButton class="outline" @click="$router.push('/program/expertise')"

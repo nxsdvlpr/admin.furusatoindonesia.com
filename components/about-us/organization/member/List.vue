@@ -5,7 +5,7 @@
     :is-loading.sync="loading"
     :rows="rows"
     :columns="columns"
-    :create-options="{ label: 'Add Organization People' }"
+    :create-options="{ label: 'Add Member' }"
     :pagination-options="{
       enabled: true,
       perPage: 20,
@@ -31,8 +31,8 @@
 <script>
 import { defineComponent, ref } from '@nuxtjs/composition-api'
 import useNTableCursorRemoteData from '@/components/nboard/composables/useNTableCursorRemoteData'
-import { GET_ORGANIZATION_PEOPLES } from '@/graphql/about-us/organization/people/queries/GET_ORGANIZATION_PEOPLES'
-import { DESTROY_ORGANIZATION_PEOPLES } from '@/graphql/about-us/organization/people/mutations/DESTROY_ORGANIZATION_PEOPLES'
+import { GET_ORGANIZATION_MEMBERS } from '@/graphql/about-us/organization/member/queries/GET_ORGANIZATION_MEMBERS'
+import { DESTROY_ORGANIZATION_MEMBERS } from '@/graphql/about-us/organization/member/mutations/DESTROY_ORGANIZATION_MEMBERS'
 
 export default defineComponent({
   props: {
@@ -55,9 +55,9 @@ export default defineComponent({
 
     const { rows, totalRecords, pageInfo, loading, methods } =
       useNTableCursorRemoteData({
-        getQuery: GET_ORGANIZATION_PEOPLES,
-        destroyQuery: DESTROY_ORGANIZATION_PEOPLES,
-        dataProperty: 'organizationPeople',
+        getQuery: GET_ORGANIZATION_MEMBERS,
+        destroyQuery: DESTROY_ORGANIZATION_MEMBERS,
+        dataProperty: 'organizationMembers',
         customVariables: {
           organizationId: props.organizationId,
         },

@@ -5,15 +5,18 @@ import useNFormValidators from '@/components/nboard/composables/useNFormValidato
 
 const defaultData = () => ({
   expertise: {
-    name: null,
     group: 'expertise',
     subject: null,
+    subjectJp: null,
     excerpt: null,
+    excerptJp: null,
     body: null,
+    bodyJp: null,
     image: null,
     sequence: 0,
   },
   images: [],
+  displayLanguage: 'ID',
 })
 
 const form = reactive(defaultData())

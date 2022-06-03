@@ -2,7 +2,7 @@
   <div>
     <NAppHeader>
       <h1>{{ blog.subject }}</h1>
-      Blog &raquo; Detail Blog
+      <p>Publication &raquo; Blog &raquo; Detail</p>
       <template slot="more">
         <NButton class="outline" @click="$router.push('/publication/blog')"
           >&laquo; BLOGS</NButton

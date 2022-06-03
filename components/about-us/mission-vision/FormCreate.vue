@@ -1,29 +1,34 @@
 <template>
   <NForm>
+    <div class="flex justify-end">
+      <FormLangSelect v-model="form.displayLanguage" />
+    </div>
     <NFormSection
       id="overview"
       caption="Overview"
-      description="Basic missionVision information"
+      description="Basic Mission Vision information"
     >
       <NInputGroup
         :feedback="validation.error('missionVision.subject')"
         label="Subject"
       >
-        <NInput v-model="form.missionVision.subject" type="text" />
+        <NInput
+          v-if="form.displayLanguage === 'ID'"
+          v-model="form.missionVision.subject"
+          type="text"
+        />
+        <NInput v-else v-model="form.missionVision.subjectJp" type="text" />
       </NInputGroup>
 
       <NInputGroup
         :feedback="validation.error('missionVision.excerpt')"
         label="Excerpt"
       >
-        <NTextarea v-model="form.missionVision.excerpt" />
-      </NInputGroup>
-
-      <NInputGroup
-        :feedback="validation.error('missionVision.body')"
-        label="Body"
-      >
-        <NTextarea v-model="form.missionVision.body" />
+        <NTextarea
+          v-if="form.displayLanguage === 'ID'"
+          v-model="form.missionVision.excerpt"
+        />
+        <NTextarea v-else v-model="form.missionVision.excerptJp" />
       </NInputGroup>
     </NFormSection>
 
@@ -45,7 +50,14 @@ export default defineComponent({
   setup(props, { emit }) {
     const { $toast } = useContext()
 
-    const { variables } = useNTableCursorRemoteData()
+    const { variables } = useNTableCursorRemoteData({
+      customVariables: {
+        sorting: {
+          field: 'sequence',
+          direction: 'ASC',
+        },
+      },
+    })
 
     const { form, validation, resetFormData } = useFormMissionVision()
 

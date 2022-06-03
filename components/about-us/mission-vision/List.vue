@@ -22,8 +22,23 @@
     <template #table-row="props">
       <div v-if="props.column.field === 'subject'">
         <div class="font-medium">{{ props.row.subject }}</div>
-        <div class="font-xs text-gray-500">
-          {{ props.row.excerpt }}
+      </div>
+      <div
+        v-else-if="props.column.field === 'action'"
+        class="n-table-action-group"
+        @click.stop
+      >
+        <div class="flex">
+          <NIconButton
+            class="primary"
+            icon="arrow-up-2"
+            @click="changeSequenceUp(props.row)"
+          />
+          <NIconButton
+            class="primary"
+            icon="arrow-down-2"
+            @click="changeSequenceDown(props.row)"
+          />
         </div>
       </div>
       <NTableCellResponsive v-else :props="props"></NTableCellResponsive>
@@ -33,9 +48,11 @@
 
 <script>
 import { defineComponent, ref } from '@nuxtjs/composition-api'
+import { useMutation } from '@vue/apollo-composable'
 import useNTableCursorRemoteData from '@/components/nboard/composables/useNTableCursorRemoteData'
 import { GET_MISSION_VISIONS } from '@/graphql/about-us/mission-vision/queries/GET_MISSION_VISIONS'
 import { DESTROY_MISSION_VISIONS } from '@/graphql/about-us/mission-vision/mutations/DESTROY_MISSION_VISIONS'
+import { CHANGE_MISSION_VISION_SEQUENCE } from '@/graphql/about-us/mission-vision/mutations/CHANGE_MISSION_VISION_SEQUENCE'
 
 export default defineComponent({
   setup(props, { emit }) {
@@ -45,16 +62,32 @@ export default defineComponent({
         field: 'subject',
       },
       {
-        label: 'Body',
-        field: 'body',
+        label: 'Excerpt',
+        field: 'excerpt',
+      },
+      {
+        label: ' ',
+        field: 'action',
+        type: 'action',
+        align: 'right',
+        width: '60px',
       },
     ])
 
-    const { rows, totalRecords, pageInfo, loading, methods } =
+    const { mutate: changeSequence, onDone: onChangeSequenceDone } =
+      useMutation(CHANGE_MISSION_VISION_SEQUENCE, {})
+
+    const { refetch, rows, totalRecords, pageInfo, loading, methods } =
       useNTableCursorRemoteData({
         getQuery: GET_MISSION_VISIONS,
         destroyQuery: DESTROY_MISSION_VISIONS,
         dataProperty: 'articles',
+        customVariables: {
+          sorting: {
+            field: 'sequence',
+            direction: 'ASC',
+          },
+        },
       })
 
     const onCreate = () => {
@@ -73,6 +106,26 @@ export default defineComponent({
       emit('delete', rows)
     }
 
+    const changeSequenceDown = (row) => {
+      changeSequence({
+        id: row.id,
+        group: 'mission-vision',
+        direction: 'down',
+      })
+    }
+
+    const changeSequenceUp = (row) => {
+      changeSequence({
+        id: row.id,
+        group: 'mission-vision',
+        direction: 'up',
+      })
+    }
+
+    onChangeSequenceDone(() => {
+      refetch()
+    })
+
     return {
       columns,
       rows,
@@ -83,6 +136,8 @@ export default defineComponent({
       onCreate,
       onRowTap,
       onDelete,
+      changeSequenceDown,
+      changeSequenceUp,
     }
   },
 })

@@ -1,13 +1,13 @@
 import { gql } from 'graphql-tag'
 
-export const GET_ORGANIZATION_PEOPLES = gql`
-  query getOrganizationPeoples(
+export const GET_ORGANIZATION_MEMBERS = gql`
+  query getOrganizationMembers(
     $paging: CursorPaging!
     $query: String
-    $sorting: OrganizationPeopleSort!
+    $sorting: OrganizationMemberSort!
     $organizationId: ID!
   ) {
-    organizationPeople(
+    organizationMembers(
       paging: $paging
       filter: {
         organizationStructureId: { eq: $organizationId }
@@ -20,6 +20,7 @@ export const GET_ORGANIZATION_PEOPLES = gql`
           id
           fullname
           profession
+          professionJp
           image
           sequence
         }

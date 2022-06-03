@@ -2,7 +2,7 @@
   <div>
     <NAppHeader>
       <h1>{{ article.subject }}</h1>
-      Mission and Vision &raquo; Detail Mission and Vision
+      <p>About Us &raquo; Mission and Vision &raquo; Detail</p>
       <template slot="more">
         <NButton
           class="outline"

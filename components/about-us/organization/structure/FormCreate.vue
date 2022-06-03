@@ -1,5 +1,8 @@
 <template>
   <NForm>
+    <div class="flex justify-end">
+      <FormLangSelect v-model="form.displayLanguage" />
+    </div>
     <NFormSection
       id="overview"
       caption="Overview"
@@ -9,14 +12,28 @@
         :feedback="validation.error('organizationStructure.subject')"
         label="Subject"
       >
-        <NInput v-model="form.organizationStructure.subject" type="text" />
+        <NInput
+          v-if="form.displayLanguage === 'ID'"
+          v-model="form.organizationStructure.subject"
+          type="text"
+        />
+
+        <NInput
+          v-else
+          v-model="form.organizationStructure.subjectJp"
+          type="text"
+        />
       </NInputGroup>
 
       <NInputGroup
         :feedback="validation.error('organizationStructure.description')"
         label="Description"
       >
-        <NTextarea v-model="form.organizationStructure.description" />
+        <NTextarea
+          v-if="form.displayLanguage === 'ID'"
+          v-model="form.organizationStructure.description"
+        />
+        <NTextarea v-else v-model="form.organizationStructure.descriptionJp" />
       </NInputGroup>
     </NFormSection>
 

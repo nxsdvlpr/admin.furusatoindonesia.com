@@ -1,5 +1,8 @@
 <template>
   <NForm>
+    <div class="flex justify-end">
+      <FormLangSelect v-model="form.displayLanguage" />
+    </div>
     <NFormSection
       id="overview"
       caption="Overview"
@@ -9,18 +12,23 @@
         :feedback="validation.error('expertise.subject')"
         label="Subject"
       >
-        <NInput v-model="form.expertise.subject" type="text" />
+        <NInput
+          v-if="form.displayLanguage === 'ID'"
+          v-model="form.expertise.subject"
+          type="text"
+        />
+        <NInput v-else v-model="form.expertise.subjectJp" type="text" />
       </NInputGroup>
 
       <NInputGroup
         :feedback="validation.error('expertise.excerpt')"
         label="Excerpt"
       >
-        <NTextarea v-model="form.expertise.excerpt" />
-      </NInputGroup>
-
-      <NInputGroup :feedback="validation.error('expertise.body')" label="Body">
-        <NTextarea v-model="form.expertise.body" />
+        <NTextarea
+          v-if="form.displayLanguage === 'ID'"
+          v-model="form.expertise.excerpt"
+        />
+        <NTextarea v-else v-model="form.expertise.excerptJp" />
       </NInputGroup>
 
       <!-- <NInputGroup :feedback="validation.error('expertise.body')" label="Body">
@@ -54,7 +62,14 @@ export default defineComponent({
   setup(props, { emit }) {
     const { env, $toast } = useContext()
 
-    const { variables } = useNTableCursorRemoteData()
+    const { variables } = useNTableCursorRemoteData({
+      customVariables: {
+        sorting: {
+          field: 'sequence',
+          direction: 'ASC',
+        },
+      },
+    })
 
     const { form, validation, resetFormData } = useFormExpertise()
 

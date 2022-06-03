@@ -1,12 +1,14 @@
 <template>
   <div>
     <NAppHeader>
-      <h1>Organization People</h1>
-      <p>Organization People &raquo; Create Organization People</p>
+      <h1>Organization Member</h1>
+      <p>
+        About Us &raquo; Organization Structure &raquo; Member &raquo; Create
+      </p>
       <template slot="more">
         <NButtonGroup>
           <NButton class="outline" @click="back()"
-            >&laquo; ORGANIZATION PEOPLES</NButton
+            >&laquo; ORGANIZATION MEMBERS</NButton
           >
         </NButtonGroup>
       </template>
@@ -16,7 +18,7 @@
     </NAppHeader>
     <NAppMain>
       <NPanel>
-        <AboutUsOrganizationPeopleFormCreate
+        <AboutUsOrganizationMemberFormCreate
           @save="onSave"
           @discard="onDiscard"
         />
@@ -53,7 +55,7 @@ export default defineComponent({
     const id = computed(() => route.value.params.structure_id)
 
     const back = () => {
-      router.push(`/about-us/organization/structure/${id.value}/people`)
+      router.push(`/about-us/organization/structure/${id.value}/member`)
     }
 
     const onSave = () => {

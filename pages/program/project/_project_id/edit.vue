@@ -2,7 +2,7 @@
   <div>
     <NAppHeader>
       <h1>{{ article.subject }}</h1>
-      Project &raquo; Detail Project
+      <p>Program &raquo; Project &raquo; Detail</p>
       <template slot="more">
         <NButton class="outline" @click="$router.push('/program/project')"
           >&laquo; PROJECTS</NButton

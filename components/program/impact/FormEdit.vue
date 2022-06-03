@@ -1,5 +1,8 @@
 <template>
   <NForm>
+    <div class="flex justify-end">
+      <FormLangSelect v-model="form.displayLanguage" />
+    </div>
     <NFormSection
       id="overview"
       caption="Overview"
@@ -9,18 +12,23 @@
         :feedback="validation.error('impact.subject')"
         label="Subject"
       >
-        <NInput v-model="form.impact.subject" type="text" />
+        <NInput
+          v-if="form.displayLanguage === 'ID'"
+          v-model="form.impact.subject"
+          type="text"
+        />
+        <NInput v-else v-model="form.impact.subjectJp" type="text" />
       </NInputGroup>
 
       <NInputGroup
         :feedback="validation.error('impact.excerpt')"
         label="Excerpt"
       >
-        <NTextarea v-model="form.impact.excerpt" />
-      </NInputGroup>
-
-      <NInputGroup :feedback="validation.error('impact.body')" label="Body">
-        <NTextarea v-model="form.impact.body" />
+        <NTextarea
+          v-if="form.displayLanguage === 'ID'"
+          v-model="form.impact.excerpt"
+        />
+        <NTextarea v-else v-model="form.impact.excerptJp" />
       </NInputGroup>
     </NFormSection>
 
@@ -45,7 +53,14 @@ export default defineComponent({
 
     const route = useRoute()
 
-    const { variables } = useNTableCursorRemoteData()
+    const { variables } = useNTableCursorRemoteData({
+      customVariables: {
+        sorting: {
+          field: 'sequence',
+          direction: 'ASC',
+        },
+      },
+    })
 
     const { form, validation, resetFormData } = useFormImpact()
 

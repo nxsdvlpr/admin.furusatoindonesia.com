@@ -22,9 +22,6 @@
     <template #table-row="props">
       <div v-if="props.column.field === 'subject'">
         <div class="font-medium">{{ props.row.subject }}</div>
-        <div class="font-xs text-gray-500">
-          {{ props.row.excerpt }}
-        </div>
       </div>
       <NTableCellResponsive v-else :props="props"></NTableCellResponsive>
     </template>
@@ -33,6 +30,7 @@
 
 <script>
 import { defineComponent, ref } from '@nuxtjs/composition-api'
+
 import useNTableCursorRemoteData from '@/components/nboard/composables/useNTableCursorRemoteData'
 import { GET_PROJECTS } from '@/graphql/program/project/queries/GET_PROJECTS'
 import { DESTROY_PROJECTS } from '@/graphql/program/project/mutations/DESTROY_PROJECTS'
@@ -45,8 +43,8 @@ export default defineComponent({
         field: 'subject',
       },
       {
-        label: 'Body',
-        field: 'body',
+        label: 'Excerpt',
+        field: 'excerpt',
       },
     ])
 
@@ -55,6 +53,12 @@ export default defineComponent({
         getQuery: GET_PROJECTS,
         destroyQuery: DESTROY_PROJECTS,
         dataProperty: 'articles',
+        customVariables: {
+          sorting: {
+            field: 'sequence',
+            direction: 'ASC',
+          },
+        },
       })
 
     const onCreate = () => {
