@@ -10,7 +10,7 @@ export const GET_IMPACTS = gql`
       paging: $paging
       filter: {
         group: { eq: "impact" }
-        or: [{ subject: { iLike: $query } }, { excerpt: { iLike: $query } }]
+        or: [{ title: { iLike: $query } }, { subtitle: { iLike: $query } }]
       }
       sorting: [$sorting]
     ) {
@@ -18,13 +18,16 @@ export const GET_IMPACTS = gql`
         node {
           id
           group
-          subject
-          subjectJp
+          title
+          titleJp
+          subtitle
+          subtitleJp
           excerpt
           excerptJp
           body
           bodyJp
           image
+          icon
           sequence
         }
       }

@@ -5,13 +5,16 @@ export const GET_EXPERTISE = gql`
     article(id: $id) {
       id
       group
-      subject
-      subjectJp
+      title
+      titleJp
+      subtitle
+      subtitleJp
       excerpt
       excerptJp
       body
       bodyJp
       image
+      icon
       sequence
     }
   }

@@ -34,6 +34,16 @@
             icon="users"
             @click="onMembersClick(props.row)"
           />
+          <NIconButton
+            class="primary"
+            icon="arrow-up-2"
+            @click="changeSequenceUp(props.row)"
+          />
+          <NIconButton
+            class="primary"
+            icon="arrow-down-2"
+            @click="changeSequenceDown(props.row)"
+          />
         </div>
       </div>
       <NTableCellResponsive v-else :props="props"></NTableCellResponsive>
@@ -43,9 +53,11 @@
 
 <script>
 import { defineComponent, ref } from '@nuxtjs/composition-api'
+import { useMutation } from '@vue/apollo-composable'
 import useNTableCursorRemoteData from '@/components/nboard/composables/useNTableCursorRemoteData'
 import { GET_ORGANIZATION_STRUCTURES } from '@/graphql/about-us/organization/structure/queries/GET_ORGANIZATION_STRUCTURES'
 import { DESTROY_ORGANIZATION_STRUCTURES } from '@/graphql/about-us/organization/structure/mutations/DESTROY_ORGANIZATION_STRUCTURES'
+import { CHANGE_ORGANIZATION_STRUCTURE_SEQUENCE } from '@/graphql/about-us/organization/structure/mutations/CHANGE_ORGANIZATION_STRUCTURE_SEQUENCE'
 
 export default defineComponent({
   setup(props, { emit }) {
@@ -67,11 +79,20 @@ export default defineComponent({
       },
     ])
 
-    const { rows, totalRecords, pageInfo, loading, methods } =
+    const { mutate: changeSequence, onDone: onChangeSequenceDone } =
+      useMutation(CHANGE_ORGANIZATION_STRUCTURE_SEQUENCE, {})
+
+    const { refetch, rows, totalRecords, pageInfo, loading, methods } =
       useNTableCursorRemoteData({
         getQuery: GET_ORGANIZATION_STRUCTURES,
         destroyQuery: DESTROY_ORGANIZATION_STRUCTURES,
         dataProperty: 'organizationStructures',
+        customVariables: {
+          sorting: {
+            field: 'sequence',
+            direction: 'ASC',
+          },
+        },
       })
 
     const onCreate = () => {
@@ -94,6 +115,24 @@ export default defineComponent({
       emit('members-click', row)
     }
 
+    const changeSequenceDown = (row) => {
+      changeSequence({
+        id: row.id,
+        direction: 'down',
+      })
+    }
+
+    const changeSequenceUp = (row) => {
+      changeSequence({
+        id: row.id,
+        direction: 'up',
+      })
+    }
+
+    onChangeSequenceDone(() => {
+      refetch()
+    })
+
     return {
       columns,
       rows,
@@ -105,6 +144,8 @@ export default defineComponent({
       onRowTap,
       onDelete,
       onMembersClick,
+      changeSequenceDown,
+      changeSequenceUp,
     }
   },
 })

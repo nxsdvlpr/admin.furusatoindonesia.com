@@ -9,26 +9,39 @@
       description="Basic expertise information"
     >
       <NInputGroup
-        :feedback="validation.error('expertise.subject')"
-        label="Subject"
+        :feedback="validation.error('expertise.title')"
+        label="Title"
       >
         <NInput
           v-if="form.displayLanguage === 'ID'"
-          v-model="form.expertise.subject"
+          v-model="form.expertise.title"
           type="text"
         />
-        <NInput v-else v-model="form.expertise.subjectJp" type="text" />
+        <NInput v-else v-model="form.expertise.titleJp" type="text" />
       </NInputGroup>
 
       <NInputGroup
-        :feedback="validation.error('expertise.excerpt')"
-        label="Excerpt"
+        :feedback="validation.error('expertise.subtitle')"
+        label="Subtitle"
       >
+        <NInput
+          v-if="form.displayLanguage === 'ID'"
+          v-model="form.expertise.subtitle"
+          type="text"
+        />
+        <NInput v-else v-model="form.expertise.subtitleJp" type="text" />
+      </NInputGroup>
+
+      <NInputGroup :feedback="validation.error('expertise.body')" label="Body">
         <NTextarea
           v-if="form.displayLanguage === 'ID'"
-          v-model="form.expertise.excerpt"
+          v-model="form.expertise.body"
         />
-        <NTextarea v-else v-model="form.expertise.excerptJp" />
+        <NTextarea v-else v-model="form.expertise.bodyJp" />
+      </NInputGroup>
+
+      <NInputGroup :feedback="validation.error('expertise.icon')" label="Icon">
+        <NInput v-model="form.expertise.icon" type="text" />
       </NInputGroup>
 
       <!-- <NInputGroup :feedback="validation.error('expertise.body')" label="Body">
@@ -71,7 +84,7 @@ export default defineComponent({
       },
     })
 
-    const { form, validation, resetFormData } = useFormExpertise()
+    const { form, validation } = useFormExpertise()
 
     const uploadEndpoint = computed(() => env.uploadEndpoint)
 
@@ -107,7 +120,6 @@ export default defineComponent({
 
     const onDiscard = () => {
       emit('discard')
-      resetFormData()
     }
 
     const onUploadImageDone = (files) => {
@@ -117,7 +129,6 @@ export default defineComponent({
     onCreateExpertiseDone(({ data }) => {
       $toast.success('Expertise successfully added!')
       emit('save')
-      resetFormData()
     })
 
     onCreateExpertiseError((error) => {

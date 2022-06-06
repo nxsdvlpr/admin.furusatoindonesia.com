@@ -9,26 +9,26 @@
       description="Basic Mission Vision information"
     >
       <NInputGroup
-        :feedback="validation.error('missionVision.subject')"
+        :feedback="validation.error('missionVision.title')"
         label="Subject"
       >
         <NInput
           v-if="form.displayLanguage === 'ID'"
-          v-model="form.missionVision.subject"
+          v-model="form.missionVision.title"
           type="text"
         />
-        <NInput v-else v-model="form.missionVision.subjectJp" type="text" />
+        <NInput v-else v-model="form.missionVision.titleJp" type="text" />
       </NInputGroup>
 
       <NInputGroup
-        :feedback="validation.error('missionVision.excerpt')"
-        label="Excerpt"
+        :feedback="validation.error('missionVision.body')"
+        label="Body"
       >
         <NTextarea
           v-if="form.displayLanguage === 'ID'"
-          v-model="form.missionVision.excerpt"
+          v-model="form.missionVision.body"
         />
-        <NTextarea v-else v-model="form.missionVision.excerptJp" />
+        <NTextarea v-else v-model="form.missionVision.bodyJp" />
       </NInputGroup>
     </NFormSection>
 
@@ -59,7 +59,7 @@ export default defineComponent({
       },
     })
 
-    const { form, validation, resetFormData } = useFormMissionVision()
+    const { form, validation } = useFormMissionVision()
 
     const refetchQueries = [
       {
@@ -93,13 +93,11 @@ export default defineComponent({
 
     const onDiscard = () => {
       emit('discard')
-      resetFormData()
     }
 
     onCreateMissionVisionDone(({ data }) => {
       $toast.success('MissionVision successfully added!')
       emit('save')
-      resetFormData()
     })
 
     onCreateMissionVisionError((error) => {

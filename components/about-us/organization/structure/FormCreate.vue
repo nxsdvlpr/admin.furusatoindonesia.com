@@ -55,9 +55,16 @@ export default defineComponent({
   setup(props, { emit }) {
     const { $toast } = useContext()
 
-    const { variables } = useNTableCursorRemoteData()
+    const { variables } = useNTableCursorRemoteData({
+      customVariables: {
+        sorting: {
+          field: 'sequence',
+          direction: 'ASC',
+        },
+      },
+    })
 
-    const { form, validation, resetFormData } = useFormOrganizationStructure()
+    const { form, validation } = useFormOrganizationStructure()
 
     const refetchQueries = [
       {
@@ -91,13 +98,11 @@ export default defineComponent({
 
     const onDiscard = () => {
       emit('discard')
-      resetFormData()
     }
 
     onCreateOrganizationStructureDone(({ data }) => {
       $toast.success('Organization Structure successfully added!')
       emit('save')
-      resetFormData()
     })
 
     onCreateOrganizationStructureError((error) => {
