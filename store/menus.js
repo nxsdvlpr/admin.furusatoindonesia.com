@@ -101,6 +101,16 @@ export const state = () => ({
           roleGuard: ['admin'],
         },
         {
+          label: 'Pages',
+          to: '/setting/pages/home',
+          roleGuard: ['admin'],
+        },
+        {
+          label: 'Testimony',
+          to: '/setting/testimony',
+          roleGuard: ['admin'],
+        },
+        {
           label: 'Users Management',
           to: '/setting/user',
           roleGuard: ['admin'],

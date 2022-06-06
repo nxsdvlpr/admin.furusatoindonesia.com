@@ -54,10 +54,14 @@ export default defineComponent({
     const { variables } = useNTableCursorRemoteData({
       customVariables: {
         organizationId: route.value.params.structure_id,
+        sorting: {
+          field: 'sequence',
+          direction: 'ASC',
+        },
       },
     })
 
-    const { form, validation, resetFormData } = useFormOrganizationMember()
+    const { form, validation } = useFormOrganizationMember()
 
     const refetchQueries = [
       {
@@ -91,13 +95,11 @@ export default defineComponent({
 
     const onDiscard = () => {
       emit('discard')
-      resetFormData()
     }
 
     onCreateOrganizationMemberDone(({ data }) => {
       $toast.success('Organization Member successfully added!')
       emit('save')
-      resetFormData()
     })
 
     onCreateOrganizationMemberError((error) => {

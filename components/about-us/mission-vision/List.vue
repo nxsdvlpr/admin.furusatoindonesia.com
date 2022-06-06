@@ -20,8 +20,8 @@
     @on-delete="onDelete"
   >
     <template #table-row="props">
-      <div v-if="props.column.field === 'subject'">
-        <div class="font-medium">{{ props.row.subject }}</div>
+      <div v-if="props.column.field === 'title'">
+        <div class="font-medium">{{ props.row.title }}</div>
       </div>
       <div
         v-else-if="props.column.field === 'action'"
@@ -58,12 +58,12 @@ export default defineComponent({
   setup(props, { emit }) {
     const columns = ref([
       {
-        label: 'Subject',
-        field: 'subject',
+        label: 'Title',
+        field: 'title',
       },
       {
-        label: 'Excerpt',
-        field: 'excerpt',
+        label: 'Body',
+        field: 'body',
       },
       {
         label: ' ',

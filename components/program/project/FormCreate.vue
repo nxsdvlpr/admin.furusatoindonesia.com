@@ -8,27 +8,37 @@
       caption="Overview"
       description="Basic project information"
     >
-      <NInputGroup
-        :feedback="validation.error('project.subject')"
-        label="Subject"
-      >
+      <NInputGroup :feedback="validation.error('project.title')" label="Title">
         <NInput
           v-if="form.displayLanguage === 'ID'"
-          v-model="form.project.subject"
+          v-model="form.project.title"
           type="text"
         />
-        <NInput v-else v-model="form.project.subjectJp" type="text" />
+        <NInput v-else v-model="form.project.titleJp" type="text" />
       </NInputGroup>
 
       <NInputGroup
-        :feedback="validation.error('project.excerpt')"
-        label="Excerpt"
+        :feedback="validation.error('project.subtitle')"
+        label="Subtitle"
       >
+        <NInput
+          v-if="form.displayLanguage === 'ID'"
+          v-model="form.project.subtitle"
+          type="text"
+        />
+        <NInput v-else v-model="form.project.subtitleJp" type="text" />
+      </NInputGroup>
+
+      <NInputGroup :feedback="validation.error('project.body')" label="Body">
         <NTextarea
           v-if="form.displayLanguage === 'ID'"
-          v-model="form.project.excerpt"
+          v-model="form.project.body"
         />
-        <NTextarea v-else v-model="form.project.excerptJp" />
+        <NTextarea v-else v-model="form.project.bodyJp" />
+      </NInputGroup>
+
+      <NInputGroup :feedback="validation.error('project.icon')" label="Icon">
+        <NInput v-model="form.project.icon" type="text" />
       </NInputGroup>
     </NFormSection>
 
@@ -59,7 +69,7 @@ export default defineComponent({
       },
     })
 
-    const { form, validation, resetFormData } = useFormProject()
+    const { form, validation } = useFormProject()
 
     const refetchQueries = [
       {
@@ -93,13 +103,11 @@ export default defineComponent({
 
     const onDiscard = () => {
       emit('discard')
-      resetFormData()
     }
 
     onCreateProjectDone(({ data }) => {
       $toast.success('Project successfully added!')
       emit('save')
-      resetFormData()
     })
 
     onCreateProjectError((error) => {

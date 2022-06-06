@@ -3,7 +3,7 @@
     <NFormSection
       id="overview"
       caption="Overview"
-      description="Basic expertise information"
+      description="Basic resource information"
     >
       <NInputGroup
         :feedback="validation.error('resource.subject')"

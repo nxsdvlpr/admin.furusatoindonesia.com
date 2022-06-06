@@ -8,27 +8,33 @@
       caption="Overview"
       description="Basic impact information"
     >
-      <NInputGroup
-        :feedback="validation.error('impact.subject')"
-        label="Subject"
-      >
+      <NInputGroup :feedback="validation.error('impact.title')" label="Title">
         <NInput
           v-if="form.displayLanguage === 'ID'"
-          v-model="form.impact.subject"
+          v-model="form.impact.title"
           type="text"
         />
-        <NInput v-else v-model="form.impact.subjectJp" type="text" />
+        <NInput v-else v-model="form.impact.titleJp" type="text" />
       </NInputGroup>
 
       <NInputGroup
-        :feedback="validation.error('impact.excerpt')"
-        label="Excerpt"
+        :feedback="validation.error('impact.subtitle')"
+        label="Subtitle"
       >
+        <NInput
+          v-if="form.displayLanguage === 'ID'"
+          v-model="form.impact.subtitle"
+          type="text"
+        />
+        <NInput v-else v-model="form.impact.subtitleJp" type="text" />
+      </NInputGroup>
+
+      <NInputGroup :feedback="validation.error('impact.body')" label="Body">
         <NTextarea
           v-if="form.displayLanguage === 'ID'"
-          v-model="form.impact.excerpt"
+          v-model="form.impact.body"
         />
-        <NTextarea v-else v-model="form.impact.excerptJp" />
+        <NTextarea v-else v-model="form.impact.bodyJp" />
       </NInputGroup>
     </NFormSection>
 
@@ -59,7 +65,7 @@ export default defineComponent({
       },
     })
 
-    const { form, validation, resetFormData } = useFormImpact()
+    const { form, validation } = useFormImpact()
 
     const refetchQueries = [
       {
@@ -93,13 +99,11 @@ export default defineComponent({
 
     const onDiscard = () => {
       emit('discard')
-      resetFormData()
     }
 
     onCreateImpactDone(({ data }) => {
       $toast.success('Impact successfully added!')
       emit('save')
-      resetFormData()
     })
 
     onCreateImpactError((error) => {

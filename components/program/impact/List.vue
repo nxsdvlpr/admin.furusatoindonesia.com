@@ -5,7 +5,7 @@
     :is-loading.sync="loading"
     :rows="rows"
     :columns="columns"
-    :create-options="{ label: 'Add Project' }"
+    :create-options="{ label: 'Add Impact' }"
     :pagination-options="{
       enabled: true,
       perPage: 20,
@@ -20,8 +20,8 @@
     @on-delete="onDelete"
   >
     <template #table-row="props">
-      <div v-if="props.column.field === 'subject'">
-        <div class="font-medium">{{ props.row.subject }}</div>
+      <div v-if="props.column.field === 'title'">
+        <div class="font-medium">{{ props.row.title }}</div>
       </div>
       <NTableCellResponsive v-else :props="props"></NTableCellResponsive>
     </template>
@@ -38,12 +38,12 @@ export default defineComponent({
   setup(props, { emit }) {
     const columns = ref([
       {
-        label: 'Subject',
-        field: 'subject',
+        label: 'Title',
+        field: 'title',
       },
       {
-        label: 'Excerpt',
-        field: 'excerpt',
+        label: 'Body',
+        field: 'body',
       },
     ])
 

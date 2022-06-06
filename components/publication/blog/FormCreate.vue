@@ -3,7 +3,7 @@
     <NFormSection
       id="overview"
       caption="Overview"
-      description="Basic expertise information"
+      description="Basic blog information"
     >
       <NInputGroup :feedback="validation.error('blog.subject')" label="Subject">
         <NInput v-model="form.blog.subject" type="text" />
@@ -35,6 +35,8 @@
         </NInputGroup>
       </NColumn>
     </NFormSection>
+
+    <MarkdownEditor />
 
     <NFormAction :loading="loading" @on-save="onSave" @on-discard="onDiscard" />
   </NForm>

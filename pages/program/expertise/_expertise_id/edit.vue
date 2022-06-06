@@ -1,7 +1,7 @@
 <template>
   <div>
     <NAppHeader>
-      <h1>{{ article.subject }}</h1>
+      <h1>{{ article.title }}</h1>
       <p>Program &raquo; Expertise &raquo; Detail</p>
       <template slot="more">
         <NButton class="outline" @click="$router.push('/program/expertise')"

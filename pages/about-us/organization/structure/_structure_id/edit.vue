@@ -1,7 +1,7 @@
 <template>
   <div>
     <NAppHeader>
-      <h1>{{ organizationStructure.subject }}</h1>
+      <h1>{{ organizationStructure.title }}</h1>
       <p>About Us &raquo; Organization Structure &raquo; Detail</p>
       <template slot="more">
         <NButton

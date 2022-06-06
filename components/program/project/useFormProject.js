@@ -3,33 +3,41 @@ import { assign, defaultsDeep } from 'lodash'
 import useNFormValidation from '@/components/nboard/composables/useNFormValidation'
 import useNFormValidators from '@/components/nboard/composables/useNFormValidators'
 
-const defaultData = () => ({
-  project: {
-    group: 'project',
-    subject: null,
-    subjectJp: null,
-    excerpt: null,
-    excerptJp: null,
-    body: null,
-    bodyJp: null,
-    image: null,
-    sequence: 0,
-  },
-  displayLanguage: 'ID',
-})
-
-const form = reactive(defaultData())
-
 export default function useFormProject() {
   const { required } = useNFormValidators()
+
+  const defaultData = () => ({
+    project: {
+      group: 'project',
+      title: null,
+      titleJp: null,
+      subtitle: null,
+      subtitleJp: null,
+      excerpt: null,
+      excerptJp: null,
+      body: null,
+      bodyJp: null,
+      image: null,
+      sequence: 0,
+    },
+    displayLanguage: 'ID',
+  })
+
+  const form = reactive(defaultData())
 
   const rules = computed(() => {
     return {
       project: {
-        subject: {
+        title: {
           required,
         },
-        excerpt: {
+        subtitle: {
+          required,
+        },
+        body: {
+          required,
+        },
+        icon: {
           required,
         },
       },

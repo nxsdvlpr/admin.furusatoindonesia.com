@@ -3,7 +3,7 @@
     <NFormSection
       id="overview"
       caption="Overview"
-      description="Basic expertise information"
+      description="Basic blog information"
     >
       <NInputGroup :feedback="validation.error('blog.subject')" label="Subject">
         <NInput v-model="form.blog.subject" type="text" />
