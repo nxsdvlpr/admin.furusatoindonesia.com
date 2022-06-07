@@ -8,17 +8,12 @@ export default function useFormProjectOption() {
 
   const defaultData = () => ({
     page: {
-      group: 'page-title',
+      group: 'page-hero',
       title: null,
       titleJp: null,
-      subtitle: null,
-      subtitleJp: null,
-      excerpt: null,
-      excerptJp: null,
       body: null,
       bodyJp: null,
       image: null,
-      sequence: 0,
     },
     displayLanguage: 'ID',
   })
@@ -31,7 +26,7 @@ export default function useFormProjectOption() {
         title: {
           required,
         },
-        subtitle: {
+        body: {
           required,
         },
       },

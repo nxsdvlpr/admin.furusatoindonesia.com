@@ -1,10 +1,6 @@
 <template>
   <NForm>
-    <NFormSection
-      id="page-title"
-      caption="Page Title"
-      description="Basic page title information"
-    >
+    <NFormSection id="hero" caption="Hero" description="Basic hero information">
       <div class="flex justify-end">
         <FormLangSelect v-model="form.displayLanguage" />
       </div>
@@ -18,16 +14,12 @@
         <NInput v-else v-model="form.page.titleJp" type="text" />
       </NInputGroup>
 
-      <NInputGroup
-        :feedback="validation.error('page.subtitle')"
-        label="Subtitle"
-      >
-        <NInput
+      <NInputGroup :feedback="validation.error('page.body')" label="Body">
+        <NTextarea
           v-if="form.displayLanguage === 'ID'"
-          v-model="form.page.subtitle"
-          type="text"
+          v-model="form.page.body"
         />
-        <NInput v-else v-model="form.page.subtitleJp" type="text" />
+        <NTextarea v-else v-model="form.page.bodyJp" />
       </NInputGroup>
 
       <NFormAction>

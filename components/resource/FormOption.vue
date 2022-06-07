@@ -43,7 +43,7 @@
 import { defineComponent, useContext } from '@nuxtjs/composition-api'
 import { useMutation, useQuery } from '@vue/apollo-composable'
 
-import useFormProjectOption from '@/components/program/project/useFormProjectOption'
+import useFormResourceOption from '@/components/resource/useFormResourceOption'
 
 import { UPDATE_PAGE_HOME } from '@/graphql/setting/pages/home/mutations/UPDATE_PAGE_HOME'
 import { GET_PAGE_HOME } from '@/graphql/setting/pages/home/queries/GET_PAGE_HOME'
@@ -52,7 +52,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const { $toast, error } = useContext()
 
-    const { form, validation } = useFormProjectOption()
+    const { form, validation } = useFormResourceOption()
 
     const refetchQueries = [
       {

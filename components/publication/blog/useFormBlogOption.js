@@ -3,7 +3,7 @@ import { assign, defaultsDeep } from 'lodash'
 import useNFormValidation from '@/components/nboard/composables/useNFormValidation'
 import useNFormValidators from '@/components/nboard/composables/useNFormValidators'
 
-export default function useFormExpertiseOption() {
+export default function useFormBlogOption() {
   const { required } = useNFormValidators()
 
   const defaultData = () => ({

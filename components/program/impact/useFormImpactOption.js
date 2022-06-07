@@ -13,12 +13,6 @@ export default function useFormImpactOption() {
       titleJp: null,
       subtitle: null,
       subtitleJp: null,
-      excerpt: null,
-      excerptJp: null,
-      body: null,
-      bodyJp: null,
-      image: null,
-      sequence: 0,
     },
     displayLanguage: 'ID',
   })

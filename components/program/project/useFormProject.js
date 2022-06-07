@@ -13,12 +13,10 @@ export default function useFormProject() {
       titleJp: null,
       subtitle: null,
       subtitleJp: null,
-      excerpt: null,
-      excerptJp: null,
       body: null,
       bodyJp: null,
+      icon: null,
       image: null,
-      sequence: 0,
     },
     displayLanguage: 'ID',
   })

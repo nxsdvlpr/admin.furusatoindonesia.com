@@ -1,10 +1,6 @@
 <template>
   <NForm>
-    <NFormSection
-      id="page-title"
-      caption="Page Title"
-      description="Basic page title information"
-    >
+    <NFormSection id="hero" caption="Hero" description="Basic hero information">
       <div class="flex justify-end">
         <FormLangSelect v-model="form.displayLanguage" />
       </div>
@@ -18,16 +14,12 @@
         <NInput v-else v-model="form.page.titleJp" type="text" />
       </NInputGroup>
 
-      <NInputGroup
-        :feedback="validation.error('page.subtitle')"
-        label="Subtitle"
-      >
-        <NInput
+      <NInputGroup :feedback="validation.error('page.body')" label="Body">
+        <NTextarea
           v-if="form.displayLanguage === 'ID'"
-          v-model="form.page.subtitle"
-          type="text"
+          v-model="form.page.body"
         />
-        <NInput v-else v-model="form.page.subtitleJp" type="text" />
+        <NTextarea v-else v-model="form.page.bodyJp" />
       </NInputGroup>
 
       <NFormAction>
@@ -43,7 +35,7 @@
 import { defineComponent, useContext } from '@nuxtjs/composition-api'
 import { useMutation, useQuery } from '@vue/apollo-composable'
 
-import useFormImpactOption from '@/components/program/impact/useFormImpactOption'
+import useFormWwuOption from '@/components/program/work-with-us/useFormWwuOption'
 
 import { UPDATE_PAGE_HOME } from '@/graphql/setting/pages/home/mutations/UPDATE_PAGE_HOME'
 import { GET_PAGE_HOME } from '@/graphql/setting/pages/home/queries/GET_PAGE_HOME'
@@ -52,7 +44,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const { $toast, error } = useContext()
 
-    const { form, validation } = useFormImpactOption()
+    const { form, validation } = useFormWwuOption()
 
     const refetchQueries = [
       {
