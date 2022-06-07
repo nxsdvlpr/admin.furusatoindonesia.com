@@ -1,15 +1,15 @@
 <template>
   <div>
     <NAppHeader>
-      <h1>At A Glance</h1>
-      <p>About &raquo; At A Glance &raquo; Option</p>
+      <h1>Work With Us</h1>
+      <p>Program &raquo; Work With Us &raquo; Option</p>
       <template slot="after">
         <NTabs :tabs="tabs" />
       </template>
     </NAppHeader>
     <NAppMain>
       <NPanel>
-        <AboutUsAtAGlanceFormSection
+        <ProgramWorkWithUsFormReachUs
           @row-tap="onRowTap"
           @create="onCreate"
           @delete="onDelete"
@@ -28,8 +28,8 @@ export default defineComponent({
   setup() {
     const tabs = ref([
       {
-        name: 'Section',
-        to: '/program/work-with-us/section',
+        name: 'Reach Us',
+        to: '/program/work-with-us/reach-us',
       },
       {
         name: 'Option',

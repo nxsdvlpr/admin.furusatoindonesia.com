@@ -32,7 +32,7 @@ export const state = () => ({
         },
         {
           label: 'Work With Us',
-          to: '/program/work-with-us/section',
+          to: '/program/work-with-us/reach-us',
           roleGuard: ['admin'],
         },
       ],

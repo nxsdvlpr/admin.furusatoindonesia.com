@@ -18,18 +18,6 @@
         <NInput v-else v-model="form.page.titleJp" type="text" />
       </NInputGroup>
 
-      <NInputGroup
-        :feedback="validation.error('page.subtitle')"
-        label="Subtitle"
-      >
-        <NInput
-          v-if="form.displayLanguage === 'ID'"
-          v-model="form.page.subtitle"
-          type="text"
-        />
-        <NInput v-else v-model="form.page.subtitleJp" type="text" />
-      </NInputGroup>
-
       <NFormAction>
         <NButton :disabled="loading" class="primary" @click="onSave">
           Save
@@ -43,7 +31,7 @@
 import { defineComponent, useContext } from '@nuxtjs/composition-api'
 import { useMutation, useQuery } from '@vue/apollo-composable'
 
-import useFormImpactOption from '@/components/program/impact/useFormImpactOption'
+import useFormAtGlanceOption from '@/components/about-us/at-a-glance/useFormAtGlanceOption'
 
 import { UPDATE_PAGE_HOME } from '@/graphql/setting/pages/home/mutations/UPDATE_PAGE_HOME'
 import { GET_PAGE_HOME } from '@/graphql/setting/pages/home/queries/GET_PAGE_HOME'
@@ -52,7 +40,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const { $toast, error } = useContext()
 
-    const { form, validation } = useFormImpactOption()
+    const { form, validation } = useFormAtGlanceOption()
 
     const refetchQueries = [
       {

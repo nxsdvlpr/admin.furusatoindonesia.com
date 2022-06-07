@@ -28,8 +28,8 @@ export default defineComponent({
   setup() {
     const tabs = ref([
       {
-        name: 'Section',
-        to: '/program/work-with-us/section',
+        name: 'Reach Us',
+        to: '/program/work-with-us/reach-us',
       },
       {
         name: 'Option',
