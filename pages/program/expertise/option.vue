@@ -2,14 +2,14 @@
   <div>
     <NAppHeader>
       <h1>Expertise</h1>
-      <p>Program &raquo; Expertise &raquo; Lists</p>
+      <p>Program &raquo; Expertise &raquo; Option</p>
       <template slot="after">
         <NTabs :tabs="tabs" />
       </template>
     </NAppHeader>
     <NAppMain>
       <NPanel>
-        <ProgramExpertiseList
+        <ProgramExpertiseFormOption
           @row-tap="onRowTap"
           @create="onCreate"
           @delete="onDelete"
@@ -20,15 +20,12 @@
 </template>
 
 <script>
-import { defineComponent, useRouter, ref } from '@nuxtjs/composition-api'
-
+import { defineComponent, ref } from '@nuxtjs/composition-api'
 export default defineComponent({
   meta: {
     roleGuard: ['admin'],
   },
   setup() {
-    const router = useRouter()
-
     const tabs = ref([
       {
         name: 'List',
@@ -40,21 +37,8 @@ export default defineComponent({
       },
     ])
 
-    const onRowTap = (row) => {
-      router.push(`/program/expertise/${row.id}/edit#overview`)
-    }
-
-    const onCreate = () => {
-      router.push('/program/expertise/create#overview')
-    }
-
-    const onDelete = (rows) => {}
-
     return {
       tabs,
-      onRowTap,
-      onCreate,
-      onDelete,
     }
   },
 })

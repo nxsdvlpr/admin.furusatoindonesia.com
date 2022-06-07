@@ -1,14 +1,20 @@
 <template>
   <div>
     <NAppHeader>
-      <h1>Pages Setting</h1>
-      <p>Setting &raquo; Pages</p>
+      <h1>At A Glance</h1>
+      <p>About &raquo; At A Glance &raquo; Option</p>
       <template slot="after">
         <NTabs :tabs="tabs" />
       </template>
     </NAppHeader>
     <NAppMain>
-      <nuxt-child />
+      <NPanel>
+        <AboutUsAtAGlanceFormOption
+          @row-tap="onRowTap"
+          @create="onCreate"
+          @delete="onDelete"
+        />
+      </NPanel>
     </NAppMain>
   </div>
 </template>
@@ -22,8 +28,12 @@ export default defineComponent({
   setup() {
     const tabs = ref([
       {
-        name: 'Home',
-        to: '/setting/pages/home',
+        name: 'Section',
+        to: '/about-us/at-a-glance/section',
+      },
+      {
+        name: 'Option',
+        to: '/about-us/at-a-glance/option',
       },
     ])
 

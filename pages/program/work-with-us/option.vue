@@ -1,14 +1,20 @@
 <template>
   <div>
     <NAppHeader>
-      <h1>Pages Setting</h1>
-      <p>Setting &raquo; Pages</p>
+      <h1>Work With Us</h1>
+      <p>Program &raquo; Work With Us &raquo; Option</p>
       <template slot="after">
         <NTabs :tabs="tabs" />
       </template>
     </NAppHeader>
     <NAppMain>
-      <nuxt-child />
+      <NPanel>
+        <ProgramWorkWithUsFormOption
+          @row-tap="onRowTap"
+          @create="onCreate"
+          @delete="onDelete"
+        />
+      </NPanel>
     </NAppMain>
   </div>
 </template>
@@ -22,8 +28,12 @@ export default defineComponent({
   setup() {
     const tabs = ref([
       {
-        name: 'Home',
-        to: '/setting/pages/home',
+        name: 'Reach Us',
+        to: '/program/work-with-us/reach-us',
+      },
+      {
+        name: 'Option',
+        to: '/program/work-with-us/option',
       },
     ])
 

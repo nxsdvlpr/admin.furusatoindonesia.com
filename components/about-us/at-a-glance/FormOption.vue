@@ -1,6 +1,10 @@
 <template>
   <NForm>
-    <NFormSection id="hero" caption="Hero" description="Basic hero information">
+    <NFormSection
+      id="page-title"
+      caption="Page Title"
+      description="Basic page title information"
+    >
       <div class="flex justify-end">
         <FormLangSelect v-model="form.displayLanguage" />
       </div>
@@ -12,18 +16,6 @@
           type="text"
         />
         <NInput v-else v-model="form.page.titleJp" type="text" />
-      </NInputGroup>
-
-      <NInputGroup
-        :feedback="validation.error('page.subtitle')"
-        label="Subtitle"
-      >
-        <NInput
-          v-if="form.displayLanguage === 'ID'"
-          v-model="form.page.subtitle"
-          type="text"
-        />
-        <NInput v-else v-model="form.page.subtitleJp" type="text" />
       </NInputGroup>
 
       <NFormAction>
@@ -39,7 +31,7 @@
 import { defineComponent, useContext } from '@nuxtjs/composition-api'
 import { useMutation, useQuery } from '@vue/apollo-composable'
 
-import useFormPageHome from '@/components/setting/pages/home/useFormPageHome'
+import useFormAtGlanceOption from '@/components/about-us/at-a-glance/useFormAtGlanceOption'
 
 import { UPDATE_PAGE_HOME } from '@/graphql/setting/pages/home/mutations/UPDATE_PAGE_HOME'
 import { GET_PAGE_HOME } from '@/graphql/setting/pages/home/queries/GET_PAGE_HOME'
@@ -48,19 +40,19 @@ export default defineComponent({
   setup(props, { emit }) {
     const { $toast, error } = useContext()
 
-    const { form, validation } = useFormPageHome()
+    const { form, validation } = useFormAtGlanceOption()
 
     const refetchQueries = [
       {
         query: GET_PAGE_HOME,
         variables: {
-          id: 1,
+          id: 11,
         },
       },
     ]
 
     const { onResult: onResultHomeHero } = useQuery(GET_PAGE_HOME, {
-      id: 1,
+      id: 11,
     })
 
     const {
@@ -92,7 +84,7 @@ export default defineComponent({
 
       updateHomeHero({
         input: {
-          id: 1,
+          id: 11,
           update: form.page,
         },
       })

@@ -3,6 +3,9 @@
     <NAppHeader>
       <h1>Impact</h1>
       <p>Program &raquo; Impact &raquo; Lists</p>
+      <template slot="after">
+        <NTabs :tabs="tabs" />
+      </template>
     </NAppHeader>
     <NAppMain>
       <NPanel>
@@ -17,7 +20,7 @@
 </template>
 
 <script>
-import { defineComponent, useRouter } from '@nuxtjs/composition-api'
+import { defineComponent, useRouter, ref } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   meta: {
@@ -25,6 +28,17 @@ export default defineComponent({
   },
   setup() {
     const router = useRouter()
+
+    const tabs = ref([
+      {
+        name: 'List',
+        to: '/program/impact/',
+      },
+      {
+        name: 'Option',
+        to: '/program/impact/option',
+      },
+    ])
 
     const onRowTap = (row) => {
       router.push(`/program/impact/${row.id}/edit#overview`)
@@ -37,6 +51,7 @@ export default defineComponent({
     const onDelete = (rows) => {}
 
     return {
+      tabs,
       onRowTap,
       onCreate,
       onDelete,

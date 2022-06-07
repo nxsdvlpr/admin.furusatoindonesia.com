@@ -3,7 +3,7 @@ import { assign, defaultsDeep } from 'lodash'
 import useNFormValidation from '@/components/nboard/composables/useNFormValidation'
 import useNFormValidators from '@/components/nboard/composables/useNFormValidators'
 
-export default function useFormPageHome() {
+export default function useFormAtGlanceOption() {
   const { required } = useNFormValidators()
 
   const defaultData = () => ({
@@ -11,14 +11,7 @@ export default function useFormPageHome() {
       group: 'page-title',
       title: null,
       titleJp: null,
-      subtitle: null,
-      subtitleJp: null,
-      excerpt: null,
-      excerptJp: null,
-      body: null,
-      bodyJp: null,
       image: null,
-      sequence: 0,
     },
     displayLanguage: 'ID',
   })

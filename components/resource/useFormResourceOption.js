@@ -3,19 +3,16 @@ import { assign, defaultsDeep } from 'lodash'
 import useNFormValidation from '@/components/nboard/composables/useNFormValidation'
 import useNFormValidators from '@/components/nboard/composables/useNFormValidators'
 
-export default function useFormImpact() {
+export default function useFormResourceOption() {
   const { required } = useNFormValidators()
 
   const defaultData = () => ({
-    impact: {
-      group: 'impact',
+    page: {
+      group: 'page-title',
       title: null,
       titleJp: null,
       subtitle: null,
       subtitleJp: null,
-      body: null,
-      bodyJp: null,
-      image: null,
     },
     displayLanguage: 'ID',
   })
@@ -24,14 +21,11 @@ export default function useFormImpact() {
 
   const rules = computed(() => {
     return {
-      impact: {
+      page: {
         title: {
           required,
         },
         subtitle: {
-          required,
-        },
-        body: {
           required,
         },
       },
