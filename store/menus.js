@@ -32,7 +32,7 @@ export const state = () => ({
         },
         {
           label: 'Work With Us',
-          to: '/program/work-with-us',
+          to: '/program/work-with-us/reach-us',
           roleGuard: ['admin'],
         },
       ],
@@ -71,6 +71,11 @@ export const state = () => ({
       place: 'main',
       roleGuard: ['admin'],
       submenus: [
+        {
+          label: 'At A Glance ',
+          to: '/about-us/at-a-glance/section',
+          roleGuard: ['admin'],
+        },
         {
           label: 'Mission and Vision',
           to: '/about-us/mission-vision',

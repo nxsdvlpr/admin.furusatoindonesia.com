@@ -38,7 +38,7 @@
 import { defineComponent, useContext } from '@nuxtjs/composition-api'
 import { useMutation, useQuery } from '@vue/apollo-composable'
 
-import useFormPagePrograms from '@/components/setting/pages/programs/useFormPagePrograms'
+import useFormImpactOption from '@/components/program/impact/useFormImpactOption'
 
 import { UPDATE_PAGE_PROGRAM } from '@/graphql/setting/pages/programs/mutations/UPDATE_PAGE_PROGRAM'
 import { GET_PAGE_PROGRAM } from '@/graphql/setting/pages/programs/queries/GET_PAGE_PROGRAM'
@@ -57,7 +57,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const { $toast, error } = useContext()
 
-    const { form, validation } = useFormPagePrograms()
+    const { form, validation } = useFormImpactOption()
 
     const refetchQueries = [
       {

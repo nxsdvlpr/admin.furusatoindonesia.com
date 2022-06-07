@@ -1,9 +1,9 @@
 <template>
   <NForm>
     <NFormSection
-      id="resource"
-      caption="Resource"
-      description="Basic resource information"
+      id="page-title"
+      caption="Page Title"
+      description="Basic page title information"
     >
       <div class="flex justify-end">
         <FormLangSelect v-model="form.displayLanguage" />
@@ -43,7 +43,7 @@
 import { defineComponent, useContext } from '@nuxtjs/composition-api'
 import { useMutation, useQuery } from '@vue/apollo-composable'
 
-import useFormPagePrograms from '@/components/setting/pages/programs/useFormPagePrograms'
+import useFormImpactOption from '@/components/program/impact/useFormImpactOption'
 
 import { UPDATE_PAGE_HOME } from '@/graphql/setting/pages/home/mutations/UPDATE_PAGE_HOME'
 import { GET_PAGE_HOME } from '@/graphql/setting/pages/home/queries/GET_PAGE_HOME'
@@ -52,31 +52,31 @@ export default defineComponent({
   setup(props, { emit }) {
     const { $toast, error } = useContext()
 
-    const { form, validation } = useFormPagePrograms()
+    const { form, validation } = useFormImpactOption()
 
     const refetchQueries = [
       {
         query: GET_PAGE_HOME,
         variables: {
-          id: 10,
+          id: 4,
         },
       },
     ]
 
-    const { onResult: onResultResource } = useQuery(GET_PAGE_HOME, {
-      id: 10,
+    const { onResult: onResultHomeHero } = useQuery(GET_PAGE_HOME, {
+      id: 4,
     })
 
     const {
-      mutate: updateResource,
-      onDone: onUpdateResourceDone,
-      onError: onUpdateResourceError,
+      mutate: updateHomeHero,
+      onDone: onUpdateHomeHeroDone,
+      onError: onUpdateHomeHeroError,
       loading,
     } = useMutation(UPDATE_PAGE_HOME, {
       refetchQueries,
     })
 
-    onResultResource(({ data }) => {
+    onResultHomeHero(({ data }) => {
       if (!data.article) {
         return error({ statusCode: 404, message: 'Not Found' })
       }
@@ -94,19 +94,19 @@ export default defineComponent({
         return false
       }
 
-      updateResource({
+      updateHomeHero({
         input: {
-          id: 10,
+          id: 4,
           update: form.page,
         },
       })
     }
 
-    onUpdateResourceDone(({ data }) => {
-      $toast.success('Page resource successfully updated')
+    onUpdateHomeHeroDone(({ data }) => {
+      $toast.success('Home hero successfully updated')
     })
 
-    onUpdateResourceError((error) => {
+    onUpdateHomeHeroError((error) => {
       $toast.error(error.message)
     })
 

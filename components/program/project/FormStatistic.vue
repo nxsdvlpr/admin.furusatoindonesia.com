@@ -1,6 +1,10 @@
 <template>
   <NForm>
-    <NFormSection id="hero" caption="Hero" description="Basic hero information">
+    <NFormSection
+      id="counter-1"
+      caption="Counter One"
+      description="Basic counter information"
+    >
       <div class="flex justify-end">
         <FormLangSelect v-model="form.displayLanguage" />
       </div>
@@ -39,7 +43,7 @@
 import { defineComponent, useContext } from '@nuxtjs/composition-api'
 import { useMutation, useQuery } from '@vue/apollo-composable'
 
-import useFormPageHome from '@/components/setting/pages/home/useFormPageHome'
+import useFormProjectOption from '@/components/program/project/useFormProjectOption'
 
 import { UPDATE_PAGE_HOME } from '@/graphql/setting/pages/home/mutations/UPDATE_PAGE_HOME'
 import { GET_PAGE_HOME } from '@/graphql/setting/pages/home/queries/GET_PAGE_HOME'
@@ -48,7 +52,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const { $toast, error } = useContext()
 
-    const { form, validation } = useFormPageHome()
+    const { form, validation } = useFormProjectOption()
 
     const refetchQueries = [
       {
