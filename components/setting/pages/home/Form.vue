@@ -99,7 +99,7 @@ export default defineComponent({
     }
 
     onUpdateHomeHeroDone(({ data }) => {
-      $toast.success('Home hero successfully updated')
+      $toast.success('Section hero successfully updated')
     })
 
     onUpdateHomeHeroError((error) => {

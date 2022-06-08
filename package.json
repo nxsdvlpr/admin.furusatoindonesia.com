@@ -49,6 +49,7 @@
     "vue-demi": "^0.12.1",
     "vue-good-table": "^2.21.10",
     "vue-json-excel": "^0.3.0",
+    "vue-lazyload": "^3.0.0-rc.2",
     "vue-loaders": "^4.1.4",
     "vue-month-picker": "^1.5.1",
     "vue-mq": "^1.0.1",

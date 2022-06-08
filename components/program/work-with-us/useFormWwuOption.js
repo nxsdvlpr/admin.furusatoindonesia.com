@@ -8,7 +8,7 @@ export default function useFormWwuOption() {
 
   const defaultData = () => ({
     page: {
-      group: 'page-hero',
+      group: 'section-hero',
       title: null,
       titleJp: null,
       body: null,

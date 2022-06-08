@@ -44,17 +44,16 @@
         <NInput v-model="form.expertise.icon" type="text" />
       </NInputGroup>
 
-      <!-- <NInputGroup :feedback="validation.error('expertise.body')" label="Body">
-        <NFileUpload
-          ref="imageUpload"
-          :value="form.images"
-          :endpoint="uploadEndpoint"
-          extensions="jpg,jpeg,png"
-          accept="image/png,image/jpeg"
-          :multiple="false"
-          @upload-done="onUploadImageDone"
+      <NInputGroup
+        :feedback="validation.error('expertise.image')"
+        label="Image"
+      >
+        <ImageUpload
+          path="/program/expertise/"
+          :src="form.expertise.image"
+          @image-changed="onImageChanged"
         />
-      </NInputGroup> -->
+      </NInputGroup>
     </NFormSection>
 
     <NFormAction :loading="loading" @on-save="onSave" @on-discard="onDiscard" />
@@ -62,7 +61,7 @@
 </template>
 
 <script>
-import { defineComponent, useContext, computed } from '@nuxtjs/composition-api'
+import { defineComponent, useContext } from '@nuxtjs/composition-api'
 import { useMutation } from '@vue/apollo-composable'
 
 import useNTableCursorRemoteData from '@/components/nboard/composables/useNTableCursorRemoteData'
@@ -73,7 +72,7 @@ import { GET_EXPERTISES } from '@/graphql/program/expertise/queries/GET_EXPERTIS
 
 export default defineComponent({
   setup(props, { emit }) {
-    const { env, $toast } = useContext()
+    const { $toast } = useContext()
 
     const { variables } = useNTableCursorRemoteData({
       customVariables: {
@@ -85,8 +84,6 @@ export default defineComponent({
     })
 
     const { form, validation } = useFormExpertise()
-
-    const uploadEndpoint = computed(() => env.uploadEndpoint)
 
     const refetchQueries = [
       {
@@ -122,8 +119,8 @@ export default defineComponent({
       emit('discard')
     }
 
-    const onUploadImageDone = (files) => {
-      form.expertise.image = files[0] ? files[0].url : null
+    const onImageChanged = (file) => {
+      form.expertise.image = file.url
     }
 
     onCreateExpertiseDone(({ data }) => {
@@ -139,10 +136,9 @@ export default defineComponent({
       validation,
       form,
       loading,
-      uploadEndpoint,
-      onUploadImageDone,
       onSave,
       onDiscard,
+      onImageChanged,
     }
   },
 })

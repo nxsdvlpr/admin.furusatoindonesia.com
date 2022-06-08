@@ -40,6 +40,14 @@
       <NInputGroup :feedback="validation.error('project.icon')" label="Icon">
         <NInput v-model="form.project.icon" type="text" />
       </NInputGroup>
+
+      <NInputGroup :feedback="validation.error('project.image')" label="Image">
+        <ImageUpload
+          path="/program/project/"
+          :src="form.project.image"
+          @image-changed="onImageChanged"
+        />
+      </NInputGroup>
     </NFormSection>
 
     <NFormAction :loading="loading" @on-save="onSave" @on-discard="onDiscard" />
@@ -105,6 +113,10 @@ export default defineComponent({
       emit('discard')
     }
 
+    const onImageChanged = (file) => {
+      form.project.image = file.url
+    }
+
     onCreateProjectDone(({ data }) => {
       $toast.success('Project successfully added!')
       emit('save')
@@ -120,6 +132,7 @@ export default defineComponent({
       loading,
       onSave,
       onDiscard,
+      onImageChanged,
     }
   },
 })

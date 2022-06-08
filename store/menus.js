@@ -66,7 +66,7 @@ export const state = () => ({
     },
     {
       label: 'About Us',
-      to: '/about-us',
+      to: '/about-us/at-a-glance/section',
       icon: 'info-circle',
       place: 'main',
       roleGuard: ['admin'],

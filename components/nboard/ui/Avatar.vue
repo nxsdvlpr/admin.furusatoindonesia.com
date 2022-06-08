@@ -3,7 +3,7 @@
     <div class="avatar-image">
       <img
         v-if="imageSource"
-        v-lazy="imageSource"
+        :src="imageSource"
         class="object-cover object-center w-full h-full rounded-full"
       />
       <div v-else>{{ initial }}</div>

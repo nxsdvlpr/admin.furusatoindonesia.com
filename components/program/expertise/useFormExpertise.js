@@ -18,7 +18,6 @@ export default function useFormExpertise() {
       icon: null,
       image: null,
     },
-    images: [],
     displayLanguage: 'ID',
   })
 

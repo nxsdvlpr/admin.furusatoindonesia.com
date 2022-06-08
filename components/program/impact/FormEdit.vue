@@ -17,24 +17,20 @@
         <NInput v-else v-model="form.impact.titleJp" type="text" />
       </NInputGroup>
 
-      <NInputGroup
-        :feedback="validation.error('impact.subtitle')"
-        label="Subtitle"
-      >
-        <NInput
-          v-if="form.displayLanguage === 'ID'"
-          v-model="form.impact.subtitle"
-          type="text"
-        />
-        <NInput v-else v-model="form.impact.subtitleJp" type="text" />
-      </NInputGroup>
-
       <NInputGroup :feedback="validation.error('impact.body')" label="Body">
         <NTextarea
           v-if="form.displayLanguage === 'ID'"
           v-model="form.impact.body"
         />
         <NTextarea v-else v-model="form.impact.bodyJp" />
+      </NInputGroup>
+
+      <NInputGroup :feedback="validation.error('impact.image')" label="Image">
+        <ImageUpload
+          path="/program/impact/"
+          :src="form.impact.image"
+          @image-changed="onImageChanged"
+        />
       </NInputGroup>
     </NFormSection>
 
@@ -126,6 +122,10 @@ export default defineComponent({
       emit('discard')
     }
 
+    const onImageChanged = (file) => {
+      form.impact.image = file.url
+    }
+
     onUpdateImpactDone(({ data }) => {
       $toast.success('Impact successfully updated!')
       emit('save')
@@ -141,6 +141,7 @@ export default defineComponent({
       loading,
       onSave,
       onDiscard,
+      onImageChanged,
     }
   },
 })

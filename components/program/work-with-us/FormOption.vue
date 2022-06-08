@@ -22,6 +22,14 @@
         <NTextarea v-else v-model="form.page.bodyJp" />
       </NInputGroup>
 
+      <NInputGroup :feedback="validation.error('page.image')" label="Image">
+        <ImageUpload
+          path="/program/work-with-us/"
+          :src="form.page.image"
+          @image-changed="onImageChanged"
+        />
+      </NInputGroup>
+
       <NFormAction>
         <NButton :disabled="loading" class="primary" @click="onSave">
           Save
@@ -94,8 +102,12 @@ export default defineComponent({
       })
     }
 
+    const onImageChanged = (file) => {
+      form.page.image = file.url
+    }
+
     onUpdateHomeHeroDone(({ data }) => {
-      $toast.success('Home hero successfully updated')
+      $toast.success('Section hero successfully updated')
     })
 
     onUpdateHomeHeroError((error) => {
@@ -106,6 +118,7 @@ export default defineComponent({
       validation,
       form,
       loading,
+      onImageChanged,
       onSave,
     }
   },

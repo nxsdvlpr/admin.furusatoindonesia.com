@@ -23,6 +23,24 @@
       <div v-if="props.column.field === 'title'">
         <div class="font-medium">{{ props.row.title }}</div>
       </div>
+      <div
+        v-else-if="props.column.field === 'action'"
+        class="n-table-action-group"
+        @click.stop
+      >
+        <div class="flex">
+          <NIconButton
+            class="primary"
+            icon="arrow-up-2"
+            @click="changeSequenceUp(props.row)"
+          />
+          <NIconButton
+            class="primary"
+            icon="arrow-down-2"
+            @click="changeSequenceDown(props.row)"
+          />
+        </div>
+      </div>
       <NTableCellResponsive v-else :props="props"></NTableCellResponsive>
     </template>
   </NTable>
@@ -30,9 +48,11 @@
 
 <script>
 import { defineComponent, ref } from '@nuxtjs/composition-api'
+import { useMutation } from '@vue/apollo-composable'
 import useNTableCursorRemoteData from '@/components/nboard/composables/useNTableCursorRemoteData'
 import { GET_IMPACTS } from '@/graphql/program/impact/queries/GET_IMPACTS'
 import { DESTROY_IMPACTS } from '@/graphql/program/impact/mutations/DESTROY_IMPACTS'
+import { CHANGE_IMPACT_SEQUENCE } from '@/graphql/program/impact/queries/CHANGE_IMPACT_SEQUENCE'
 
 export default defineComponent({
   setup(props, { emit }) {
@@ -45,9 +65,19 @@ export default defineComponent({
         label: 'Body',
         field: 'body',
       },
+      {
+        label: ' ',
+        field: 'action',
+        type: 'action',
+        align: 'right',
+        width: '60px',
+      },
     ])
 
-    const { rows, totalRecords, pageInfo, loading, methods } =
+    const { mutate: changeSequence, onDone: onChangeSequenceDone } =
+      useMutation(CHANGE_IMPACT_SEQUENCE, {})
+
+    const { refetch, rows, totalRecords, pageInfo, loading, methods } =
       useNTableCursorRemoteData({
         getQuery: GET_IMPACTS,
         destroyQuery: DESTROY_IMPACTS,
@@ -76,6 +106,26 @@ export default defineComponent({
       emit('delete', rows)
     }
 
+    const changeSequenceDown = (row) => {
+      changeSequence({
+        id: row.id,
+        group: 'impact',
+        direction: 'down',
+      })
+    }
+
+    const changeSequenceUp = (row) => {
+      changeSequence({
+        id: row.id,
+        group: 'impact',
+        direction: 'up',
+      })
+    }
+
+    onChangeSequenceDone(() => {
+      refetch()
+    })
+
     return {
       columns,
       rows,
@@ -86,6 +136,8 @@ export default defineComponent({
       onCreate,
       onRowTap,
       onDelete,
+      changeSequenceDown,
+      changeSequenceUp,
     }
   },
 })

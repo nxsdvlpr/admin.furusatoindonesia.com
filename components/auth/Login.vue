@@ -59,7 +59,7 @@
             <div class="h-16"></div>
           </div>
           <div class="text-xs text-gray-400">
-            &copy; ACER IND. 2022 - Trade-In Management App.
+            &copy; 2022 - Furusato Indonesia Foundation.
           </div>
         </div>
       </div>

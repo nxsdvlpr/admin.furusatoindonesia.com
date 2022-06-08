@@ -43,6 +43,17 @@
       <NInputGroup :feedback="validation.error('expertise.icon')" label="Icon">
         <NInput v-model="form.expertise.icon" type="text" />
       </NInputGroup>
+
+      <NInputGroup
+        :feedback="validation.error('expertise.image')"
+        label="Image"
+      >
+        <ImageUpload
+          path="/program/expertise/"
+          :src="form.expertise.image"
+          @image-changed="onImageChanged"
+        />
+      </NInputGroup>
     </NFormSection>
 
     <NFormAction :loading="loading" @on-save="onSave" @on-discard="onDiscard" />
@@ -133,6 +144,10 @@ export default defineComponent({
       emit('discard')
     }
 
+    const onImageChanged = (file) => {
+      form.expertise.image = file.url
+    }
+
     onUpdateExpertiseDone(({ data }) => {
       $toast.success('Expertise successfully updated!')
       emit('save')
@@ -148,6 +163,7 @@ export default defineComponent({
       loading,
       onSave,
       onDiscard,
+      onImageChanged,
     }
   },
 })
