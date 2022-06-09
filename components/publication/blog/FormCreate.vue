@@ -17,6 +17,14 @@
         <NTextarea v-model="form.blog.body" />
       </NInputGroup>
 
+      <NInputGroup :feedback="validation.error('blog.image')" label="Image">
+        <ImageUpload
+          path="/publication/blog/"
+          :src="form.blog.image"
+          @image-changed="onImageChanged"
+        />
+      </NInputGroup>
+
       <NColumn>
         <NInputGroup
           :feedback="validation.error('blog.publishedAt')"
@@ -35,8 +43,6 @@
         </NInputGroup>
       </NColumn>
     </NFormSection>
-
-    <MarkdownEditor />
 
     <NFormAction :loading="loading" @on-save="onSave" @on-discard="onDiscard" />
   </NForm>
@@ -58,7 +64,7 @@ export default defineComponent({
 
     const { variables } = useNTableCursorRemoteData()
 
-    const { form, validation, resetFormData } = useFormBlog()
+    const { form, validation } = useFormBlog()
 
     const refetchQueries = [
       {
@@ -92,13 +98,15 @@ export default defineComponent({
 
     const onDiscard = () => {
       emit('discard')
-      resetFormData()
+    }
+
+    const onImageChanged = (file) => {
+      form.blog.image = file.url
     }
 
     onCreateBlogDone(({ data }) => {
       $toast.success('Blog successfully added!')
       emit('save')
-      resetFormData()
     })
 
     onCreateBlogError((error) => {
@@ -111,6 +119,7 @@ export default defineComponent({
       loading,
       onSave,
       onDiscard,
+      onImageChanged,
     }
   },
 })

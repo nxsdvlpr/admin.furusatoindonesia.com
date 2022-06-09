@@ -8,6 +8,7 @@ export const GET_BLOG = gql`
       subject
       excerpt
       body
+      image
       published
       publishedAt
     }

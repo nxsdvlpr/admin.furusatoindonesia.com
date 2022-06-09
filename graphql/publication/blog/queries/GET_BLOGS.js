@@ -16,6 +16,7 @@ export const GET_BLOGS = gql`
           subject
           excerpt
           body
+          image
           user {
             id
             name
