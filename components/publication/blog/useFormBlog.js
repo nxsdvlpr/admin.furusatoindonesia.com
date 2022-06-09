@@ -9,12 +9,16 @@ export default function useFormBlog() {
   const defaultData = () => ({
     blog: {
       subject: null,
+      subjectJp: null,
       excerpt: null,
+      excerptJp: null,
       body: null,
+      bodyJp: null,
+      image: null,
       published: true,
       publishedAt: new Date(),
-      image: null,
     },
+    displayLanguage: 'ID',
   })
 
   const form = reactive(defaultData())

@@ -1,20 +1,37 @@
 <template>
   <NForm>
+    <div class="flex justify-end">
+      <FormLangSelect v-model="form.displayLanguage" />
+    </div>
+
     <NFormSection
       id="overview"
       caption="Overview"
       description="Basic blog information"
     >
       <NInputGroup :feedback="validation.error('blog.subject')" label="Subject">
-        <NInput v-model="form.blog.subject" type="text" />
+        <NInput
+          v-if="form.displayLanguage === 'ID'"
+          v-model="form.blog.subject"
+          type="text"
+        />
+        <NInput v-else v-model="form.blog.subjectJp" type="text" />
       </NInputGroup>
 
       <NInputGroup :feedback="validation.error('blog.excerpt')" label="Excerpt">
-        <NTextarea v-model="form.blog.excerpt" />
+        <NTextarea
+          v-if="form.displayLanguage === 'ID'"
+          v-model="form.blog.excerpt"
+        />
+        <NTextarea v-else v-model="form.blog.excerptJp" />
       </NInputGroup>
 
       <NInputGroup :feedback="validation.error('blog.body')" label="Body">
-        <NTextarea v-model="form.blog.body" />
+        <NTextarea
+          v-if="form.displayLanguage === 'ID'"
+          v-model="form.blog.body"
+        />
+        <NTextarea v-else v-model="form.blog.bodyJp" />
       </NInputGroup>
 
       <NInputGroup :feedback="validation.error('blog.image')" label="Image">
