@@ -1,5 +1,9 @@
 <template>
   <NForm>
+    <div class="flex justify-end">
+      <FormLangSelect v-model="form.displayLanguage" />
+    </div>
+
     <NFormSection
       id="overview"
       caption="Overview"
@@ -9,18 +13,35 @@
         :feedback="validation.error('resource.subject')"
         label="Subject"
       >
-        <NInput v-model="form.resource.subject" type="text" />
+        <NInput
+          v-model="
+            form.resource[
+              form.displayLanguage === 'ID' ? 'subject' : 'subjectJp'
+            ]
+          "
+          type="text"
+        />
       </NInputGroup>
 
       <NInputGroup
         :feedback="validation.error('resource.excerpt')"
         label="Excerpt"
       >
-        <NTextarea v-model="form.resource.excerpt" />
+        <NTextarea
+          v-model="
+            form.resource[
+              form.displayLanguage === 'ID' ? 'excerpt' : 'excerptJp'
+            ]
+          "
+        />
       </NInputGroup>
 
       <NInputGroup :feedback="validation.error('resource.body')" label="Body">
-        <NTextarea v-model="form.resource.body" />
+        <NTextarea
+          v-model="
+            form.resource[form.displayLanguage === 'ID' ? 'body' : 'bodyJp']
+          "
+        />
       </NInputGroup>
 
       <NColumn>
@@ -42,6 +63,8 @@
       </NColumn>
     </NFormSection>
 
+    <pre>{{ form }}</pre>
+
     <NFormAction :loading="loading" @on-save="onSave" @on-discard="onDiscard" />
   </NForm>
 </template>
@@ -62,7 +85,7 @@ export default defineComponent({
 
     const { variables } = useNTableCursorRemoteData()
 
-    const { form, validation, resetFormData } = useFormResource()
+    const { form, validation } = useFormResource()
 
     const refetchQueries = [
       {
@@ -96,13 +119,11 @@ export default defineComponent({
 
     const onDiscard = () => {
       emit('discard')
-      resetFormData()
     }
 
     onCreateResourceDone(({ data }) => {
       $toast.success('Resource successfully added!')
       emit('save')
-      resetFormData()
     })
 
     onCreateResourceError((error) => {
