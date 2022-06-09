@@ -2,18 +2,14 @@
   <div>
     <NAppHeader>
       <h1>At A Glance</h1>
-      <p>About &raquo; At A Glance &raquo; Option</p>
+      <p>About &raquo; At A Glance &raquo; Section</p>
       <template slot="after">
         <NTabs :tabs="tabs" />
       </template>
     </NAppHeader>
     <NAppMain>
       <NPanel>
-        <AboutUsAtAGlanceFormSection
-          @row-tap="onRowTap"
-          @create="onCreate"
-          @delete="onDelete"
-        />
+        <AboutUsAtAGlanceFormSection />
       </NPanel>
     </NAppMain>
   </div>

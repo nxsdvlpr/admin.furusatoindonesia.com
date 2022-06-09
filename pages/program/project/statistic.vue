@@ -9,11 +9,7 @@
     </NAppHeader>
     <NAppMain>
       <NPanel>
-        <ProgramProjectFormStatistic
-          @row-tap="onRowTap"
-          @create="onCreate"
-          @delete="onDelete"
-        />
+        <ProgramProjectFormStatistic />
       </NPanel>
     </NAppMain>
   </div>

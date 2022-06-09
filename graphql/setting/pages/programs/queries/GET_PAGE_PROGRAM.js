@@ -15,6 +15,7 @@ export const GET_PAGE_PROGRAM = gql`
       bodyJp
       image
       icon
+      counter
       sequence
     }
   }

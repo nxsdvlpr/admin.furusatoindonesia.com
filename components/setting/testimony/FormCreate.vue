@@ -25,6 +25,17 @@
       >
         <NTextarea v-model="form.testimony.message" />
       </NInputGroup>
+
+      <NInputGroup
+        :feedback="validation.error('testimony.avatar')"
+        label="Avatar"
+      >
+        <ImageUpload
+          path="/testimony/"
+          :src="form.testimony.avatar"
+          @image-changed="onAvatarChanged"
+        />
+      </NInputGroup>
     </NFormSection>
 
     <NFormAction :loading="loading" @on-save="onSave" @on-discard="onDiscard" />
@@ -83,6 +94,10 @@ export default defineComponent({
       emit('discard')
     }
 
+    const onAvatarChanged = (file) => {
+      form.testimony.avatar = file.url
+    }
+
     onCreateTestimonyDone(({ data }) => {
       $toast.success('Testimony successfully added!')
       emit('save')
@@ -98,6 +113,7 @@ export default defineComponent({
       loading,
       onSave,
       onDiscard,
+      onAvatarChanged,
     }
   },
 })

@@ -9,11 +9,7 @@
     </NAppHeader>
     <NAppMain>
       <NPanel>
-        <AboutUsMissionVisionFormOption
-          @row-tap="onRowTap"
-          @create="onCreate"
-          @delete="onDelete"
-        />
+        <AboutUsMissionVisionFormOption />
       </NPanel>
     </NAppMain>
   </div>

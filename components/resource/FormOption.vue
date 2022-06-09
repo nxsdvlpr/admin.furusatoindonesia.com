@@ -11,11 +11,11 @@
 
       <NInputGroup :feedback="validation.error('page.title')" label="Title">
         <NInput
-          v-if="form.displayLanguage === 'ID'"
-          v-model="form.page.title"
+          v-model="
+            form.page[form.displayLanguage === 'ID' ? 'title' : 'titleJp']
+          "
           type="text"
         />
-        <NInput v-else v-model="form.page.titleJp" type="text" />
       </NInputGroup>
 
       <NInputGroup
@@ -23,11 +23,11 @@
         label="Subtitle"
       >
         <NInput
-          v-if="form.displayLanguage === 'ID'"
-          v-model="form.page.subtitle"
+          v-model="
+            form.page[form.displayLanguage === 'ID' ? 'subtitle' : 'subtitleJp']
+          "
           type="text"
         />
-        <NInput v-else v-model="form.page.subtitleJp" type="text" />
       </NInputGroup>
 
       <NFormAction>
@@ -103,7 +103,7 @@ export default defineComponent({
     }
 
     onUpdateHomeHeroDone(({ data }) => {
-      $toast.success('Home hero successfully updated')
+      $toast.success('Page title successfully updated')
     })
 
     onUpdateHomeHeroError((error) => {

@@ -10,26 +10,51 @@
     >
       <NInputGroup
         :feedback="validation.error('missionVision.title')"
-        label="Subject"
+        label="Title"
       >
         <NInput
-          v-if="form.displayLanguage === 'ID'"
-          v-model="form.missionVision.title"
+          v-model="
+            form.missionVision[
+              form.displayLanguage === 'ID' ? 'title' : 'titleJp'
+            ]
+          "
           type="text"
         />
-        <NInput v-else v-model="form.missionVision.titleJp" type="text" />
       </NInputGroup>
 
       <NInputGroup
         :feedback="validation.error('missionVision.body')"
         label="Body"
       >
-        <NTextarea
-          v-if="form.displayLanguage === 'ID'"
-          v-model="form.missionVision.body"
+        <MarkdownEditor
+          v-model="
+            form.missionVision[
+              form.displayLanguage === 'ID' ? 'body' : 'bodyJp'
+            ]
+          "
+          height="150px"
         />
-        <NTextarea v-else v-model="form.missionVision.bodyJp" />
       </NInputGroup>
+
+      <NInputGroup
+        :feedback="validation.error('missionVision.image')"
+        label="Image"
+      >
+        <ImageUpload
+          path="/about-us/mission-vision/"
+          :src="form.missionVision.image"
+          @image-changed="onImageChanged"
+        />
+      </NInputGroup>
+
+      <NColumn>
+        <NInputGroup
+          :feedback="validation.error('missionVision.published')"
+          label="Published"
+        >
+          <t-toggle v-model="form.missionVision.published" />
+        </NInputGroup>
+      </NColumn>
     </NFormSection>
 
     <NFormAction :loading="loading" @on-save="onSave" @on-discard="onDiscard" />
@@ -95,6 +120,10 @@ export default defineComponent({
       emit('discard')
     }
 
+    const onImageChanged = (file) => {
+      form.missionVision.image = file.url
+    }
+
     onCreateMissionVisionDone(({ data }) => {
       $toast.success('MissionVision successfully added!')
       emit('save')
@@ -110,6 +139,7 @@ export default defineComponent({
       loading,
       onSave,
       onDiscard,
+      onImageChanged,
     }
   },
 })

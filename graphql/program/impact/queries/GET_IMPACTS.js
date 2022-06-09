@@ -29,6 +29,7 @@ export const GET_IMPACTS = gql`
           image
           icon
           sequence
+          published
         }
       }
       totalCount

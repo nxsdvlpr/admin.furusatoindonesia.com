@@ -13,12 +13,12 @@ export default function useFormExpertise() {
       titleJp: null,
       subtitle: null,
       subtitleJp: null,
-      body: null,
-      bodyJp: null,
+      body: '',
+      bodyJp: '',
       icon: null,
       image: null,
+      published: true,
     },
-    images: [],
     displayLanguage: 'ID',
   })
 

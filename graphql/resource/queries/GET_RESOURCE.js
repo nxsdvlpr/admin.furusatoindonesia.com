@@ -6,8 +6,11 @@ export const GET_RESOURCE = gql`
       id
       slug
       subject
+      subjectJp
       excerpt
+      excerptJp
       body
+      bodyJp
       published
       publishedAt
     }

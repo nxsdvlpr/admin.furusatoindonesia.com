@@ -9,11 +9,7 @@
     </NAppHeader>
     <NAppMain>
       <NPanel>
-        <ProgramExpertiseFormOption
-          @row-tap="onRowTap"
-          @create="onCreate"
-          @delete="onDelete"
-        />
+        <ProgramExpertiseFormOption />
       </NPanel>
     </NAppMain>
   </div>

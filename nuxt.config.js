@@ -42,9 +42,10 @@ export default {
     { src: '@/plugins/vue-select', ssr: false },
     { src: '@/plugins/vue-mq', ssr: false },
     { src: '@/plugins/overlayscrollbars-vue', ssr: false },
+    { src: '@/plugins/vue-lazyload', ssr: false },
     { src: '@/plugins/vue-json-excel', ssr: false },
     { src: '@/plugins/vue-tooltip', ssr: false },
-    { src: '@/plugins/vuex-persist.js' },
+    { src: '@/plugins/vuex-persist.js', ssr: false },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

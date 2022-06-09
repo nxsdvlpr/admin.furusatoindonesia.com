@@ -13,11 +13,11 @@
         label="Title"
       >
         <NInput
-          v-if="form.displayLanguage === 'ID'"
-          v-model="form.expertise.title"
+          v-model="
+            form.expertise[form.displayLanguage === 'ID' ? 'title' : 'titleJp']
+          "
           type="text"
         />
-        <NInput v-else v-model="form.expertise.titleJp" type="text" />
       </NInputGroup>
 
       <NInputGroup
@@ -25,24 +25,47 @@
         label="Subtitle"
       >
         <NInput
-          v-if="form.displayLanguage === 'ID'"
-          v-model="form.expertise.subtitle"
+          v-model="
+            form.expertise[
+              form.displayLanguage === 'ID' ? 'subtitle' : 'subtitleJp'
+            ]
+          "
           type="text"
         />
-        <NInput v-else v-model="form.expertise.subtitleJp" type="text" />
       </NInputGroup>
 
       <NInputGroup :feedback="validation.error('expertise.body')" label="Body">
-        <NTextarea
-          v-if="form.displayLanguage === 'ID'"
-          v-model="form.expertise.body"
+        <MarkdownEditor
+          v-model="
+            form.expertise[form.displayLanguage === 'ID' ? 'body' : 'bodyJp']
+          "
+          height="150px"
         />
-        <NTextarea v-else v-model="form.expertise.bodyJp" />
       </NInputGroup>
 
       <NInputGroup :feedback="validation.error('expertise.icon')" label="Icon">
         <NInput v-model="form.expertise.icon" type="text" />
       </NInputGroup>
+
+      <NInputGroup
+        :feedback="validation.error('expertise.image')"
+        label="Image"
+      >
+        <ImageUpload
+          path="/program/expertise/"
+          :src="form.expertise.image"
+          @image-changed="onImageChanged"
+        />
+      </NInputGroup>
+
+      <NColumn>
+        <NInputGroup
+          :feedback="validation.error('expertise.published')"
+          label="Published"
+        >
+          <t-toggle v-model="form.expertise.published" />
+        </NInputGroup>
+      </NColumn>
     </NFormSection>
 
     <NFormAction :loading="loading" @on-save="onSave" @on-discard="onDiscard" />
@@ -133,6 +156,10 @@ export default defineComponent({
       emit('discard')
     }
 
+    const onImageChanged = (file) => {
+      form.expertise.image = file.url
+    }
+
     onUpdateExpertiseDone(({ data }) => {
       $toast.success('Expertise successfully updated!')
       emit('save')
@@ -148,6 +175,7 @@ export default defineComponent({
       loading,
       onSave,
       onDiscard,
+      onImageChanged,
     }
   },
 })

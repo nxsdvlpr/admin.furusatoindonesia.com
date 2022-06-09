@@ -11,11 +11,10 @@ export default function useFormImpact() {
       group: 'impact',
       title: null,
       titleJp: null,
-      subtitle: null,
-      subtitleJp: null,
-      body: null,
-      bodyJp: null,
+      body: '',
+      bodyJp: '',
       image: null,
+      published: true,
     },
     displayLanguage: 'ID',
   })
@@ -26,9 +25,6 @@ export default function useFormImpact() {
     return {
       impact: {
         title: {
-          required,
-        },
-        subtitle: {
           required,
         },
         body: {

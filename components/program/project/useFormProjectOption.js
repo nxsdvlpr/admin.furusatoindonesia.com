@@ -8,11 +8,11 @@ export default function useFormProjectOption() {
 
   const defaultData = () => ({
     page: {
-      group: 'page-hero',
+      group: 'section-hero',
       title: null,
       titleJp: null,
-      body: null,
-      bodyJp: null,
+      body: '',
+      bodyJp: '',
       image: null,
     },
     displayLanguage: 'ID',
