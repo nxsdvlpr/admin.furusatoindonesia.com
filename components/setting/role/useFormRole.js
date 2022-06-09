@@ -3,20 +3,20 @@ import { assign, defaultsDeep, defaults } from 'lodash'
 import useNFormValidation from '@/components/nboard/composables/useNFormValidation'
 import useNFormValidators from '@/components/nboard/composables/useNFormValidators'
 
-const defaultData = () => ({
-  role: {
-    name: null,
-    shortname: null,
-    access: {},
-  },
-  tmpRoleAccess: {},
-  currentRoleAccess: {},
-})
-
-const form = reactive(defaultData())
-
 export default function useFormRole() {
   const { $appConfig } = useContext()
+
+  const defaultData = () => ({
+    role: {
+      name: null,
+      shortname: null,
+      access: {},
+    },
+    tmpRoleAccess: {},
+    currentRoleAccess: {},
+  })
+
+  const form = reactive(defaultData())
 
   const { required, minLength, maxLength } = useNFormValidators()
 

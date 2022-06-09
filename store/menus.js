@@ -66,7 +66,7 @@ export const state = () => ({
     },
     {
       label: 'About Us',
-      to: '/about-us',
+      to: '/about-us/at-a-glance/section',
       icon: 'info-circle',
       place: 'main',
       roleGuard: ['admin'],
@@ -92,6 +92,14 @@ export const state = () => ({
           roleGuard: ['admin'],
         },
       ],
+    },
+    {
+      label: 'Contact Us',
+      to: '/contact-us',
+      icon: 'message',
+      place: 'main',
+      roleGuard: ['admin'],
+      submenus: [],
     },
     {
       label: 'Setting',

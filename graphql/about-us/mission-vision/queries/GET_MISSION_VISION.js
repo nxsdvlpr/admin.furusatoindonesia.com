@@ -16,6 +16,7 @@ export const GET_MISSION_VISION = gql`
       image
       icon
       sequence
+      published
     }
   }
 `

@@ -13,11 +13,11 @@
         label="Title"
       >
         <NInput
-          v-if="form.displayLanguage === 'ID'"
-          v-model="form.expertise.title"
+          v-model="
+            form.expertise[form.displayLanguage === 'ID' ? 'title' : 'titleJp']
+          "
           type="text"
         />
-        <NInput v-else v-model="form.expertise.titleJp" type="text" />
       </NInputGroup>
 
       <NInputGroup
@@ -25,36 +25,47 @@
         label="Subtitle"
       >
         <NInput
-          v-if="form.displayLanguage === 'ID'"
-          v-model="form.expertise.subtitle"
+          v-model="
+            form.expertise[
+              form.displayLanguage === 'ID' ? 'subtitle' : 'subtitleJp'
+            ]
+          "
           type="text"
         />
-        <NInput v-else v-model="form.expertise.subtitleJp" type="text" />
       </NInputGroup>
 
       <NInputGroup :feedback="validation.error('expertise.body')" label="Body">
-        <NTextarea
-          v-if="form.displayLanguage === 'ID'"
-          v-model="form.expertise.body"
+        <MarkdownEditor
+          v-model="
+            form.expertise[form.displayLanguage === 'ID' ? 'body' : 'bodyJp']
+          "
+          height="150px"
         />
-        <NTextarea v-else v-model="form.expertise.bodyJp" />
       </NInputGroup>
 
       <NInputGroup :feedback="validation.error('expertise.icon')" label="Icon">
         <NInput v-model="form.expertise.icon" type="text" />
       </NInputGroup>
 
-      <!-- <NInputGroup :feedback="validation.error('expertise.body')" label="Body">
-        <NFileUpload
-          ref="imageUpload"
-          :value="form.images"
-          :endpoint="uploadEndpoint"
-          extensions="jpg,jpeg,png"
-          accept="image/png,image/jpeg"
-          :multiple="false"
-          @upload-done="onUploadImageDone"
+      <NInputGroup
+        :feedback="validation.error('expertise.image')"
+        label="Image"
+      >
+        <ImageUpload
+          path="/program/expertise/"
+          :src="form.expertise.image"
+          @image-changed="onImageChanged"
         />
-      </NInputGroup> -->
+      </NInputGroup>
+
+      <NColumn>
+        <NInputGroup
+          :feedback="validation.error('expertise.published')"
+          label="Published"
+        >
+          <t-toggle v-model="form.expertise.published" />
+        </NInputGroup>
+      </NColumn>
     </NFormSection>
 
     <NFormAction :loading="loading" @on-save="onSave" @on-discard="onDiscard" />
@@ -62,7 +73,7 @@
 </template>
 
 <script>
-import { defineComponent, useContext, computed } from '@nuxtjs/composition-api'
+import { defineComponent, useContext } from '@nuxtjs/composition-api'
 import { useMutation } from '@vue/apollo-composable'
 
 import useNTableCursorRemoteData from '@/components/nboard/composables/useNTableCursorRemoteData'
@@ -73,7 +84,7 @@ import { GET_EXPERTISES } from '@/graphql/program/expertise/queries/GET_EXPERTIS
 
 export default defineComponent({
   setup(props, { emit }) {
-    const { env, $toast } = useContext()
+    const { $toast } = useContext()
 
     const { variables } = useNTableCursorRemoteData({
       customVariables: {
@@ -85,8 +96,6 @@ export default defineComponent({
     })
 
     const { form, validation } = useFormExpertise()
-
-    const uploadEndpoint = computed(() => env.uploadEndpoint)
 
     const refetchQueries = [
       {
@@ -122,8 +131,8 @@ export default defineComponent({
       emit('discard')
     }
 
-    const onUploadImageDone = (files) => {
-      form.expertise.image = files[0] ? files[0].url : null
+    const onImageChanged = (file) => {
+      form.expertise.image = file.url
     }
 
     onCreateExpertiseDone(({ data }) => {
@@ -139,10 +148,9 @@ export default defineComponent({
       validation,
       form,
       loading,
-      uploadEndpoint,
-      onUploadImageDone,
       onSave,
       onDiscard,
+      onImageChanged,
     }
   },
 })

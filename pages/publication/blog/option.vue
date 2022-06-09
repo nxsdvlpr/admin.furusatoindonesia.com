@@ -9,11 +9,7 @@
     </NAppHeader>
     <NAppMain>
       <NPanel>
-        <PublicationBlogFormOption
-          @row-tap="onRowTap"
-          @create="onCreate"
-          @delete="onDelete"
-        />
+        <PublicationBlogFormOption />
       </NPanel>
     </NAppMain>
   </div>

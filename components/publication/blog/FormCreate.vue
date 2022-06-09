@@ -1,20 +1,44 @@
 <template>
   <NForm>
+    <div class="flex justify-end">
+      <FormLangSelect v-model="form.displayLanguage" />
+    </div>
+
     <NFormSection
       id="overview"
       caption="Overview"
       description="Basic blog information"
     >
       <NInputGroup :feedback="validation.error('blog.subject')" label="Subject">
-        <NInput v-model="form.blog.subject" type="text" />
+        <NInput
+          v-model="
+            form.blog[form.displayLanguage === 'ID' ? 'subject' : 'subjectJp']
+          "
+          type="text"
+        />
       </NInputGroup>
 
       <NInputGroup :feedback="validation.error('blog.excerpt')" label="Excerpt">
-        <NTextarea v-model="form.blog.excerpt" />
+        <NTextarea
+          v-model="
+            form.blog[form.displayLanguage === 'ID' ? 'excerpt' : 'excerptJp']
+          "
+        />
       </NInputGroup>
 
       <NInputGroup :feedback="validation.error('blog.body')" label="Body">
-        <NTextarea v-model="form.blog.body" />
+        <MarkdownEditor
+          v-model="form.blog[form.displayLanguage === 'ID' ? 'body' : 'bodyJp']"
+          height="300px"
+        />
+      </NInputGroup>
+
+      <NInputGroup :feedback="validation.error('blog.image')" label="Image">
+        <ImageUpload
+          path="/publication/blog/"
+          :src="form.blog.image"
+          @image-changed="onImageChanged"
+        />
       </NInputGroup>
 
       <NColumn>
@@ -36,8 +60,6 @@
       </NColumn>
     </NFormSection>
 
-    <MarkdownEditor />
-
     <NFormAction :loading="loading" @on-save="onSave" @on-discard="onDiscard" />
   </NForm>
 </template>
@@ -56,9 +78,16 @@ export default defineComponent({
   setup(props, { emit }) {
     const { $toast } = useContext()
 
-    const { variables } = useNTableCursorRemoteData()
+    const { variables } = useNTableCursorRemoteData({
+      customVariables: {
+        sorting: {
+          field: 'publishedAt',
+          direction: 'DESC',
+        },
+      },
+    })
 
-    const { form, validation, resetFormData } = useFormBlog()
+    const { form, validation } = useFormBlog()
 
     const refetchQueries = [
       {
@@ -92,13 +121,15 @@ export default defineComponent({
 
     const onDiscard = () => {
       emit('discard')
-      resetFormData()
+    }
+
+    const onImageChanged = (file) => {
+      form.blog.image = file.url
     }
 
     onCreateBlogDone(({ data }) => {
       $toast.success('Blog successfully added!')
       emit('save')
-      resetFormData()
     })
 
     onCreateBlogError((error) => {
@@ -111,6 +142,7 @@ export default defineComponent({
       loading,
       onSave,
       onDiscard,
+      onImageChanged,
     }
   },
 })

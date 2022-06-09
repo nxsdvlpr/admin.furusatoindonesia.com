@@ -16,6 +16,7 @@ export const GET_PROJECT = gql`
       image
       icon
       sequence
+      published
     }
   }
 `

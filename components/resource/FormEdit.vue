@@ -1,5 +1,9 @@
 <template>
   <NForm>
+    <div class="flex justify-end">
+      <FormLangSelect v-model="form.displayLanguage" />
+    </div>
+
     <NFormSection
       id="overview"
       caption="Overview"
@@ -9,18 +13,36 @@
         :feedback="validation.error('resource.subject')"
         label="Subject"
       >
-        <NInput v-model="form.resource.subject" type="text" />
+        <NInput
+          v-model="
+            form.resource[
+              form.displayLanguage === 'ID' ? 'subject' : 'subjectJp'
+            ]
+          "
+          type="text"
+        />
       </NInputGroup>
 
       <NInputGroup
         :feedback="validation.error('resource.excerpt')"
         label="Excerpt"
       >
-        <NTextarea v-model="form.resource.excerpt" />
+        <NTextarea
+          v-model="
+            form.resource[
+              form.displayLanguage === 'ID' ? 'excerpt' : 'excerptJp'
+            ]
+          "
+        />
       </NInputGroup>
 
       <NInputGroup :feedback="validation.error('resource.body')" label="Body">
-        <NTextarea v-model="form.resource.body" />
+        <MarkdownEditor
+          v-model="
+            form.resource[form.displayLanguage === 'ID' ? 'body' : 'bodyJp']
+          "
+          height="300px"
+        />
       </NInputGroup>
 
       <NColumn>
@@ -63,9 +85,16 @@ export default defineComponent({
 
     const route = useRoute()
 
-    const { variables } = useNTableCursorRemoteData()
+    const { variables } = useNTableCursorRemoteData({
+      customVariables: {
+        sorting: {
+          field: 'publishedAt',
+          direction: 'DESC',
+        },
+      },
+    })
 
-    const { form, validation, resetFormData } = useFormResource()
+    const { form, validation } = useFormResource()
 
     const refetchQueries = [
       {
@@ -121,13 +150,11 @@ export default defineComponent({
 
     const onDiscard = () => {
       emit('discard')
-      resetFormData()
     }
 
     onUpdateResourceDone(({ data }) => {
       $toast.success('Resource successfully updated!')
       emit('save')
-      resetFormData()
     })
 
     onUpdateResourceError((error) => {

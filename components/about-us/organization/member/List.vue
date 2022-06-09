@@ -20,7 +20,14 @@
     @on-delete="onDelete"
   >
     <template #table-row="props">
-      <div v-if="props.column.field === 'fullname'">
+      <div v-if="props.column.field === 'image'" class="hidden md:inline">
+        <NAvatar
+          class="sm secondary"
+          :name="props.row.fullname"
+          :src="props.row.image"
+        />
+      </div>
+      <div v-else-if="props.column.field === 'fullname'">
         <div class="font-medium">{{ props.row.fullname }}</div>
       </div>
       <div
@@ -63,6 +70,13 @@ export default defineComponent({
   },
   setup(props, { emit }) {
     const columns = ref([
+      {
+        label: 'Image',
+        field: 'image',
+        align: 'center',
+        width: '100px',
+        sortable: false,
+      },
       {
         label: 'Fullname',
         field: 'fullname',

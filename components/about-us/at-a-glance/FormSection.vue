@@ -1,8 +1,11 @@
 <template>
   <NForm>
-    <AboutUsAtAGlanceSection title="Intro" :article-id="2" />
-    <AboutUsAtAGlanceSection title="Furusato Group" :article-id="3" />
-    <AboutUsAtAGlanceSection title="Philosophy" :article-id="4" />
+    <AboutUsAtAGlanceFormSectionSection title="Intro" :article-id="2" />
+    <AboutUsAtAGlanceFormSectionSection
+      title="Furusato Group"
+      :article-id="3"
+    />
+    <AboutUsAtAGlanceFormSectionSection title="Philosophy" :article-id="4" />
   </NForm>
 </template>
 

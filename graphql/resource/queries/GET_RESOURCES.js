@@ -18,8 +18,13 @@ export const GET_RESOURCES = gql`
           id
           slug
           subject
+          subjectJp
           excerpt
+          excerptJp
           body
+          bodyJp
+          published
+          publishedAt
         }
       }
       totalCount

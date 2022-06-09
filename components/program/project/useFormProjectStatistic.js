@@ -3,28 +3,28 @@ import { assign, defaultsDeep } from 'lodash'
 import useNFormValidation from '@/components/nboard/composables/useNFormValidation'
 import useNFormValidators from '@/components/nboard/composables/useNFormValidators'
 
-const defaultData = () => ({
-  organizationStructure: {
-    subject: null,
-    subjectJp: null,
-    description: null,
-    descriptionJp: null,
-  },
-  displayLanguage: 'ID',
-})
-
-const form = reactive(defaultData())
-
-export default function useFormOrganizationStructure() {
+export default function useFormProjectStatistic() {
   const { required } = useNFormValidators()
+
+  const defaultData = () => ({
+    page: {
+      group: 'project-statistic',
+      title: null,
+      titleJp: null,
+      counter: null,
+    },
+    displayLanguage: 'ID',
+  })
+
+  const form = reactive(defaultData())
 
   const rules = computed(() => {
     return {
-      organizationStructure: {
-        subject: {
+      page: {
+        counter: {
           required,
         },
-        description: {
+        title: {
           required,
         },
       },

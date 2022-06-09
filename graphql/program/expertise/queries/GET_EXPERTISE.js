@@ -16,6 +16,7 @@ export const GET_EXPERTISE = gql`
       image
       icon
       sequence
+      published
     }
   }
 `

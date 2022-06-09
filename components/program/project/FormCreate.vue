@@ -10,11 +10,11 @@
     >
       <NInputGroup :feedback="validation.error('project.title')" label="Title">
         <NInput
-          v-if="form.displayLanguage === 'ID'"
-          v-model="form.project.title"
+          v-model="
+            form.project[form.displayLanguage === 'ID' ? 'title' : 'titleJp']
+          "
           type="text"
         />
-        <NInput v-else v-model="form.project.titleJp" type="text" />
       </NInputGroup>
 
       <NInputGroup
@@ -22,24 +22,44 @@
         label="Subtitle"
       >
         <NInput
-          v-if="form.displayLanguage === 'ID'"
-          v-model="form.project.subtitle"
+          v-model="
+            form.project[
+              form.displayLanguage === 'ID' ? 'subtitle' : 'subtitleJp'
+            ]
+          "
           type="text"
         />
-        <NInput v-else v-model="form.project.subtitleJp" type="text" />
       </NInputGroup>
 
       <NInputGroup :feedback="validation.error('project.body')" label="Body">
-        <NTextarea
-          v-if="form.displayLanguage === 'ID'"
-          v-model="form.project.body"
+        <MarkdownEditor
+          v-model="
+            form.project[form.displayLanguage === 'ID' ? 'body' : 'bodyJp']
+          "
+          height="150px"
         />
-        <NTextarea v-else v-model="form.project.bodyJp" />
       </NInputGroup>
 
       <NInputGroup :feedback="validation.error('project.icon')" label="Icon">
         <NInput v-model="form.project.icon" type="text" />
       </NInputGroup>
+
+      <NInputGroup :feedback="validation.error('project.image')" label="Image">
+        <ImageUpload
+          path="/program/project/"
+          :src="form.project.image"
+          @image-changed="onImageChanged"
+        />
+      </NInputGroup>
+
+      <NColumn>
+        <NInputGroup
+          :feedback="validation.error('project.published')"
+          label="Published"
+        >
+          <t-toggle v-model="form.project.published" />
+        </NInputGroup>
+      </NColumn>
     </NFormSection>
 
     <NFormAction :loading="loading" @on-save="onSave" @on-discard="onDiscard" />
@@ -105,6 +125,10 @@ export default defineComponent({
       emit('discard')
     }
 
+    const onImageChanged = (file) => {
+      form.project.image = file.url
+    }
+
     onCreateProjectDone(({ data }) => {
       $toast.success('Project successfully added!')
       emit('save')
@@ -120,6 +144,7 @@ export default defineComponent({
       loading,
       onSave,
       onDiscard,
+      onImageChanged,
     }
   },
 })

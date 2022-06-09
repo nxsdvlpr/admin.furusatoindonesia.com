@@ -29,6 +29,7 @@ export const GET_MISSION_VISIONS = gql`
           image
           icon
           sequence
+          published
         }
       }
       totalCount

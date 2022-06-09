@@ -26,6 +26,15 @@
           {{ props.row.excerpt }}
         </div>
       </div>
+      <NTableCellResponsive
+        v-else-if="props.column.field === 'published'"
+        :props="props"
+      >
+        <NOptionBadge
+          :value="props.row.published"
+          :options="publishedOptions"
+        />
+      </NTableCellResponsive>
       <NTableCellResponsive v-else :props="props"></NTableCellResponsive>
     </template>
   </NTable>
@@ -41,12 +50,21 @@ export default defineComponent({
   setup(props, { emit }) {
     const columns = ref([
       {
+        label: 'Date',
+        field: 'publishedAt',
+        align: 'center',
+        width: '100px',
+        type: 'date_short',
+      },
+      {
         label: 'Subject',
         field: 'subject',
       },
       {
-        label: 'Body',
-        field: 'body',
+        label: 'Status',
+        field: 'published',
+        align: 'center',
+        width: '120px',
       },
     ])
 
@@ -55,7 +73,18 @@ export default defineComponent({
         getQuery: GET_RESOURCES,
         destroyQuery: DESTROY_RESOURCES,
         dataProperty: 'resources',
+        customVariables: {
+          sorting: {
+            field: 'publishedAt',
+            direction: 'DESC',
+          },
+        },
       })
+
+    const publishedOptions = ref([
+      { value: true, label: 'PUBLISHED', class: 'primary' },
+      { value: false, label: 'UNPUBLISHED', class: 'info' },
+    ])
 
     const onCreate = () => {
       emit('create')
@@ -80,6 +109,7 @@ export default defineComponent({
       pageInfo,
       loading,
       methods,
+      publishedOptions,
       onCreate,
       onRowTap,
       onDelete,

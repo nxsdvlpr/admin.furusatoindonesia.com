@@ -10,32 +10,38 @@
     >
       <NInputGroup :feedback="validation.error('impact.title')" label="Title">
         <NInput
-          v-if="form.displayLanguage === 'ID'"
-          v-model="form.impact.title"
+          v-model="
+            form.impact[form.displayLanguage === 'ID' ? 'title' : 'titleJp']
+          "
           type="text"
         />
-        <NInput v-else v-model="form.impact.titleJp" type="text" />
-      </NInputGroup>
-
-      <NInputGroup
-        :feedback="validation.error('impact.subtitle')"
-        label="Subtitle"
-      >
-        <NInput
-          v-if="form.displayLanguage === 'ID'"
-          v-model="form.impact.subtitle"
-          type="text"
-        />
-        <NInput v-else v-model="form.impact.subtitleJp" type="text" />
       </NInputGroup>
 
       <NInputGroup :feedback="validation.error('impact.body')" label="Body">
-        <NTextarea
-          v-if="form.displayLanguage === 'ID'"
-          v-model="form.impact.body"
+        <MarkdownEditor
+          v-model="
+            form.impact[form.displayLanguage === 'ID' ? 'body' : 'bodyJp']
+          "
+          height="150px"
         />
-        <NTextarea v-else v-model="form.impact.bodyJp" />
       </NInputGroup>
+
+      <NInputGroup :feedback="validation.error('impact.image')" label="Image">
+        <ImageUpload
+          path="/program/impact/"
+          :src="form.impact.image"
+          @image-changed="onImageChanged"
+        />
+      </NInputGroup>
+
+      <NColumn>
+        <NInputGroup
+          :feedback="validation.error('impact.published')"
+          label="Published"
+        >
+          <t-toggle v-model="form.impact.published" />
+        </NInputGroup>
+      </NColumn>
     </NFormSection>
 
     <NFormAction :loading="loading" @on-save="onSave" @on-discard="onDiscard" />
@@ -126,6 +132,10 @@ export default defineComponent({
       emit('discard')
     }
 
+    const onImageChanged = (file) => {
+      form.impact.image = file.url
+    }
+
     onUpdateImpactDone(({ data }) => {
       $toast.success('Impact successfully updated!')
       emit('save')
@@ -141,6 +151,7 @@ export default defineComponent({
       loading,
       onSave,
       onDiscard,
+      onImageChanged,
     }
   },
 })

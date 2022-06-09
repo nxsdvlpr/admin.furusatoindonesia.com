@@ -7,19 +7,18 @@
 
       <NInputGroup :feedback="validation.error('page.title')" label="Title">
         <NInput
-          v-if="form.displayLanguage === 'ID'"
-          v-model="form.page.title"
+          v-model="
+            form.page[form.displayLanguage === 'ID' ? 'title' : 'titleJp']
+          "
           type="text"
         />
-        <NInput v-else v-model="form.page.titleJp" type="text" />
       </NInputGroup>
 
       <NInputGroup :feedback="validation.error('page.body')" label="Body">
-        <NTextarea
-          v-if="form.displayLanguage === 'ID'"
-          v-model="form.page.body"
+        <MarkdownEditor
+          v-model="form.page[form.displayLanguage === 'ID' ? 'body' : 'bodyJp']"
+          height="150px"
         />
-        <NTextarea v-else v-model="form.page.bodyJp" />
       </NInputGroup>
 
       <NFormAction>
@@ -95,7 +94,7 @@ export default defineComponent({
     }
 
     onUpdateHomeHeroDone(({ data }) => {
-      $toast.success('Home hero successfully updated')
+      $toast.success('Section hero successfully updated')
     })
 
     onUpdateHomeHeroError((error) => {

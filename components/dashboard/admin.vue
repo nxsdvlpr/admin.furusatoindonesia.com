@@ -3,16 +3,16 @@
     <div class="space-y-6">
       <div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <NCounterWidget :options="totalSummaryWidgetOption" />
+          <!-- <NCounterWidget :options="totalSummaryWidgetOption" />
           <NCounterWidget :options="todayRegistrationWidgetOption" />
-          <NCounterWidget :options="todayVerificationWidgetOption" />
+          <NCounterWidget :options="todayVerificationWidgetOption" /> -->
         </div>
       </div>
 
       <div>
-        <NWidget title="Daily Trade-Ins">
+        <!-- <NWidget title="Daily Trade-Ins">
           <DashboardAdminDailyTradeInChart />
-        </NWidget>
+        </NWidget> -->
       </div>
     </div>
   </div>

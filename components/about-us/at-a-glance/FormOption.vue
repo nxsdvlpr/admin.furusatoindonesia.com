@@ -91,7 +91,7 @@ export default defineComponent({
     }
 
     onUpdateHomeHeroDone(({ data }) => {
-      $toast.success('Home hero successfully updated')
+      $toast.success('Page title successfully updated')
     })
 
     onUpdateHomeHeroError((error) => {

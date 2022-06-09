@@ -9,11 +9,7 @@
     </NAppHeader>
     <NAppMain>
       <NPanel>
-        <AboutUsAtAGlanceFormOption
-          @row-tap="onRowTap"
-          @create="onCreate"
-          @delete="onDelete"
-        />
+        <AboutUsAtAGlanceFormOption />
       </NPanel>
     </NAppMain>
   </div>

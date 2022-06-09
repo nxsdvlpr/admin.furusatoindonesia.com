@@ -20,14 +20,23 @@
         label="Profession"
       >
         <NInput
-          v-if="form.displayLanguage === 'ID'"
-          v-model="form.organizationMember.profession"
+          v-model="
+            form.organizationMember[
+              form.displayLanguage === 'ID' ? 'profession' : 'professionJp'
+            ]
+          "
           type="text"
         />
-        <NInput
-          v-else
-          v-model="form.organizationMember.professionJp"
-          type="text"
+      </NInputGroup>
+
+      <NInputGroup
+        :feedback="validation.error('organizationMember.image')"
+        label="Image"
+      >
+        <ImageUpload
+          path="/about-us/organization-member/"
+          :src="form.organizationMember.image"
+          @image-changed="onImageChanged"
         />
       </NInputGroup>
     </NFormSection>
@@ -97,6 +106,10 @@ export default defineComponent({
       emit('discard')
     }
 
+    const onImageChanged = (file) => {
+      form.organizationMember.image = file.url
+    }
+
     onCreateOrganizationMemberDone(({ data }) => {
       $toast.success('Organization Member successfully added!')
       emit('save')
@@ -112,6 +125,7 @@ export default defineComponent({
       loading,
       onSave,
       onDiscard,
+      onImageChanged,
     }
   },
 })

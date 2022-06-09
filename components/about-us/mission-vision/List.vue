@@ -20,9 +20,21 @@
     @on-delete="onDelete"
   >
     <template #table-row="props">
-      <div v-if="props.column.field === 'title'">
+      <div v-if="props.column.field === 'image'" class="hidden md:inline">
+        <NThumbnail :src="props.row.image ? props.row.image : null" />
+      </div>
+      <div v-else-if="props.column.field === 'title'">
         <div class="font-medium">{{ props.row.title }}</div>
       </div>
+      <NTableCellResponsive
+        v-else-if="props.column.field === 'published'"
+        :props="props"
+      >
+        <NOptionBadge
+          :value="props.row.published"
+          :options="publishedOptions"
+        />
+      </NTableCellResponsive>
       <div
         v-else-if="props.column.field === 'action'"
         class="n-table-action-group"
@@ -58,12 +70,25 @@ export default defineComponent({
   setup(props, { emit }) {
     const columns = ref([
       {
+        label: 'Image',
+        field: 'image',
+        align: 'center',
+        width: '100px',
+        sortable: false,
+      },
+      {
         label: 'Title',
         field: 'title',
       },
       {
         label: 'Body',
         field: 'body',
+      },
+      {
+        label: 'Status',
+        field: 'published',
+        align: 'center',
+        width: '120px',
       },
       {
         label: ' ',
@@ -89,6 +114,11 @@ export default defineComponent({
           },
         },
       })
+
+    const publishedOptions = ref([
+      { value: true, label: 'PUBLISHED', class: 'primary' },
+      { value: false, label: 'UNPUBLISHED', class: 'info' },
+    ])
 
     const onCreate = () => {
       emit('create')
@@ -133,6 +163,7 @@ export default defineComponent({
       pageInfo,
       loading,
       methods,
+      publishedOptions,
       onCreate,
       onRowTap,
       onDelete,

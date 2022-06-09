@@ -3,22 +3,21 @@ import { assign, defaultsDeep } from 'lodash'
 import useNFormValidation from '@/components/nboard/composables/useNFormValidation'
 import useNFormValidators from '@/components/nboard/composables/useNFormValidators'
 
-const defaultData = () => ({
-  organizationMember: {
-    organizationStructureId: null,
-    fullname: null,
-    profession: null,
-    professionJp: null,
-    image: null,
-    sequence: 0,
-  },
-  displayLanguage: 'ID',
-})
-
-const form = reactive(defaultData())
-
 export default function useFormOrganizationMember() {
   const { required } = useNFormValidators()
+
+  const defaultData = () => ({
+    organizationMember: {
+      organizationStructureId: null,
+      fullname: null,
+      profession: null,
+      professionJp: null,
+      image: null,
+    },
+    displayLanguage: 'ID',
+  })
+
+  const form = reactive(defaultData())
 
   const route = useRoute()
 

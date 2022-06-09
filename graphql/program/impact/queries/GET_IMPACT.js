@@ -16,6 +16,7 @@ export const GET_IMPACT = gql`
       image
       icon
       sequence
+      published
     }
   }
 `

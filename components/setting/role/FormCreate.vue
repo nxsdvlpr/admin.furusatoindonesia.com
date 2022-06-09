@@ -53,7 +53,7 @@ export default defineComponent({
 
     const { variables } = useNTableCursorRemoteData()
 
-    const { form, validation, resetFormData } = useFormRole()
+    const { form, validation } = useFormRole()
 
     const refetchQueries = [
       {
@@ -89,13 +89,11 @@ export default defineComponent({
 
     const onDiscard = () => {
       emit('discard')
-      resetFormData()
     }
 
     onCreateRoleDone(({ data }) => {
       $toast.success('Role successfully added!')
       emit('save')
-      resetFormData()
     })
 
     onCreateRoleError((error) => {
