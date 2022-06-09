@@ -14,11 +14,9 @@
 
     <NInputGroup :feedback="validation.error('page.title')" label="Title">
       <NInput
-        v-if="form.displayLanguage === 'ID'"
-        v-model="form.page.title"
+        v-model="form.page[form.displayLanguage === 'ID' ? 'title' : 'titleJp']"
         type="text"
       />
-      <NInput v-else v-model="form.page.titleJp" type="text" />
     </NInputGroup>
 
     <NFormAction>

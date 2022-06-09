@@ -10,11 +10,11 @@
     >
       <NInputGroup :feedback="validation.error('project.title')" label="Title">
         <NInput
-          v-if="form.displayLanguage === 'ID'"
-          v-model="form.project.title"
+          v-model="
+            form.project[form.displayLanguage === 'ID' ? 'title' : 'titleJp']
+          "
           type="text"
         />
-        <NInput v-else v-model="form.project.titleJp" type="text" />
       </NInputGroup>
 
       <NInputGroup
@@ -22,19 +22,21 @@
         label="Subtitle"
       >
         <NInput
-          v-if="form.displayLanguage === 'ID'"
-          v-model="form.project.subtitle"
+          v-model="
+            form.project[
+              form.displayLanguage === 'ID' ? 'subtitle' : 'subtitleJp'
+            ]
+          "
           type="text"
         />
-        <NInput v-else v-model="form.project.subtitleJp" type="text" />
       </NInputGroup>
 
       <NInputGroup :feedback="validation.error('project.body')" label="Body">
         <NTextarea
-          v-if="form.displayLanguage === 'ID'"
-          v-model="form.project.body"
+          v-model="
+            form.project[form.displayLanguage === 'ID' ? 'body' : 'bodyJp']
+          "
         />
-        <NTextarea v-else v-model="form.project.bodyJp" />
       </NInputGroup>
 
       <NInputGroup :feedback="validation.error('project.icon')" label="Icon">

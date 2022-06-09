@@ -11,27 +11,25 @@
     >
       <NInputGroup :feedback="validation.error('blog.subject')" label="Subject">
         <NInput
-          v-if="form.displayLanguage === 'ID'"
-          v-model="form.blog.subject"
+          v-model="
+            form.blog[form.displayLanguage === 'ID' ? 'subject' : 'subjectJp']
+          "
           type="text"
         />
-        <NInput v-else v-model="form.blog.subjectJp" type="text" />
       </NInputGroup>
 
       <NInputGroup :feedback="validation.error('blog.excerpt')" label="Excerpt">
         <NTextarea
-          v-if="form.displayLanguage === 'ID'"
-          v-model="form.blog.excerpt"
+          v-model="
+            form.blog[form.displayLanguage === 'ID' ? 'excerpt' : 'excerptJp']
+          "
         />
-        <NTextarea v-else v-model="form.blog.excerptJp" />
       </NInputGroup>
 
       <NInputGroup :feedback="validation.error('blog.body')" label="Body">
         <NTextarea
-          v-if="form.displayLanguage === 'ID'"
-          v-model="form.blog.body"
+          v-model="form.blog[form.displayLanguage === 'ID' ? 'body' : 'bodyJp']"
         />
-        <NTextarea v-else v-model="form.blog.bodyJp" />
       </NInputGroup>
 
       <NInputGroup :feedback="validation.error('blog.image')" label="Image">

@@ -7,19 +7,17 @@
 
       <NInputGroup :feedback="validation.error('page.title')" label="Title">
         <NInput
-          v-if="form.displayLanguage === 'ID'"
-          v-model="form.page.title"
+          v-model="
+            form.page[form.displayLanguage === 'ID' ? 'title' : 'titleJp']
+          "
           type="text"
         />
-        <NInput v-else v-model="form.page.titleJp" type="text" />
       </NInputGroup>
 
       <NInputGroup :feedback="validation.error('page.body')" label="Body">
         <NTextarea
-          v-if="form.displayLanguage === 'ID'"
-          v-model="form.page.body"
+          v-model="form.page[form.displayLanguage === 'ID' ? 'body' : 'bodyJp']"
         />
-        <NTextarea v-else v-model="form.page.bodyJp" />
       </NInputGroup>
 
       <NInputGroup :feedback="validation.error('page.image')" label="Image">

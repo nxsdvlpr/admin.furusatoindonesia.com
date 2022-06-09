@@ -13,11 +13,11 @@
         label="Title"
       >
         <NInput
-          v-if="form.displayLanguage === 'ID'"
-          v-model="form.expertise.title"
+          v-model="
+            form.expertise[form.displayLanguage === 'ID' ? 'title' : 'titleJp']
+          "
           type="text"
         />
-        <NInput v-else v-model="form.expertise.titleJp" type="text" />
       </NInputGroup>
 
       <NInputGroup
@@ -25,19 +25,21 @@
         label="Subtitle"
       >
         <NInput
-          v-if="form.displayLanguage === 'ID'"
-          v-model="form.expertise.subtitle"
+          v-model="
+            form.expertise[
+              form.displayLanguage === 'ID' ? 'subtitle' : 'subtitleJp'
+            ]
+          "
           type="text"
         />
-        <NInput v-else v-model="form.expertise.subtitleJp" type="text" />
       </NInputGroup>
 
       <NInputGroup :feedback="validation.error('expertise.body')" label="Body">
         <NTextarea
-          v-if="form.displayLanguage === 'ID'"
-          v-model="form.expertise.body"
+          v-model="
+            form.expertise[form.displayLanguage === 'ID' ? 'body' : 'bodyJp']
+          "
         />
-        <NTextarea v-else v-model="form.expertise.bodyJp" />
       </NInputGroup>
 
       <NInputGroup :feedback="validation.error('expertise.icon')" label="Icon">

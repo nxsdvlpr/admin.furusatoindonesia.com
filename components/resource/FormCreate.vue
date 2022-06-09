@@ -63,8 +63,6 @@
       </NColumn>
     </NFormSection>
 
-    <pre>{{ form }}</pre>
-
     <NFormAction :loading="loading" @on-save="onSave" @on-discard="onDiscard" />
   </NForm>
 </template>

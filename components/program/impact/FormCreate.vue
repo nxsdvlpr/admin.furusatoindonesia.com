@@ -10,19 +10,19 @@
     >
       <NInputGroup :feedback="validation.error('impact.title')" label="Title">
         <NInput
-          v-if="form.displayLanguage === 'ID'"
-          v-model="form.impact.title"
+          v-model="
+            form.impact[form.displayLanguage === 'ID' ? 'title' : 'titleJp']
+          "
           type="text"
         />
-        <NInput v-else v-model="form.impact.titleJp" type="text" />
       </NInputGroup>
 
       <NInputGroup :feedback="validation.error('impact.body')" label="Body">
         <NTextarea
-          v-if="form.displayLanguage === 'ID'"
-          v-model="form.impact.body"
+          v-model="
+            form.impact[form.displayLanguage === 'ID' ? 'body' : 'bodyJp']
+          "
         />
-        <NTextarea v-else v-model="form.impact.bodyJp" />
       </NInputGroup>
 
       <NInputGroup :feedback="validation.error('impact.image')" label="Image">
