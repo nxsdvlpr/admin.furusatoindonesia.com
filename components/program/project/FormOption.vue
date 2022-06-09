@@ -15,8 +15,9 @@
       </NInputGroup>
 
       <NInputGroup :feedback="validation.error('page.body')" label="Body">
-        <NTextarea
+        <MarkdownEditor
           v-model="form.page[form.displayLanguage === 'ID' ? 'body' : 'bodyJp']"
+          height="150px"
         />
       </NInputGroup>
 

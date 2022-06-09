@@ -94,6 +94,14 @@ export const state = () => ({
       ],
     },
     {
+      label: 'Contact Us',
+      to: '/contact-us',
+      icon: 'message',
+      place: 'main',
+      roleGuard: ['admin'],
+      submenus: [],
+    },
+    {
       label: 'Setting',
       to: '/setting/general#site',
       icon: 'setting',

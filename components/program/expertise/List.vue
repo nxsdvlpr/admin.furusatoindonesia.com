@@ -20,9 +20,24 @@
     @on-delete="onDelete"
   >
     <template #table-row="props">
-      <div v-if="props.column.field === 'title'">
-        <div class="font-medium">{{ props.row.title }}</div>
+      <div v-if="props.column.field === 'image'" class="hidden md:inline">
+        <NThumbnail :src="props.row.image ? props.row.image : null" />
       </div>
+      <div v-else-if="props.column.field === 'title'">
+        <div class="font-medium">{{ props.row.title }}</div>
+        <div class="font-xs text-gray-500">
+          {{ props.row.subtitle }}
+        </div>
+      </div>
+      <NTableCellResponsive
+        v-else-if="props.column.field === 'published'"
+        :props="props"
+      >
+        <NOptionBadge
+          :value="props.row.published"
+          :options="publishedOptions"
+        />
+      </NTableCellResponsive>
       <div
         v-else-if="props.column.field === 'action'"
         class="n-table-action-group"
@@ -58,6 +73,13 @@ export default defineComponent({
   setup(props, { emit }) {
     const columns = ref([
       {
+        label: 'Image',
+        field: 'image',
+        align: 'center',
+        width: '100px',
+        sortable: false,
+      },
+      {
         label: 'Title',
         field: 'title',
       },
@@ -66,12 +88,23 @@ export default defineComponent({
         field: 'body',
       },
       {
+        label: 'Status',
+        field: 'published',
+        align: 'center',
+        width: '120px',
+      },
+      {
         label: ' ',
         field: 'action',
         type: 'action',
         align: 'right',
         width: '60px',
       },
+    ])
+
+    const publishedOptions = ref([
+      { value: true, label: 'PUBLISHED', class: 'primary' },
+      { value: false, label: 'UNPUBLISHED', class: 'info' },
     ])
 
     const { mutate: changeSequence, onDone: onChangeSequenceDone } =
@@ -133,6 +166,7 @@ export default defineComponent({
       pageInfo,
       loading,
       methods,
+      publishedOptions,
       onCreate,
       onRowTap,
       onDelete,

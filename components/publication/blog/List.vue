@@ -32,6 +32,15 @@
       <div v-else-if="props.column.field === 'user'">
         <div class="font-medium">{{ props.row.user.name }}</div>
       </div>
+      <NTableCellResponsive
+        v-else-if="props.column.field === 'published'"
+        :props="props"
+      >
+        <NOptionBadge
+          :value="props.row.published"
+          :options="publishedOptions"
+        />
+      </NTableCellResponsive>
       <NTableCellResponsive v-else :props="props"></NTableCellResponsive>
     </template>
   </NTable>
@@ -69,6 +78,12 @@ export default defineComponent({
         field: 'user',
         sortable: false,
       },
+      {
+        label: 'Status',
+        field: 'published',
+        align: 'center',
+        width: '120px',
+      },
     ])
 
     const { rows, totalRecords, pageInfo, loading, methods } =
@@ -83,6 +98,11 @@ export default defineComponent({
           },
         },
       })
+
+    const publishedOptions = ref([
+      { value: true, label: 'PUBLISHED', class: 'primary' },
+      { value: false, label: 'UNPUBLISHED', class: 'info' },
+    ])
 
     const onCreate = () => {
       emit('create')
@@ -107,6 +127,7 @@ export default defineComponent({
       pageInfo,
       loading,
       methods,
+      publishedOptions,
       onCreate,
       onRowTap,
       onDelete,

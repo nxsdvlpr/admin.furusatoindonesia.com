@@ -17,6 +17,7 @@ export default function useFormProject() {
       bodyJp: '',
       icon: null,
       image: null,
+      published: true,
     },
     displayLanguage: 'ID',
   })

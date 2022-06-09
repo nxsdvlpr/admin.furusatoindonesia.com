@@ -57,6 +57,15 @@
           @image-changed="onImageChanged"
         />
       </NInputGroup>
+
+      <NColumn>
+        <NInputGroup
+          :feedback="validation.error('expertise.published')"
+          label="Published"
+        >
+          <t-toggle v-model="form.expertise.published" />
+        </NInputGroup>
+      </NColumn>
     </NFormSection>
 
     <NFormAction :loading="loading" @on-save="onSave" @on-discard="onDiscard" />

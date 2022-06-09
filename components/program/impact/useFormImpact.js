@@ -14,6 +14,7 @@ export default function useFormImpact() {
       body: '',
       bodyJp: '',
       image: null,
+      published: true,
     },
     displayLanguage: 'ID',
   })

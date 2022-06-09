@@ -9,7 +9,6 @@ const defaultData = () => ({
     subjectJp: null,
     description: null,
     descriptionJp: null,
-    sequence: 0,
   },
   displayLanguage: 'ID',
 })

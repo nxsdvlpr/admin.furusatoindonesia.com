@@ -29,6 +29,7 @@ export const GET_PROJECTS = gql`
           image
           icon
           sequence
+          published
         }
       }
       totalCount

@@ -29,6 +29,7 @@ export const GET_EXPERTISES = gql`
           image
           icon
           sequence
+          published
         }
       }
       totalCount
