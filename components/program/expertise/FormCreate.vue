@@ -35,10 +35,11 @@
       </NInputGroup>
 
       <NInputGroup :feedback="validation.error('expertise.body')" label="Body">
-        <NTextarea
+        <MarkdownEditor
           v-model="
             form.expertise[form.displayLanguage === 'ID' ? 'body' : 'bodyJp']
           "
+          height="150px"
         />
       </NInputGroup>
 

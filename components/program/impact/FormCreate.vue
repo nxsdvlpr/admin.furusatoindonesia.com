@@ -18,10 +18,11 @@
       </NInputGroup>
 
       <NInputGroup :feedback="validation.error('impact.body')" label="Body">
-        <NTextarea
+        <MarkdownEditor
           v-model="
             form.impact[form.displayLanguage === 'ID' ? 'body' : 'bodyJp']
           "
+          height="150px"
         />
       </NInputGroup>
 
