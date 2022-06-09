@@ -9,11 +9,7 @@
     </NAppHeader>
     <NAppMain>
       <NPanel>
-        <ProgramWorkWithUsFormReachUs
-          @row-tap="onRowTap"
-          @create="onCreate"
-          @delete="onDelete"
-        />
+        <ProgramWorkWithUsFormReachUs />
       </NPanel>
     </NAppMain>
   </div>

@@ -9,11 +9,7 @@
     </NAppHeader>
     <NAppMain>
       <NPanel>
-        <ResourceFormOption
-          @row-tap="onRowTap"
-          @create="onCreate"
-          @delete="onDelete"
-        />
+        <ResourceFormOption />
       </NPanel>
     </NAppMain>
   </div>

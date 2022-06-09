@@ -9,11 +9,7 @@
     </NAppHeader>
     <NAppMain>
       <NPanel>
-        <ProgramWorkWithUsFormOption
-          @row-tap="onRowTap"
-          @create="onCreate"
-          @delete="onDelete"
-        />
+        <ProgramWorkWithUsFormOption />
       </NPanel>
     </NAppMain>
   </div>
