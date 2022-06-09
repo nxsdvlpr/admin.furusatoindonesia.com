@@ -82,7 +82,14 @@ export default defineComponent({
   setup(props, { emit }) {
     const { $toast } = useContext()
 
-    const { variables } = useNTableCursorRemoteData()
+    const { variables } = useNTableCursorRemoteData({
+      customVariables: {
+        sorting: {
+          field: 'publishedAt',
+          direction: 'DESC',
+        },
+      },
+    })
 
     const { form, validation } = useFormResource()
 

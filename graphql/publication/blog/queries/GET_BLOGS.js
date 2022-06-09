@@ -24,6 +24,7 @@ export const GET_BLOGS = gql`
             id
             name
           }
+          publishedAt
         }
       }
       totalCount

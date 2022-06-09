@@ -41,12 +41,15 @@ export default defineComponent({
   setup(props, { emit }) {
     const columns = ref([
       {
-        label: 'Subject',
-        field: 'subject',
+        label: 'Date',
+        field: 'publishedAt',
+        align: 'center',
+        width: '100px',
+        type: 'date_short',
       },
       {
-        label: 'Body',
-        field: 'body',
+        label: 'Subject',
+        field: 'subject',
       },
     ])
 
@@ -55,6 +58,12 @@ export default defineComponent({
         getQuery: GET_RESOURCES,
         destroyQuery: DESTROY_RESOURCES,
         dataProperty: 'resources',
+        customVariables: {
+          sorting: {
+            field: 'publishedAt',
+            direction: 'DESC',
+          },
+        },
       })
 
     const onCreate = () => {

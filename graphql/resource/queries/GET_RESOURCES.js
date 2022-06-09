@@ -23,6 +23,7 @@ export const GET_RESOURCES = gql`
           excerptJp
           body
           bodyJp
+          publishedAt
         }
       }
       totalCount

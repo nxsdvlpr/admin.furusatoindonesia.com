@@ -81,7 +81,14 @@ export default defineComponent({
 
     const route = useRoute()
 
-    const { variables } = useNTableCursorRemoteData()
+    const { variables } = useNTableCursorRemoteData({
+      customVariables: {
+        sorting: {
+          field: 'publishedAt',
+          direction: 'DESC',
+        },
+      },
+    })
 
     const { form, validation } = useFormBlog()
 
