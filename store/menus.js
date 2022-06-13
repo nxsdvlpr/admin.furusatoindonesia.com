@@ -95,11 +95,17 @@ export const state = () => ({
     },
     {
       label: 'Contact Us',
-      to: '/contact-us',
+      to: '/contact-us/message',
       icon: 'message',
       place: 'main',
       roleGuard: ['admin'],
-      submenus: [],
+      submenus: [
+        {
+          label: 'Message',
+          to: '/contact-us/message',
+          roleGuard: ['admin'],
+        },
+      ],
     },
     {
       label: 'Setting',

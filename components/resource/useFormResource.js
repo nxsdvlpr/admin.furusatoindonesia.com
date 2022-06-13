@@ -4,7 +4,7 @@ import useNFormValidation from '@/components/nboard/composables/useNFormValidati
 import useNFormValidators from '@/components/nboard/composables/useNFormValidators'
 
 export default function useFormResource() {
-  const { required } = useNFormValidators()
+  const { required, url } = useNFormValidators()
 
   const defaultData = () => ({
     resource: {
@@ -14,6 +14,9 @@ export default function useFormResource() {
       excerptJp: null,
       body: '',
       bodyJp: '',
+      image: null,
+      file: null,
+      videoUrl: null,
       published: true,
       publishedAt: new Date(),
     },
@@ -33,6 +36,9 @@ export default function useFormResource() {
         },
         body: {
           required,
+        },
+        videoUrl: {
+          url,
         },
       },
     }
