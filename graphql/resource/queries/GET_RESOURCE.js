@@ -11,6 +11,9 @@ export const GET_RESOURCE = gql`
       excerptJp
       body
       bodyJp
+      image
+      file
+      videoUrl
       published
       publishedAt
     }

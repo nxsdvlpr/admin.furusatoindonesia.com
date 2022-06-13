@@ -45,6 +45,21 @@
         />
       </NInputGroup>
 
+      <NInputGroup :feedback="validation.error('resource.image')" label="Image">
+        <ImageUpload
+          path="/resource/"
+          :src="form.resource.image"
+          @image-changed="onImageChanged"
+        />
+      </NInputGroup>
+
+      <NInputGroup
+        :feedback="validation.error('resource.videoUrl')"
+        label="Video Url"
+      >
+        <NInput v-model="form.resource.videoUrl" type="text" />
+      </NInputGroup>
+
       <NColumn>
         <NInputGroup
           :feedback="validation.error('resource.publishedAt')"
@@ -152,6 +167,10 @@ export default defineComponent({
       emit('discard')
     }
 
+    const onImageChanged = (file) => {
+      form.resource.image = file.url
+    }
+
     onUpdateResourceDone(({ data }) => {
       $toast.success('Resource successfully updated!')
       emit('save')
@@ -165,6 +184,7 @@ export default defineComponent({
       validation,
       form,
       loading,
+      onImageChanged,
       onSave,
       onDiscard,
     }

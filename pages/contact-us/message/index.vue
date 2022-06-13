@@ -1,0 +1,37 @@
+<template>
+  <div>
+    <NAppHeader>
+      <h1>Message</h1>
+      <p>Contact Us &raquo; Message &raquo; Lists</p>
+    </NAppHeader>
+    <NAppMain>
+      <NPanel>
+        <ContactUsMessageList @row-tap="onRowTap" @delete="onDelete" />
+      </NPanel>
+    </NAppMain>
+  </div>
+</template>
+
+<script>
+import { defineComponent, useRouter } from '@nuxtjs/composition-api'
+
+export default defineComponent({
+  meta: {
+    roleGuard: ['admin'],
+  },
+  setup() {
+    const router = useRouter()
+
+    const onRowTap = (row) => {
+      router.push(`/contact-us/message${row.id}/detail#overview`)
+    }
+
+    const onDelete = (rows) => {}
+
+    return {
+      onRowTap,
+      onDelete,
+    }
+  },
+})
+</script>

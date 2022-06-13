@@ -20,7 +20,10 @@
     @on-delete="onDelete"
   >
     <template #table-row="props">
-      <div v-if="props.column.field === 'subject'">
+      <div v-if="props.column.field === 'image'" class="hidden md:inline">
+        <NThumbnail :src="props.row.image ? props.row.image : null" />
+      </div>
+      <div v-else-if="props.column.field === 'subject'">
         <div class="font-medium">{{ props.row.subject }}</div>
         <div class="font-xs text-gray-500">
           {{ props.row.excerpt }}
@@ -55,6 +58,13 @@ export default defineComponent({
         align: 'center',
         width: '100px',
         type: 'date_short',
+      },
+      {
+        label: 'Image',
+        field: 'image',
+        align: 'center',
+        width: '100px',
+        sortable: false,
       },
       {
         label: 'Subject',

@@ -1,6 +1,10 @@
 <template>
   <NForm>
-    <NFormSection id="hero" caption="Hero" description="Basic hero information">
+    <NFormSection
+      id="page-title"
+      caption="Page Title"
+      description="Basic page title information"
+    >
       <div class="flex justify-end">
         <FormLangSelect v-model="form.displayLanguage" />
       </div>
@@ -22,6 +26,7 @@
           v-model="
             form.page[form.displayLanguage === 'ID' ? 'subtitle' : 'subtitleJp']
           "
+          type="text"
         />
       </NInputGroup>
 
@@ -38,7 +43,7 @@
 import { defineComponent, useContext } from '@nuxtjs/composition-api'
 import { useMutation, useQuery } from '@vue/apollo-composable'
 
-import useFormPageHome from '@/components/setting/pages/home/useFormPageHome'
+import useFormExpertiseOption from '@/components/program/expertise/useFormExpertiseOption'
 
 import { UPDATE_PAGE_HOME } from '@/graphql/setting/pages/home/mutations/UPDATE_PAGE_HOME'
 import { GET_PAGE_HOME } from '@/graphql/setting/pages/home/queries/GET_PAGE_HOME'
@@ -47,19 +52,19 @@ export default defineComponent({
   setup(props, { emit }) {
     const { $toast, error } = useContext()
 
-    const { form, validation } = useFormPageHome()
+    const { form, validation } = useFormExpertiseOption()
 
     const refetchQueries = [
       {
         query: GET_PAGE_HOME,
         variables: {
-          id: 1,
+          id: 2,
         },
       },
     ]
 
     const { onResult: onResultHomeHero } = useQuery(GET_PAGE_HOME, {
-      id: 1,
+      id: 2,
     })
 
     const {
@@ -91,14 +96,14 @@ export default defineComponent({
 
       updateHomeHero({
         input: {
-          id: 1,
+          id: 2,
           update: form.page,
         },
       })
     }
 
     onUpdateHomeHeroDone(({ data }) => {
-      $toast.success('Section hero successfully updated')
+      $toast.success('Page title successfully updated')
     })
 
     onUpdateHomeHeroError((error) => {
