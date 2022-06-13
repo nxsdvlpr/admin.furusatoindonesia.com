@@ -13,14 +13,11 @@
         label="Subject"
       >
         <NInput
-          v-if="form.displayLanguage === 'ID'"
-          v-model="form.organizationStructure.subject"
-          type="text"
-        />
-
-        <NInput
-          v-else
-          v-model="form.organizationStructure.subjectJp"
+          v-model="
+            form.organizationStructure[
+              form.displayLanguage === 'ID' ? 'subject' : 'subjectJp'
+            ]
+          "
           type="text"
         />
       </NInputGroup>
@@ -30,10 +27,12 @@
         label="Description"
       >
         <NTextarea
-          v-if="form.displayLanguage === 'ID'"
-          v-model="form.organizationStructure.description"
+          v-model="
+            form.organizationStructure[
+              form.displayLanguage === 'ID' ? 'description' : 'descriptionJp'
+            ]
+          "
         />
-        <NTextarea v-else v-model="form.organizationStructure.descriptionJp" />
       </NInputGroup>
     </NFormSection>
 

@@ -1,33 +1,27 @@
 import { gql } from 'graphql-tag'
 
-export const GET_RESOURCES = gql`
-  query getResources(
+export const GET_MESSAGES = gql`
+  query getMessages(
     $paging: CursorPaging!
     $query: String
-    $sorting: ResourceSort!
+    $sorting: MessageSort!
   ) {
-    resources(
+    messages(
       paging: $paging
       filter: {
-        or: [{ subject: { iLike: $query } }, { excerpt: { iLike: $query } }]
+        or: [{ fullname: { iLike: $query } }, { email: { iLike: $query } }]
       }
       sorting: [$sorting]
     ) {
       edges {
         node {
           id
-          slug
-          subject
-          subjectJp
-          excerpt
-          excerptJp
+          fullname
+          email
+          phone
           body
-          bodyJp
-          image
-          file
-          videoUrl
-          published
-          publishedAt
+          alreadyRead
+          createdAt
         }
       }
       totalCount
