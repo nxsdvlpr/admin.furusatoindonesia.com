@@ -21,6 +21,7 @@ export const GET_MESSAGES = gql`
           phone
           body
           alreadyRead
+          createdAt
         }
       }
       totalCount

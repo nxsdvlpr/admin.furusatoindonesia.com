@@ -20,9 +20,12 @@
   >
     <template #table-row="props">
       <div v-if="props.column.field === 'fullname'">
-        <div class="font-medium">{{ props.row.fullname }}</div>
-        <div class="font-xs text-gray-500">
+        <div class="font-bold">{{ props.row.fullname }}</div>
+        <div class="font-medium text-secondary">
           {{ props.row.email }}
+        </div>
+        <div>
+          {{ props.row.phone }}
         </div>
       </div>
 
@@ -41,12 +44,16 @@ export default defineComponent({
   setup(props, { emit }) {
     const columns = ref([
       {
-        label: 'Fullname',
-        field: 'fullname',
+        label: 'Date',
+        field: 'createdAt',
+        align: 'center',
+        width: '100px',
+        type: 'date_short',
       },
       {
-        label: 'Email',
-        field: 'email',
+        label: 'Fullname',
+        field: 'fullname',
+        width: '250px',
       },
       {
         label: 'Message',

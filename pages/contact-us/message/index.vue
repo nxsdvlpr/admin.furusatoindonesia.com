@@ -9,6 +9,7 @@
         <ContactUsMessageList @row-tap="onRowTap" @delete="onDelete" />
       </NPanel>
     </NAppMain>
+    <nuxt-child />
   </div>
 </template>
 
@@ -23,7 +24,7 @@ export default defineComponent({
     const router = useRouter()
 
     const onRowTap = (row) => {
-      router.push(`/contact-us/message${row.id}/detail#overview`)
+      router.push(`/contact-us/message/${row.id}/detail`)
     }
 
     const onDelete = (rows) => {}
