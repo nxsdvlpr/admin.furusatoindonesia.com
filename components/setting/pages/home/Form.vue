@@ -14,14 +14,10 @@
         />
       </NInputGroup>
 
-      <NInputGroup
-        :feedback="validation.error('page.subtitle')"
-        label="Subtitle"
-      >
-        <NInput
-          v-model="
-            form.page[form.displayLanguage === 'ID' ? 'subtitle' : 'subtitleJp']
-          "
+      <NInputGroup :feedback="validation.error('page.body')" label="Body">
+        <MarkdownEditor
+          v-model="form.page[form.displayLanguage === 'ID' ? 'body' : 'bodyJp']"
+          height="150px"
         />
       </NInputGroup>
 
