@@ -11,8 +11,8 @@ export default function useFormPageHome() {
       group: 'page-title',
       title: null,
       titleJp: null,
-      subtitle: null,
-      subtitleJp: null,
+      body: '',
+      bodyJp: '',
     },
     displayLanguage: 'ID',
   })
@@ -25,7 +25,7 @@ export default function useFormPageHome() {
         title: {
           required,
         },
-        subtitle: {
+        body: {
           required,
         },
       },
