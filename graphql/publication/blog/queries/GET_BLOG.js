@@ -6,11 +6,11 @@ export const GET_BLOG = gql`
       id
       slug
       subject
-      subjectJp
+      subjectJa
       excerpt
-      excerptJp
+      excerptJa
       body
-      bodyJp
+      bodyJa
       image
       published
       publishedAt

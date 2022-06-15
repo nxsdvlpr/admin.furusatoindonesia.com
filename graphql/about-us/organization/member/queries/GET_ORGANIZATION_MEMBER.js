@@ -7,7 +7,7 @@ export const GET_ORGANIZATION_MEMBER = gql`
       organizationStructureId
       fullname
       profession
-      professionJp
+      professionJa
       image
       sequence
     }

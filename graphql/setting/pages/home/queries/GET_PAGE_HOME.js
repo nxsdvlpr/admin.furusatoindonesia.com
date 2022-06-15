@@ -6,13 +6,13 @@ export const GET_PAGE_HOME = gql`
       id
       group
       title
-      titleJp
+      titleJa
       subtitle
-      subtitleJp
+      subtitleJa
       excerpt
-      excerptJp
+      excerptJa
       body
-      bodyJp
+      bodyJa
       image
       icon
       sequence

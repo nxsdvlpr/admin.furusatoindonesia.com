@@ -11,7 +11,7 @@
       <NInputGroup :feedback="validation.error('impact.title')" label="Title">
         <NInput
           v-model="
-            form.impact[form.displayLanguage === 'ID' ? 'title' : 'titleJp']
+            form.impact[form.displayLanguage === 'ID' ? 'title' : 'titleJa']
           "
           type="text"
         />
@@ -20,7 +20,7 @@
       <NInputGroup :feedback="validation.error('impact.body')" label="Body">
         <MarkdownEditor
           v-model="
-            form.impact[form.displayLanguage === 'ID' ? 'body' : 'bodyJp']
+            form.impact[form.displayLanguage === 'ID' ? 'body' : 'bodyJa']
           "
           height="150px"
         />

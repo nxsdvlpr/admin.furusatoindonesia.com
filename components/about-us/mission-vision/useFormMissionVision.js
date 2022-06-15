@@ -10,9 +10,9 @@ export default function useFormMissionVision() {
     missionVision: {
       group: 'mission-vision',
       title: null,
-      titleJp: null,
+      titleJa: null,
       body: '',
-      bodyJp: '',
+      bodyJa: '',
       image: null,
       published: true,
     },

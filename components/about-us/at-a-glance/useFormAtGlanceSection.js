@@ -10,9 +10,9 @@ export default function useFormAtGlanceSection() {
     page: {
       group: 'at-a-glance',
       title: null,
-      titleJp: null,
+      titleJa: null,
       body: '',
-      bodyJp: '',
+      bodyJa: '',
       image: null,
     },
     displayLanguage: 'ID',

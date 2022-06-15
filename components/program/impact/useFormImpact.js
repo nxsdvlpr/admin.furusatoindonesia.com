@@ -10,9 +10,9 @@ export default function useFormImpact() {
     impact: {
       group: 'impact',
       title: null,
-      titleJp: null,
+      titleJa: null,
       body: '',
-      bodyJp: '',
+      bodyJa: '',
       image: null,
       published: true,
     },

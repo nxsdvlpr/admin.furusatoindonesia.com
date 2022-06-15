@@ -11,7 +11,7 @@ export default function useFormOrganizationMember() {
       organizationStructureId: null,
       fullname: null,
       profession: null,
-      professionJp: null,
+      professionJa: null,
       image: null,
     },
     displayLanguage: 'ID',

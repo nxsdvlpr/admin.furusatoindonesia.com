@@ -8,7 +8,7 @@ export const GET_OPTIONS = gql`
           id
           name
           value
-          valueJp
+          valueJa
           type
         }
       }

@@ -10,10 +10,13 @@ export default function useFormTestimony() {
     testimony: {
       fullname: null,
       profession: null,
-      message: null,
+      professionJa: null,
+      message: '',
+      messageJa: '',
       avatar: null,
       logo: null,
     },
+    displayLanguage: 'ID',
   })
 
   const form = reactive(defaultData())

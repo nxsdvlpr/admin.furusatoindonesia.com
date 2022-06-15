@@ -10,9 +10,9 @@ export default function useFormBlogOption() {
     page: {
       group: 'page-title',
       title: null,
-      titleJp: null,
+      titleJa: null,
       subtitle: null,
-      subtitleJp: null,
+      subtitleJa: null,
     },
     displayLanguage: 'ID',
   })

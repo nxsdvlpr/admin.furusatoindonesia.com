@@ -14,7 +14,7 @@
       >
         <NInput
           v-model="
-            form.expertise[form.displayLanguage === 'ID' ? 'title' : 'titleJp']
+            form.expertise[form.displayLanguage === 'ID' ? 'title' : 'titleJa']
           "
           type="text"
         />
@@ -27,7 +27,7 @@
         <NInput
           v-model="
             form.expertise[
-              form.displayLanguage === 'ID' ? 'subtitle' : 'subtitleJp'
+              form.displayLanguage === 'ID' ? 'subtitle' : 'subtitleJa'
             ]
           "
           type="text"
@@ -37,7 +37,7 @@
       <NInputGroup :feedback="validation.error('expertise.body')" label="Body">
         <MarkdownEditor
           v-model="
-            form.expertise[form.displayLanguage === 'ID' ? 'body' : 'bodyJp']
+            form.expertise[form.displayLanguage === 'ID' ? 'body' : 'bodyJa']
           "
           height="150px"
         />

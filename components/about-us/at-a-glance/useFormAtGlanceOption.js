@@ -10,7 +10,7 @@ export default function useFormAtGlanceOption() {
     page: {
       group: 'page-title',
       title: null,
-      titleJp: null,
+      titleJa: null,
       image: null,
     },
     displayLanguage: 'ID',

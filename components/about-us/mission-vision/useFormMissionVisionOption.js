@@ -10,7 +10,7 @@ export default function useFormMissionVisionOption() {
     page: {
       group: 'page-title',
       title: null,
-      titleJp: null,
+      titleJa: null,
     },
     displayLanguage: 'ID',
   })

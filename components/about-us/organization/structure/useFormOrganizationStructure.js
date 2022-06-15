@@ -6,9 +6,9 @@ import useNFormValidators from '@/components/nboard/composables/useNFormValidato
 const defaultData = () => ({
   organizationStructure: {
     subject: null,
-    subjectJp: null,
+    subjectJa: null,
     description: null,
-    descriptionJp: null,
+    descriptionJa: null,
   },
   displayLanguage: 'ID',
 })

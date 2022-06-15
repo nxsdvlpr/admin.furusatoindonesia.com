@@ -19,13 +19,13 @@ export const GET_EXPERTISES = gql`
           id
           group
           title
-          titleJp
+          titleJa
           subtitle
-          subtitleJp
+          subtitleJa
           excerpt
-          excerptJp
+          excerptJa
           body
-          bodyJp
+          bodyJa
           image
           icon
           sequence

@@ -16,7 +16,7 @@
         <NInput
           v-model="
             form.resource[
-              form.displayLanguage === 'ID' ? 'subject' : 'subjectJp'
+              form.displayLanguage === 'ID' ? 'subject' : 'subjectJa'
             ]
           "
           type="text"
@@ -30,7 +30,7 @@
         <NTextarea
           v-model="
             form.resource[
-              form.displayLanguage === 'ID' ? 'excerpt' : 'excerptJp'
+              form.displayLanguage === 'ID' ? 'excerpt' : 'excerptJa'
             ]
           "
         />
@@ -39,7 +39,7 @@
       <NInputGroup :feedback="validation.error('resource.body')" label="Body">
         <MarkdownEditor
           v-model="
-            form.resource[form.displayLanguage === 'ID' ? 'body' : 'bodyJp']
+            form.resource[form.displayLanguage === 'ID' ? 'body' : 'bodyJa']
           "
           height="300px"
         />

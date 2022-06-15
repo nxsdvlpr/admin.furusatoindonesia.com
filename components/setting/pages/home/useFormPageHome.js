@@ -10,9 +10,9 @@ export default function useFormPageHome() {
     page: {
       group: 'page-title',
       title: null,
-      titleJp: null,
+      titleJa: null,
       body: '',
-      bodyJp: '',
+      bodyJa: '',
     },
     displayLanguage: 'ID',
   })
