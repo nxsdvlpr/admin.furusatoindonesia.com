@@ -9,11 +9,11 @@ export default function useFormBlog() {
   const defaultData = () => ({
     blog: {
       subject: null,
-      subjectJp: null,
+      subjectJa: null,
       excerpt: null,
-      excerptJp: null,
+      excerptJa: null,
       body: '',
-      bodyJp: '',
+      bodyJa: '',
       image: null,
       published: true,
       publishedAt: new Date(),

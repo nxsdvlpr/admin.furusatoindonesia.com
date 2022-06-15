@@ -15,7 +15,7 @@
         <NInput
           v-model="
             form.organizationStructure[
-              form.displayLanguage === 'ID' ? 'subject' : 'subjectJp'
+              form.displayLanguage === 'ID' ? 'subject' : 'subjectJa'
             ]
           "
           type="text"
@@ -29,7 +29,7 @@
         <NTextarea
           v-model="
             form.organizationStructure[
-              form.displayLanguage === 'ID' ? 'description' : 'descriptionJp'
+              form.displayLanguage === 'ID' ? 'description' : 'descriptionJa'
             ]
           "
         />

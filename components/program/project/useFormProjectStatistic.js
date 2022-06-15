@@ -10,7 +10,7 @@ export default function useFormProjectStatistic() {
     page: {
       group: 'project-statistic',
       title: null,
-      titleJp: null,
+      titleJa: null,
       counter: null,
     },
     displayLanguage: 'ID',

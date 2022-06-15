@@ -10,14 +10,14 @@
 
     <NInputGroup :feedback="validation.error('page.title')" label="Title">
       <NInput
-        v-model="form.page[form.displayLanguage === 'ID' ? 'title' : 'titleJp']"
+        v-model="form.page[form.displayLanguage === 'ID' ? 'title' : 'titleJa']"
         type="text"
       />
     </NInputGroup>
 
     <NInputGroup :feedback="validation.error('page.body')" label="Body">
       <MarkdownEditor
-        v-model="form.page[form.displayLanguage === 'ID' ? 'body' : 'bodyJp']"
+        v-model="form.page[form.displayLanguage === 'ID' ? 'body' : 'bodyJa']"
         height="200px"
       />
     </NInputGroup>

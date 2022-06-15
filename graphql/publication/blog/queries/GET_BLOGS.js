@@ -14,11 +14,11 @@ export const GET_BLOGS = gql`
           id
           slug
           subject
-          subjectJp
+          subjectJa
           excerpt
-          excerptJp
+          excerptJa
           body
-          bodyJp
+          bodyJa
           image
           user {
             id

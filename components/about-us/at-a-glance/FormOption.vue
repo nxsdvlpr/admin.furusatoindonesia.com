@@ -15,7 +15,7 @@
           v-model="form.page.title"
           type="text"
         />
-        <NInput v-else v-model="form.page.titleJp" type="text" />
+        <NInput v-else v-model="form.page.titleJa" type="text" />
       </NInputGroup>
 
       <NFormAction>

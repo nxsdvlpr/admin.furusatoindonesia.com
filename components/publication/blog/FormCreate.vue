@@ -12,7 +12,7 @@
       <NInputGroup :feedback="validation.error('blog.subject')" label="Subject">
         <NInput
           v-model="
-            form.blog[form.displayLanguage === 'ID' ? 'subject' : 'subjectJp']
+            form.blog[form.displayLanguage === 'ID' ? 'subject' : 'subjectJa']
           "
           type="text"
         />
@@ -21,14 +21,14 @@
       <NInputGroup :feedback="validation.error('blog.excerpt')" label="Excerpt">
         <NTextarea
           v-model="
-            form.blog[form.displayLanguage === 'ID' ? 'excerpt' : 'excerptJp']
+            form.blog[form.displayLanguage === 'ID' ? 'excerpt' : 'excerptJa']
           "
         />
       </NInputGroup>
 
       <NInputGroup :feedback="validation.error('blog.body')" label="Body">
         <MarkdownEditor
-          v-model="form.blog[form.displayLanguage === 'ID' ? 'body' : 'bodyJp']"
+          v-model="form.blog[form.displayLanguage === 'ID' ? 'body' : 'bodyJa']"
           height="300px"
         />
       </NInputGroup>

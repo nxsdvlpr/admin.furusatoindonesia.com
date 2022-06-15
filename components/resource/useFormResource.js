@@ -9,11 +9,11 @@ export default function useFormResource() {
   const defaultData = () => ({
     resource: {
       subject: null,
-      subjectJp: null,
+      subjectJa: null,
       excerpt: null,
-      excerptJp: null,
+      excerptJa: null,
       body: '',
-      bodyJp: '',
+      bodyJa: '',
       image: null,
       file: null,
       videoUrl: null,

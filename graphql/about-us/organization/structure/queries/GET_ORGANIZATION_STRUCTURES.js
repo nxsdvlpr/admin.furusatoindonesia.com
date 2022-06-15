@@ -15,9 +15,9 @@ export const GET_ORGANIZATION_STRUCTURES = gql`
         node {
           id
           subject
-          subjectJp
+          subjectJa
           description
-          descriptionJp
+          descriptionJa
           sequence
         }
       }

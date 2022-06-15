@@ -10,9 +10,9 @@ export default function useFormWwuOption() {
     page: {
       group: 'section-hero',
       title: null,
-      titleJp: null,
+      titleJa: null,
       body: '',
-      bodyJp: '',
+      bodyJa: '',
       image: null,
     },
     displayLanguage: 'ID',
