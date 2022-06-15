@@ -24,12 +24,12 @@
         <div v-else class="w-full">
           <NInput
             v-if="option.type === 'varchar'"
-            v-model="options[index].valueJp"
+            v-model="options[index].valueJa"
             type="text"
           />
           <NTextarea
             v-else-if="option.type === 'text'"
-            v-model="options[index].valueJp"
+            v-model="options[index].valueJa"
           />
         </div>
       </NInputGroup>
@@ -68,7 +68,7 @@ export default defineComponent({
       options.value = data.options.edges.map(({ node }) => ({
         name: node.name,
         value: node.value,
-        valueJp: node.valueJp,
+        valueJa: node.valueJa,
         type: node.type,
       }))
     })

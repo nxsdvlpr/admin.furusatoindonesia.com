@@ -11,7 +11,7 @@
       <NInputGroup :feedback="validation.error('project.title')" label="Title">
         <NInput
           v-model="
-            form.project[form.displayLanguage === 'ID' ? 'title' : 'titleJp']
+            form.project[form.displayLanguage === 'ID' ? 'title' : 'titleJa']
           "
           type="text"
         />
@@ -24,7 +24,7 @@
         <NInput
           v-model="
             form.project[
-              form.displayLanguage === 'ID' ? 'subtitle' : 'subtitleJp'
+              form.displayLanguage === 'ID' ? 'subtitle' : 'subtitleJa'
             ]
           "
           type="text"
@@ -34,7 +34,7 @@
       <NInputGroup :feedback="validation.error('project.body')" label="Body">
         <MarkdownEditor
           v-model="
-            form.project[form.displayLanguage === 'ID' ? 'body' : 'bodyJp']
+            form.project[form.displayLanguage === 'ID' ? 'body' : 'bodyJa']
           "
           height="150px"
         />

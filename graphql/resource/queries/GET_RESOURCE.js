@@ -6,11 +6,11 @@ export const GET_RESOURCE = gql`
       id
       slug
       subject
-      subjectJp
+      subjectJa
       excerpt
-      excerptJp
+      excerptJa
       body
-      bodyJp
+      bodyJa
       image
       file
       videoUrl

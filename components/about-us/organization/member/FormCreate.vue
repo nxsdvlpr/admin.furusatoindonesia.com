@@ -22,7 +22,7 @@
         <NInput
           v-model="
             form.organizationMember[
-              form.displayLanguage === 'ID' ? 'profession' : 'professionJp'
+              form.displayLanguage === 'ID' ? 'profession' : 'professionJa'
             ]
           "
           type="text"

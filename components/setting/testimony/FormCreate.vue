@@ -1,5 +1,8 @@
 <template>
   <NForm>
+    <div class="flex justify-end">
+      <FormLangSelect v-model="form.displayLanguage" />
+    </div>
     <NFormSection
       id="overview"
       caption="Overview"
@@ -16,14 +19,27 @@
         :feedback="validation.error('testimony.profession')"
         label="Profession"
       >
-        <NInput v-model="form.testimony.profession" type="text" />
+        <NInput
+          v-model="
+            form.testimony[
+              form.displayLanguage === 'ID' ? 'profession' : 'professionJa'
+            ]
+          "
+          type="text"
+        />
       </NInputGroup>
 
       <NInputGroup
         :feedback="validation.error('testimony.message')"
         label="Message"
       >
-        <NTextarea v-model="form.testimony.message" />
+        <NTextarea
+          v-model="
+            form.testimony[
+              form.displayLanguage === 'ID' ? 'message' : 'messageJa'
+            ]
+          "
+        />
       </NInputGroup>
 
       <NInputGroup

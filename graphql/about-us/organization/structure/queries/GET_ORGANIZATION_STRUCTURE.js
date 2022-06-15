@@ -5,9 +5,9 @@ export const GET_ORGANIZATION_STRUCTURE = gql`
     organizationStructure(id: $id) {
       id
       subject
-      subjectJp
+      subjectJa
       description
-      descriptionJp
+      descriptionJa
       sequence
     }
   }

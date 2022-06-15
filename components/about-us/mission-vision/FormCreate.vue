@@ -15,7 +15,7 @@
         <NInput
           v-model="
             form.missionVision[
-              form.displayLanguage === 'ID' ? 'title' : 'titleJp'
+              form.displayLanguage === 'ID' ? 'title' : 'titleJa'
             ]
           "
           type="text"
@@ -29,7 +29,7 @@
         <MarkdownEditor
           v-model="
             form.missionVision[
-              form.displayLanguage === 'ID' ? 'body' : 'bodyJp'
+              form.displayLanguage === 'ID' ? 'body' : 'bodyJa'
             ]
           "
           height="150px"

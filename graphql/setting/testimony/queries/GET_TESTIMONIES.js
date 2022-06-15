@@ -18,7 +18,9 @@ export const GET_TESTIMONIES = gql`
           id
           fullname
           profession
+          professionJa
           message
+          messageJa
           avatar
           logo
         }
