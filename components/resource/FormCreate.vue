@@ -41,7 +41,7 @@
           v-model="
             form.resource[form.displayLanguage === 'ID' ? 'body' : 'bodyJa']
           "
-          height="300px"
+          height="350px"
         />
       </NInputGroup>
 
