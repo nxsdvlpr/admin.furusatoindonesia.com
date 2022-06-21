@@ -35,11 +35,13 @@
             @click="onMembersClick(props.row)"
           />
           <NIconButton
+            v-if="props.index > 0"
             class="primary"
             icon="arrow-up-2"
             @click="changeSequenceUp(props.row)"
           />
           <NIconButton
+            v-if="rows.length > 1 && props.index < rows.length - 1"
             class="primary"
             icon="arrow-down-2"
             @click="changeSequenceDown(props.row)"

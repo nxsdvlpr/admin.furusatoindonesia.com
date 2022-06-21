@@ -29,7 +29,7 @@
       <NInputGroup :feedback="validation.error('blog.body')" label="Body">
         <MarkdownEditor
           v-model="form.blog[form.displayLanguage === 'ID' ? 'body' : 'bodyJa']"
-          height="300px"
+          height="350px"
         />
       </NInputGroup>
 

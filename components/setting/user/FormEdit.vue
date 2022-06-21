@@ -28,7 +28,7 @@
         >
           <NInput v-model="form.user.password" type="password" />
           <span class="text-xs text-gray-base">
-            leave blank if you don't want to change it
+            Leave blank if you don't want to change it
           </span>
         </NInputGroup>
       </NColumn>
