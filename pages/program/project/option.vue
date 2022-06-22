@@ -19,7 +19,7 @@
 import { defineComponent, ref } from '@nuxtjs/composition-api'
 export default defineComponent({
   meta: {
-    roleGuard: ['admin'],
+    accessName: ['admin'],
   },
   setup() {
     const tabs = ref([

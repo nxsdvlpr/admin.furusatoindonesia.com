@@ -73,8 +73,8 @@ export default defineComponent({
         dataProperty: 'messages',
         customVariables: {
           sorting: {
-            field: 'id',
-            direction: 'ASC',
+            field: 'createdAt',
+            direction: 'DESC',
           },
         },
       })

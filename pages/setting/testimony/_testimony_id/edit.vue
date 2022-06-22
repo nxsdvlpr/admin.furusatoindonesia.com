@@ -32,7 +32,7 @@ import { GET_TESTIMONY } from '@/graphql/setting/testimony/queries/GET_TESTIMONY
 
 export default defineComponent({
   meta: {
-    roleGuard: ['admin'],
+    accessName: ['admin'],
   },
   setup() {
     const router = useRouter()

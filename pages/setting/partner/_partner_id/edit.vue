@@ -32,7 +32,7 @@ import { GET_PARTNER } from '@/graphql/setting/partner/queries/GET_PARTNER'
 
 export default defineComponent({
   meta: {
-    roleGuard: ['admin'],
+    accessName: ['admin'],
   },
   setup() {
     const router = useRouter()

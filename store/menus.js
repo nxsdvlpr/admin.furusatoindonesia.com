@@ -5,7 +5,7 @@ export const state = () => ({
       to: '/dashboard',
       icon: 'home',
       place: 'main',
-      roleGuard: ['admin'],
+      accessName: 'home',
       submenus: [],
     },
     {
@@ -13,27 +13,27 @@ export const state = () => ({
       to: '/program/expertise',
       icon: 'category',
       place: 'main',
-      roleGuard: ['admin'],
+      accessName: 'home',
       submenus: [
         {
           label: 'Expertise',
           to: '/program/expertise',
-          roleGuard: ['admin'],
+          accessName: 'home',
         },
         {
           label: 'Project',
           to: '/program/project',
-          roleGuard: ['admin'],
+          accessName: 'home',
         },
         {
           label: 'Impact',
           to: '/program/impact',
-          roleGuard: ['admin'],
+          accessName: 'home',
         },
         {
           label: 'Work With Us',
           to: '/program/work-with-us/reach-us',
-          roleGuard: ['admin'],
+          accessName: 'home',
         },
       ],
     },
@@ -42,17 +42,17 @@ export const state = () => ({
       to: '/publication/blog',
       icon: 'document',
       place: 'main',
-      roleGuard: ['admin'],
+      accessName: 'publication',
       submenus: [
         {
           label: 'Blog',
           to: '/publication/blog',
-          roleGuard: ['admin'],
+          accessName: 'publication_blog',
         },
         {
           label: 'Timeline',
           to: '/publication/timeline',
-          roleGuard: ['admin'],
+          accessName: 'publication_timeline',
         },
       ],
     },
@@ -61,7 +61,7 @@ export const state = () => ({
       to: '/resource',
       icon: 'folder',
       place: 'main',
-      roleGuard: ['admin'],
+      accessName: 'resource',
       submenus: [],
     },
     {
@@ -69,27 +69,27 @@ export const state = () => ({
       to: '/about-us/at-a-glance/section',
       icon: 'info-circle',
       place: 'main',
-      roleGuard: ['admin'],
+      accessName: 'home',
       submenus: [
         {
           label: 'At A Glance ',
           to: '/about-us/at-a-glance/section',
-          roleGuard: ['admin'],
+          accessName: 'home',
         },
         {
           label: 'Mission and Vision',
           to: '/about-us/mission-vision',
-          roleGuard: ['admin'],
+          accessName: 'home',
         },
         {
           label: 'Organization',
           to: '/about-us/organization/structure',
-          roleGuard: ['admin'],
+          accessName: 'home',
         },
         {
           label: 'Our History',
           to: '/about-us/our-history',
-          roleGuard: ['admin'],
+          accessName: 'home',
         },
       ],
     },
@@ -98,12 +98,12 @@ export const state = () => ({
       to: '/contact-us/message',
       icon: 'message',
       place: 'main',
-      roleGuard: ['admin'],
+      accessName: 'home',
       submenus: [
         {
           label: 'Message',
           to: '/contact-us/message',
-          roleGuard: ['admin'],
+          accessName: 'home',
         },
       ],
     },
@@ -112,37 +112,37 @@ export const state = () => ({
       to: '/setting/general#site',
       icon: 'setting',
       place: 'bottom',
-      roleGuard: ['admin'],
+      accessName: 'setting',
       submenus: [
         {
           label: 'General',
           to: '/setting/general#site',
-          roleGuard: ['admin'],
+          accessName: 'setting_general',
         },
         {
           label: 'Pages',
           to: '/setting/pages/home',
-          roleGuard: ['admin'],
+          accessName: 'home',
         },
         {
           label: 'Testimony',
           to: '/setting/testimony',
-          roleGuard: ['admin'],
+          accessName: 'home',
         },
         {
           label: 'Partner',
           to: '/setting/partner',
-          roleGuard: ['admin'],
+          accessName: 'home',
         },
         {
           label: 'Office',
           to: '/setting/office',
-          roleGuard: ['admin'],
+          accessName: 'home',
         },
         {
           label: 'Users Management',
           to: '/setting/user',
-          roleGuard: ['admin'],
+          accessName: 'setting_user_management',
         },
       ],
     },
@@ -168,12 +168,18 @@ export const actions = {
 export const mutations = {
   SET_MENUS: (state, role) => {
     const defaultMenus = JSON.parse(JSON.stringify(state.defaultMenus))
+
+    const accesses = Object.entries(role.access)
+
     const filteredMenu = defaultMenus
-      .filter((menu) => menu.roleGuard.includes(role))
+      .filter((menu) =>
+        accesses.find((i) => i[0].startsWith(menu.accessName) && i[1])
+      )
       .map((menu) => {
         menu.submenus = menu.submenus.filter((submenu) =>
-          submenu.roleGuard.includes(role)
+          accesses.find((i) => i[0].startsWith(submenu.accessName) && i[1])
         )
+
         return menu
       })
 

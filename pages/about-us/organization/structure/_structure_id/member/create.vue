@@ -38,7 +38,7 @@ import {
 
 export default defineComponent({
   meta: {
-    roleGuard: ['admin'],
+    accessName: ['admin'],
   },
   setup() {
     const router = useRouter()
