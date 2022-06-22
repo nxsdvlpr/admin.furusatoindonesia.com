@@ -29,7 +29,7 @@ import { defineComponent, useRouter, ref } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   meta: {
-    roleGuard: ['admin'],
+    accessName: ['admin'],
   },
   setup() {
     const router = useRouter()

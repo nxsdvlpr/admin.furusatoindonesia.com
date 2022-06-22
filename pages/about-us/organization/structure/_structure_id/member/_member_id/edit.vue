@@ -38,7 +38,7 @@ import { GET_ORGANIZATION_MEMBER } from '@/graphql/about-us/organization/member/
 
 export default defineComponent({
   meta: {
-    roleGuard: ['admin'],
+    accessName: ['admin'],
   },
   setup() {
     const router = useRouter()

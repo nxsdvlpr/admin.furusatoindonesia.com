@@ -14,6 +14,9 @@
 import { defineComponent, useStore, computed } from '@nuxtjs/composition-api'
 export default defineComponent({
   layout: 'light-background',
+  meta: {
+    accessName: 'home',
+  },
   setup() {
     const store = useStore()
 

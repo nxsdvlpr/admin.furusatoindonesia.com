@@ -32,7 +32,7 @@ import { GET_PROJECT } from '@/graphql/program/project/queries/GET_PROJECT'
 
 export default defineComponent({
   meta: {
-    roleGuard: ['admin'],
+    accessName: ['admin'],
   },
   setup() {
     const router = useRouter()

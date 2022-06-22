@@ -27,7 +27,7 @@ import { defineComponent, useRouter, ref } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   meta: {
-    roleGuard: ['admin'],
+    accessName: 'setting_user_management',
   },
   setup() {
     const router = useRouter()

@@ -32,7 +32,7 @@ import { GET_RESOURCE } from '@/graphql/resource/queries/GET_RESOURCE'
 
 export default defineComponent({
   meta: {
-    roleGuard: ['admin'],
+    accessName: ['admin'],
   },
   setup() {
     const router = useRouter()

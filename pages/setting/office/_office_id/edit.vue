@@ -32,7 +32,7 @@ import { GET_OFFICE } from '@/graphql/setting/office/queries/GET_OFFICE'
 
 export default defineComponent({
   meta: {
-    roleGuard: ['admin'],
+    accessName: ['admin'],
   },
   setup() {
     const router = useRouter()

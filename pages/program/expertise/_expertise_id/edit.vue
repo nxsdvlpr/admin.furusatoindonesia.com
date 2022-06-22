@@ -32,7 +32,7 @@ import { GET_EXPERTISE } from '@/graphql/program/expertise/queries/GET_EXPERTISE
 
 export default defineComponent({
   meta: {
-    roleGuard: ['admin'],
+    accessName: ['admin'],
   },
   setup() {
     const router = useRouter()

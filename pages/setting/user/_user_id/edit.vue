@@ -32,7 +32,7 @@ import { GET_USER } from '@/graphql/setting/user/queries/GET_USER'
 
 export default defineComponent({
   meta: {
-    roleGuard: ['admin'],
+    accessName: 'setting_user_management',
   },
   setup() {
     const router = useRouter()
