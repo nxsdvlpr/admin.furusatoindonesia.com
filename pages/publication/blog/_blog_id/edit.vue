@@ -32,7 +32,7 @@ import { GET_BLOG } from '@/graphql/publication/blog/queries/GET_BLOG'
 
 export default defineComponent({
   meta: {
-    roleGuard: ['admin'],
+    accessName: ['admin'],
   },
   setup() {
     const router = useRouter()

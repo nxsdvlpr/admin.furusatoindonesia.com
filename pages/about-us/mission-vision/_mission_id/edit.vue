@@ -34,7 +34,7 @@ import { GET_MISSION_VISION } from '@/graphql/about-us/mission-vision/queries/GE
 
 export default defineComponent({
   meta: {
-    roleGuard: ['admin'],
+    accessName: ['admin'],
   },
   setup() {
     const router = useRouter()

@@ -32,7 +32,7 @@ import { GET_IMPACT } from '@/graphql/program/impact/queries/GET_IMPACT'
 
 export default defineComponent({
   meta: {
-    roleGuard: ['admin'],
+    accessName: ['admin'],
   },
   setup() {
     const router = useRouter()

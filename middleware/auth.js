@@ -47,21 +47,25 @@ export default async function ({ app, $toast, route, error, store, redirect }) {
       store.dispatch('auth/setMe', me)
 
       store.dispatch('auth/setMe', me)
-      store.dispatch('menus/setMenus', me.role.shortname)
+      store.dispatch('menus/setMenus', me.role)
 
       store.dispatch('auth/isAuthenticated', true)
     }
 
-    const hasRoleGuard = route.meta.findIndex((m) =>
-      Object.prototype.hasOwnProperty.call(m, 'roleGuard')
+    const hasAccessName = route.meta.findIndex((m) =>
+      Object.prototype.hasOwnProperty.call(m, 'accessName')
     )
 
-    if (hasRoleGuard !== -1) {
-      const allowedRoles = route.meta[hasRoleGuard].roleGuard
+    const accessName = route?.meta[hasAccessName]?.accessName
 
+    if (typeof accessName === 'string') {
       const me = store.getters['auth/me']
 
-      if (!allowedRoles.includes(me?.role?.shortname)) {
+      const accesses = Object.entries(me.role.access)
+
+      const hasAccess = accesses.find((i) => i[0] === accessName && i[1])
+
+      if (!hasAccess) {
         return error({
           message: "You don't have permission to access this page",
           statusCode: 403,
