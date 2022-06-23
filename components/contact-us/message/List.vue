@@ -29,6 +29,13 @@
         </div>
       </div>
 
+      <NTableCellResponsive
+        v-else-if="props.column.field === 'alreadyRead'"
+        :props="props"
+      >
+        <NOptionBadge :value="props.row.alreadyRead" :options="readOptions" />
+      </NTableCellResponsive>
+
       <NTableCellResponsive v-else :props="props"></NTableCellResponsive>
     </template>
   </NTable>
@@ -59,11 +66,17 @@ export default defineComponent({
         label: 'Message',
         field: 'body',
       },
+      {
+        label: 'Status',
+        field: 'alreadyRead',
+        align: 'center',
+        width: '120px',
+      },
     ])
 
-    const publishedOptions = ref([
-      { value: true, label: 'PUBLISHED', class: 'primary' },
-      { value: false, label: 'UNPUBLISHED', class: 'info' },
+    const readOptions = ref([
+      { value: true, label: 'READ', class: 'primary' },
+      { value: false, label: 'UNREAD', class: 'danger' },
     ])
 
     const { rows, totalRecords, pageInfo, loading, methods } =
@@ -98,7 +111,7 @@ export default defineComponent({
       pageInfo,
       loading,
       methods,
-      publishedOptions,
+      readOptions,
       onRowTap,
       onDelete,
     }

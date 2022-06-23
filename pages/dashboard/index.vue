@@ -3,7 +3,7 @@
     <NAppMain>
       <NPanel>
         <div class="mt-8">
-          <DashboardAdmin />
+          <Dashboard />
         </div>
       </NPanel>
     </NAppMain>
