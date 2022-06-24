@@ -1,37 +1,33 @@
 <template>
-  <NForm>
-    <NFormSection
-      id="page-title"
-      caption="Page Title"
-      description="Basic page title information"
-    >
-      <div class="flex justify-end">
-        <FormLangSelect v-model="form.displayLanguage" />
-      </div>
+  <NFormSection
+    id="group-chart"
+    caption="Group Chart"
+    description="Basic Group Chart information"
+  >
+    <div class="flex justify-end">
+      <FormLangSelect v-model="form.displayLanguage" />
+    </div>
 
-      <NInputGroup :feedback="validation.error('page.title')" label="Title">
-        <NInput
-          v-if="form.displayLanguage === 'ID'"
-          v-model="form.page.title"
-          type="text"
-        />
-        <NInput v-else v-model="form.page.titleJa" type="text" />
-      </NInputGroup>
+    <NInputGroup :feedback="validation.error('page.title')" label="Title">
+      <NInput
+        v-model="form.page[form.displayLanguage === 'ID' ? 'title' : 'titleJa']"
+        type="text"
+      />
+    </NInputGroup>
 
-      <NFormAction>
-        <NButton :disabled="loading" class="primary" @click="onSave">
-          Save
-        </NButton>
-      </NFormAction>
-    </NFormSection>
-  </NForm>
+    <NFormAction>
+      <NButton :disabled="loading" class="primary" @click="onSave">
+        Save
+      </NButton>
+    </NFormAction>
+  </NFormSection>
 </template>
 
 <script>
 import { defineComponent, useContext } from '@nuxtjs/composition-api'
 import { useMutation, useQuery } from '@vue/apollo-composable'
 
-import useFormAtGlanceOption from '@/components/about-us/at-a-glance/useFormAtGlanceOption'
+import useFormAtGlanceSection from '@/components/about-us/at-a-glance/useFormAtGlanceSection'
 
 import { UPDATE_PAGE_HOME } from '@/graphql/setting/pages/home/mutations/UPDATE_PAGE_HOME'
 import { GET_PAGE_HOME } from '@/graphql/setting/pages/home/queries/GET_PAGE_HOME'
@@ -40,31 +36,31 @@ export default defineComponent({
   setup(props, { emit }) {
     const { $toast, error } = useContext()
 
-    const { form, validation } = useFormAtGlanceOption()
+    const { form, validation } = useFormAtGlanceSection()
 
     const refetchQueries = [
       {
         query: GET_PAGE_HOME,
         variables: {
-          id: 11,
+          id: 17,
         },
       },
     ]
 
-    const { onResult: onResultHomeHero } = useQuery(GET_PAGE_HOME, {
-      id: 11,
+    const { onResult: onResultArticle } = useQuery(GET_PAGE_HOME, {
+      id: 17,
     })
 
     const {
-      mutate: updateHomeHero,
-      onDone: onUpdateHomeHeroDone,
-      onError: onUpdateHomeHeroError,
+      mutate: updateArticle,
+      onDone: onUpdateArticleDone,
+      onError: onUpdateArticleError,
       loading,
     } = useMutation(UPDATE_PAGE_HOME, {
       refetchQueries,
     })
 
-    onResultHomeHero(({ data }) => {
+    onResultArticle(({ data }) => {
       if (!data.article) {
         return error({ statusCode: 404, message: 'Not Found' })
       }
@@ -82,19 +78,19 @@ export default defineComponent({
         return false
       }
 
-      updateHomeHero({
+      updateArticle({
         input: {
-          id: 11,
+          id: 17,
           update: form.page,
         },
       })
     }
 
-    onUpdateHomeHeroDone(({ data }) => {
-      $toast.success('Page title successfully updated')
+    onUpdateArticleDone(({ data }) => {
+      $toast.success('Section Group Chart successfully updated')
     })
 
-    onUpdateHomeHeroError((error) => {
+    onUpdateArticleError((error) => {
       $toast.error(error.message)
     })
 

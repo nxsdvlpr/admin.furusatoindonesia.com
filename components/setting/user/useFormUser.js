@@ -4,25 +4,25 @@ import useNFormValidation from '@/components/nboard/composables/useNFormValidati
 import useNFormValidators from '@/components/nboard/composables/useNFormValidators'
 import useCustomValidator from '@/components/setting/user/useCustomValidator'
 
-const defaultData = () => ({
-  user: {
-    roleId: null,
-    name: null,
-    username: null,
-    password: null,
-    phone: null,
-  },
-  oldUsername: null,
-  role: null,
-})
-
-const form = reactive(defaultData())
-
 export default function useFormUser() {
   const { uniqueUsername } = useCustomValidator()
 
   const { required, numeric, email, minLength, maxLength } =
     useNFormValidators()
+
+  const defaultData = () => ({
+    user: {
+      roleId: null,
+      name: null,
+      username: null,
+      password: null,
+      phone: null,
+    },
+    oldUsername: null,
+    role: null,
+  })
+
+  const form = reactive(defaultData())
 
   const rules = computed(() => {
     const usernameRule = {

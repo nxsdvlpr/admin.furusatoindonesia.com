@@ -57,7 +57,7 @@ export default defineComponent({
 
     const { variables } = useNTableCursorRemoteData()
 
-    const { form, validation, resetFormData } = useFormUser()
+    const { form, validation } = useFormUser()
 
     const refetchQueries = [
       {
@@ -93,13 +93,11 @@ export default defineComponent({
 
     const onDiscard = () => {
       emit('discard')
-      resetFormData()
     }
 
     onCreateUserDone(({ data }) => {
       $toast.success('User successfully added!')
       emit('save')
-      resetFormData()
     })
 
     onCreateUserError((error) => {

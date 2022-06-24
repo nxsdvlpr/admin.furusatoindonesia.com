@@ -16,8 +16,13 @@
           <span>{{ menu.label }}</span>
         </nuxt-link>
       </li>
-      <li v-if="me" class="hidden justify-center md:flex">
-        <NAvatar :name="me.name" class="sm secondary" />
+      <li
+        v-if="me"
+        v-tooltip.right-start="tooltipOptions(me.name)"
+        class="hidden justify-center md:flex cursor-pointer"
+        @click="$router.push('/profile')"
+      >
+        <NAvatar :name="me.name" :src="me.avatar" class="sm secondary" />
       </li>
     </ul>
   </nav>
