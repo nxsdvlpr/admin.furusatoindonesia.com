@@ -25,13 +25,7 @@ export const mutations = {
     state.isAuthenticated = bool
   },
   SET_ME: (state, payload) => {
-    state.me = {
-      id: payload.id,
-      name: payload.name,
-      username: payload.username,
-      phone: payload.phone,
-      role: payload.role,
-    }
+    state.me = payload
   },
   UNSET_AUTH: (state) => {
     state.isAuthenticated = false

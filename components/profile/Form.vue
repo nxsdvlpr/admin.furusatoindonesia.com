@@ -44,6 +44,17 @@
           <NInput v-model="form.confirmPassword" type="password" />
         </NInputGroup>
       </NColumn>
+
+      <NInputGroup
+        :feedback="validation.error('profile.avatar')"
+        label="Avatar"
+      >
+        <ImageUpload
+          path="/user/"
+          :src="form.profile.avatar"
+          @image-changed="onAvatarChanged"
+        />
+      </NInputGroup>
     </NFormSection>
 
     <NFormAction>
@@ -88,6 +99,7 @@ export default defineComponent({
         username: null,
         password: null,
         phone: null,
+        avatar: null,
       },
       confirmPassword: null,
       oldUsername: null,
@@ -148,6 +160,10 @@ export default defineComponent({
 
     const { validation } = useNFormValidation(rules, form)
 
+    const onAvatarChanged = (file) => {
+      form.profile.avatar = file.url
+    }
+
     const onSave = async () => {
       const validationResult = await validation.validate()
 
@@ -177,6 +193,7 @@ export default defineComponent({
       form.profile.username = me.value.username
       form.profile.name = me.value.name
       form.profile.phone = me.value.phone
+      form.profile.avatar = me.value.avatar
       form.oldUsername = me.value.username
     }
 
@@ -187,6 +204,7 @@ export default defineComponent({
       form,
       loading,
       me,
+      onAvatarChanged,
       onSave,
     }
   },
