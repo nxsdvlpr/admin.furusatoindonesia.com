@@ -63,7 +63,7 @@ export default defineComponent({
 
     const { variables } = useNTableCursorRemoteData()
 
-    const { form, validation, resetFormData } = useFormUser()
+    const { form, validation } = useFormUser()
 
     const refetchQueries = [
       {
@@ -121,13 +121,11 @@ export default defineComponent({
 
     const onDiscard = () => {
       emit('discard')
-      resetFormData()
     }
 
     onUpdateUserDone(({ data }) => {
       $toast.success('User successfully updated!')
       emit('save')
-      resetFormData()
     })
 
     onUpdateUserError((error) => {

@@ -1,8 +1,8 @@
 <template>
   <NFormSection
-    :id="title.toLowerCase()"
-    :caption="title"
-    :description="`Basic ${title.toLowerCase()} information`"
+    id="page-header"
+    caption="Page Header"
+    description="Basic page header information"
   >
     <div class="flex justify-end">
       <FormLangSelect v-model="form.displayLanguage" />
@@ -15,10 +15,11 @@
       />
     </NInputGroup>
 
-    <NInputGroup :feedback="validation.error('page.body')" label="Body">
-      <MarkdownEditor
-        v-model="form.page[form.displayLanguage === 'ID' ? 'body' : 'bodyJa']"
-        height="200px"
+    <NInputGroup :feedback="validation.error('page.image')" label="Image">
+      <ImageUpload
+        path="/about/at-a-glance/"
+        :src="form.page.image"
+        @image-changed="onImageChanged"
       />
     </NInputGroup>
 
@@ -36,20 +37,10 @@ import { useMutation, useQuery } from '@vue/apollo-composable'
 
 import useFormAtGlanceSection from '@/components/about-us/at-a-glance/useFormAtGlanceSection'
 
-import { UPDATE_PAGE_PROGRAM } from '@/graphql/setting/pages/programs/mutations/UPDATE_PAGE_PROGRAM'
-import { GET_PAGE_PROGRAM } from '@/graphql/setting/pages/programs/queries/GET_PAGE_PROGRAM'
+import { UPDATE_PAGE_HOME } from '@/graphql/setting/pages/home/mutations/UPDATE_PAGE_HOME'
+import { GET_PAGE_HOME } from '@/graphql/setting/pages/home/queries/GET_PAGE_HOME'
 
 export default defineComponent({
-  props: {
-    title: {
-      type: String,
-      required: true,
-    },
-    articleId: {
-      type: [String, Number],
-      required: true,
-    },
-  },
   setup(props, { emit }) {
     const { $toast, error } = useContext()
 
@@ -57,27 +48,27 @@ export default defineComponent({
 
     const refetchQueries = [
       {
-        query: GET_PAGE_PROGRAM,
+        query: GET_PAGE_HOME,
         variables: {
-          id: props.articleId,
+          id: 11,
         },
       },
     ]
 
-    const { onResult: onResultPageProgram } = useQuery(GET_PAGE_PROGRAM, {
-      id: props.articleId,
+    const { onResult: onResultArticle } = useQuery(GET_PAGE_HOME, {
+      id: 11,
     })
 
     const {
-      mutate: updatePageProgram,
-      onDone: onUpdatePageProgramDone,
-      onError: onUpdatePageProgramError,
+      mutate: updateArticle,
+      onDone: onUpdateArticleDone,
+      onError: onUpdateArticleError,
       loading,
-    } = useMutation(UPDATE_PAGE_PROGRAM, {
+    } = useMutation(UPDATE_PAGE_HOME, {
       refetchQueries,
     })
 
-    onResultPageProgram(({ data }) => {
+    onResultArticle(({ data }) => {
       if (!data.article) {
         return error({ statusCode: 404, message: 'Not Found' })
       }
@@ -85,6 +76,10 @@ export default defineComponent({
       const { id, __typename, ...result } = data.article
       form.page = result
     })
+
+    const onImageChanged = (file) => {
+      form.page.image = file.url
+    }
 
     const onSave = async () => {
       const validationResult = await validation.validate()
@@ -95,19 +90,19 @@ export default defineComponent({
         return false
       }
 
-      updatePageProgram({
+      updateArticle({
         input: {
-          id: props.articleId,
+          id: 11,
           update: form.page,
         },
       })
     }
 
-    onUpdatePageProgramDone(({ data }) => {
-      $toast.success(`Page ${props.title.toLowerCase()} successfully updated!`)
+    onUpdateArticleDone(({ data }) => {
+      $toast.success('Page header successfully updated')
     })
 
-    onUpdatePageProgramError((error) => {
+    onUpdateArticleError((error) => {
       $toast.error(error.message)
     })
 
@@ -115,6 +110,7 @@ export default defineComponent({
       validation,
       form,
       loading,
+      onImageChanged,
       onSave,
     }
   },

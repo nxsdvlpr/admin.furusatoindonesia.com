@@ -66,14 +66,14 @@ export const state = () => ({
     },
     {
       label: 'About Us',
-      to: '/about-us/at-a-glance/section',
+      to: '/about-us/at-a-glance#page-header',
       icon: 'info-circle',
       place: 'main',
       accessName: 'home',
       submenus: [
         {
           label: 'At A Glance ',
-          to: '/about-us/at-a-glance/section',
+          to: '/about-us/at-a-glance#page-header',
           accessName: 'home',
         },
         {

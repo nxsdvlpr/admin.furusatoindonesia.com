@@ -79,9 +79,13 @@ export default defineComponent({
       }
     })
 
-    watch(source, (value) => {
-      image.value = value
-    })
+    watch(
+      source,
+      (value) => {
+        image.value = value
+      },
+      { immediate: true }
+    )
 
     const updateValue = (value) => {
       files.value = value

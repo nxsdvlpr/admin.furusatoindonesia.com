@@ -7,6 +7,7 @@ export const GET_ME = gql`
       name
       username
       phone
+      avatar
       role {
         id
         name
