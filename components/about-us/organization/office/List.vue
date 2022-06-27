@@ -61,9 +61,9 @@
 import { defineComponent, ref } from '@nuxtjs/composition-api'
 import { useMutation } from '@vue/apollo-composable'
 import useNTableCursorRemoteData from '@/components/nboard/composables/useNTableCursorRemoteData'
-import { GET_OFFICES } from '@/graphql/setting/office/queries/GET_OFFICES.js'
-import { DESTROY_OFFICES } from '@/graphql/setting/office/mutations/DESTROY_OFFICES'
-import { CHANGE_OFFICE_SEQUENCE } from '@/graphql/setting/office/mutations/CHANGE_OFFICE_SEQUENCE'
+import { GET_OFFICES } from '@/graphql/about-us/organization/office/queries/GET_OFFICES.js'
+import { DESTROY_OFFICES } from '@/graphql/about-us/organization/office/mutations/DESTROY_OFFICES'
+import { CHANGE_OFFICE_SEQUENCE } from '@/graphql/about-us/organization/office/mutations/CHANGE_OFFICE_SEQUENCE'
 
 export default defineComponent({
   setup(props, { emit }) {

@@ -1,14 +1,16 @@
 <template>
   <div>
     <NAppHeader>
-      <h1>General Setting</h1>
-      <p>Setting &raquo; General</p>
+      <h1>Organization</h1>
+      <p>About Us &raquo; Organization &raquo; Section</p>
       <template slot="after">
         <NTabs :tabs="tabs" />
       </template>
     </NAppHeader>
     <NAppMain>
-      <SettingGeneralForm />
+      <NPanel>
+        <AboutUsOrganizationFormSection />
+      </NPanel>
     </NAppMain>
   </div>
 </template>
@@ -22,12 +24,16 @@ export default defineComponent({
   setup() {
     const tabs = ref([
       {
-        name: 'Site',
-        to: '/setting/general#site',
+        name: 'List',
+        to: '/about-us/organization/structure',
       },
       {
-        name: 'Contact',
-        to: '/setting/general#contact',
+        name: 'Section',
+        to: '/about-us/organization/section',
+      },
+      {
+        name: 'Office',
+        to: '/about-us/organization/office',
       },
     ])
 

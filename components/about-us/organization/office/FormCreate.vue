@@ -32,10 +32,10 @@ import { defineComponent, useContext } from '@nuxtjs/composition-api'
 import { useMutation } from '@vue/apollo-composable'
 
 import useNTableCursorRemoteData from '@/components/nboard/composables/useNTableCursorRemoteData'
-import useFormOffice from '@/components/setting/office/useFormOffice'
+import useFormOffice from '@/components/about-us/organization/office/useFormOffice'
 
-import { CREATE_OFFICE } from '@/graphql/setting/office/mutations/CREATE_OFFICE'
-import { GET_OFFICES } from '@/graphql/setting/office/queries/GET_OFFICES'
+import { CREATE_OFFICE } from '@/graphql/about-us/organization/office/mutations/CREATE_OFFICE'
+import { GET_OFFICES } from '@/graphql/about-us/organization/office/queries/GET_OFFICES'
 
 export default defineComponent({
   setup(props, { emit }) {
