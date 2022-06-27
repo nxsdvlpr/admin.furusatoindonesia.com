@@ -2,10 +2,12 @@
   <div>
     <NAppHeader>
       <h1>Office</h1>
-      <p>Setting &raquo; Office &raquo; Create</p>
+      <p>About Us &raquo; Organization &raquo; Office &raquo; Create</p>
       <template slot="more">
         <NButtonGroup>
-          <NButton class="outline" @click="$router.push('/setting/office')"
+          <NButton
+            class="outline"
+            @click="$router.push('/about-us/organization/office')"
             >&laquo; OFFICES</NButton
           >
         </NButtonGroup>
@@ -16,7 +18,10 @@
     </NAppHeader>
     <NAppMain>
       <NPanel>
-        <SettingOfficeFormCreate @save="onSave" @discard="onDiscard" />
+        <AboutUsOrganizationOfficeFormCreate
+          @save="onSave"
+          @discard="onDiscard"
+        />
       </NPanel>
     </NAppMain>
   </div>
@@ -40,11 +45,11 @@ export default defineComponent({
     ])
 
     const onSave = () => {
-      router.push('/setting/office')
+      router.push('/about-us/organization/office')
     }
 
     const onDiscard = () => {
-      router.push('/setting/office')
+      router.push('/about-us/organization/office')
     }
 
     return {

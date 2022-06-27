@@ -1,19 +1,18 @@
 <template>
   <div>
     <NAppHeader>
-      <h1>Organization Structure</h1>
-      <p>About Us &raquo; Organization Structure &raquo; Lists</p>
+      <h1>Office</h1>
+      <p>About Us &raquo; Organization &raquo; Office &raquo; Lists</p>
       <template slot="after">
         <NTabs :tabs="tabs" />
       </template>
     </NAppHeader>
     <NAppMain>
       <NPanel>
-        <AboutUsOrganizationStructureList
+        <AboutUsOrganizationOfficeList
           @row-tap="onRowTap"
           @create="onCreate"
           @delete="onDelete"
-          @members-click="onMembersClick"
         />
       </NPanel>
     </NAppMain>
@@ -46,25 +45,20 @@ export default defineComponent({
     ])
 
     const onRowTap = (row) => {
-      router.push(`/about-us/organization/structure/${row.id}/edit#overview`)
+      router.push(`/about-us/organization/office/${row.id}/edit#overview`)
     }
 
     const onCreate = () => {
-      router.push('/about-us/organization/structure/create#overview')
+      router.push('/about-us/organization/office/create#overview')
     }
 
     const onDelete = (rows) => {}
-
-    const onMembersClick = (row) => {
-      router.push(`/about-us/organization/structure/${row.id}/member`)
-    }
 
     return {
       tabs,
       onRowTap,
       onCreate,
       onDelete,
-      onMembersClick,
     }
   },
 })

@@ -2,9 +2,11 @@
   <div>
     <NAppHeader>
       <h1>{{ office.title }}</h1>
-      <p>Setting &raquo; Office &raquo; Detail</p>
+      <p>About Us &raquo; Organization &raquo; Office &raquo; Detail</p>
       <template slot="more">
-        <NButton class="outline" @click="$router.push('/setting/office')"
+        <NButton
+          class="outline"
+          @click="$router.push('/about-us/organization/office')"
           >&laquo; OFFICES</NButton
         >
       </template>
@@ -14,7 +16,10 @@
     </NAppHeader>
     <NAppMain>
       <NPanel>
-        <SettingOfficeFormEdit @save="onSave" @discard="onDiscard" />
+        <AboutUsOrganizationOfficeFormEdit
+          @save="onSave"
+          @discard="onDiscard"
+        />
       </NPanel>
     </NAppMain>
   </div>
@@ -28,7 +33,7 @@ import {
   ref,
 } from '@nuxtjs/composition-api'
 import { useQuery, useResult } from '@vue/apollo-composable'
-import { GET_OFFICE } from '@/graphql/setting/office/queries/GET_OFFICE'
+import { GET_OFFICE } from '@/graphql/about-us/organization/office/queries/GET_OFFICE'
 
 export default defineComponent({
   meta: {
@@ -47,11 +52,11 @@ export default defineComponent({
     ])
 
     const onSave = () => {
-      router.push('/setting/office')
+      router.push('/about-us/organization/office')
     }
 
     const onDiscard = () => {
-      router.push('/setting/office')
+      router.push('/about-us/organization/office')
     }
 
     const { result } = useQuery(GET_OFFICE, {

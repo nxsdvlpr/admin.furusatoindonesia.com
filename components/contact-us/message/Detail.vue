@@ -5,29 +5,47 @@
         <tr>
           <td>Date</td>
           <td class="p-4">:</td>
-          <td v-if="message.createdAt">
-            {{ $__.formatDate(message.createdAt) }}
+          <td>
+            <NLazy :loading="loading" class="font-medium">
+              {{ $__.formatDate(message.createdAt) }}
+            </NLazy>
           </td>
         </tr>
         <tr>
           <td>Fullname</td>
           <td class="p-4">:</td>
-          <td>{{ message.fullname }}</td>
+          <td>
+            <NLazy :loading="loading" class="font-medium">
+              {{ message.fullname }}
+            </NLazy>
+          </td>
         </tr>
         <tr>
           <td>Phone</td>
           <td class="p-4">:</td>
-          <td>{{ message.phone }}</td>
+          <td>
+            <NLazy :loading="loading" class="font-medium">
+              {{ message.phone }}
+            </NLazy>
+          </td>
         </tr>
         <tr>
           <td>Email</td>
           <td class="p-4">:</td>
-          <td>{{ message.email }}</td>
+          <td>
+            <NLazy :loading="loading" class="font-medium">
+              {{ message.email }}
+            </NLazy>
+          </td>
         </tr>
         <tr>
           <td>Body</td>
           <td class="p-4">:</td>
-          <td class="whitespace-pre-wrap">{{ message.body }}</td>
+          <td class="whitespace-pre-wrap">
+            <NLazy :loading="loading" class="font-medium">{{
+              message.body
+            }}</NLazy>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -70,7 +88,7 @@ export default defineComponent({
       },
     ]
 
-    const { result } = useQuery(GET_MESSAGE, {
+    const { result, loading } = useQuery(GET_MESSAGE, {
       id: route.value.params.message_id,
     })
 
@@ -92,7 +110,7 @@ export default defineComponent({
       return data.message
     })
 
-    return { message }
+    return { message, loading }
   },
 })
 </script>
