@@ -8,8 +8,8 @@
       <NPanel>
         <ContactUsMessageList @row-tap="onRowTap" @delete="onDelete" />
       </NPanel>
+      <nuxt-child />
     </NAppMain>
-    <nuxt-child />
   </div>
 </template>
 

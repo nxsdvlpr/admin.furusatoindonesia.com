@@ -135,11 +135,6 @@ export const state = () => ({
           accessName: 'home',
         },
         {
-          label: 'Office',
-          to: '/setting/office',
-          accessName: 'home',
-        },
-        {
           label: 'Users Management',
           to: '/setting/user',
           accessName: 'setting_user_management',
