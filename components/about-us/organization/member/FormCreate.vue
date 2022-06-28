@@ -33,7 +33,7 @@
         :feedback="validation.error('organizationMember.image')"
         label="Image"
       >
-        <ImageUpload
+        <UiImageUpload
           path="/about-us/organization-member/"
           :src="form.organizationMember.image"
           @image-changed="onImageChanged"

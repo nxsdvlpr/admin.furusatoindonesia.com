@@ -46,10 +46,18 @@
       </NInputGroup>
 
       <NInputGroup :feedback="validation.error('resource.image')" label="Image">
-        <ImageUpload
+        <UiImageUpload
           path="/resource/"
           :src="form.resource.image"
           @image-changed="onImageChanged"
+        />
+      </NInputGroup>
+
+      <NInputGroup :feedback="validation.error('resource.file')" label="File">
+        <UiFileUpload
+          path="/resource/file/"
+          :src="form.resource.file"
+          @file-changed="onFileChanged"
         />
       </NInputGroup>
 
@@ -171,6 +179,10 @@ export default defineComponent({
       form.resource.image = file.url
     }
 
+    const onFileChanged = (file) => {
+      form.resource.file = file.url
+    }
+
     onUpdateResourceDone(({ data }) => {
       $toast.success('Resource successfully updated!')
       emit('save')
@@ -185,6 +197,7 @@ export default defineComponent({
       form,
       loading,
       onImageChanged,
+      onFileChanged,
       onSave,
       onDiscard,
     }

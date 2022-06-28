@@ -34,6 +34,13 @@
           v-model="options[index].valueJa"
         />
       </div>
+      <UiImageUpload
+        v-if="option.type === 'image'"
+        path="/general/"
+        :src="options[index].value"
+        :options="{ overwrite: true, public_id: 'favicon' }"
+        @image-changed="onImageChanged($event, index)"
+      />
     </NInputGroup>
 
     <NFormAction>
@@ -41,8 +48,6 @@
         Save
       </NButton>
     </NFormAction>
-
-    {{ props }}
   </NFormSection>
 </template>
 
@@ -112,6 +117,11 @@ export default defineComponent({
       })
     }
 
+    const onImageChanged = (file, index) => {
+      console.log(file)
+      options.value[index].value = file.url
+    }
+
     onUpdateOptionsDone(({ data }) => {
       $toast.success('Setting successfully updated!')
       emit('save')
@@ -126,6 +136,7 @@ export default defineComponent({
       options,
       displayLanguage,
       loading,
+      onImageChanged,
     }
   },
 })

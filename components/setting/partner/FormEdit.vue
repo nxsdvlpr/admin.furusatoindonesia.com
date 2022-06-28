@@ -10,7 +10,7 @@
       </NInputGroup>
 
       <NInputGroup :feedback="validation.error('partner.image')" label="Image">
-        <ImageUpload
+        <UiImageUpload
           path="/setting/partner/"
           :src="form.partner.image"
           @image-changed="onImageChanged"

@@ -40,7 +40,7 @@
         :feedback="validation.error('missionVision.image')"
         label="Image"
       >
-        <ImageUpload
+        <UiImageUpload
           path="/about-us/mission-vision/"
           :src="form.missionVision.image"
           @image-changed="onImageChanged"

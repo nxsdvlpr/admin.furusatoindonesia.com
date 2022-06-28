@@ -34,7 +34,7 @@
       </NInputGroup>
 
       <NInputGroup :feedback="validation.error('blog.image')" label="Image">
-        <ImageUpload
+        <UiImageUpload
           path="/publication/blog/"
           :src="form.blog.image"
           @image-changed="onImageChanged"

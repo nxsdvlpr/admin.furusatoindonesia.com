@@ -45,7 +45,7 @@
       </NInputGroup>
 
       <NInputGroup :feedback="validation.error('project.image')" label="Image">
-        <ImageUpload
+        <UiImageUpload
           path="/program/project/"
           :src="form.project.image"
           @image-changed="onImageChanged"

@@ -1,21 +1,43 @@
 <template>
   <div class="flex items-center">
     <file-upload
-      ref="imageFile"
+      ref="fileUpload"
+      input-id="fileUpload"
       class="cursor-pointer"
-      extensions="jpg,jpeg,png"
-      accept="image/png,image/jpeg"
+      extensions="doc,docx,pdf,csv,xls,xlsx,ppt,pptx"
+      accept="application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf,text/csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation"
       name="file"
       :multiple="false"
       :post-action="uploadEndpoint + path"
       :value="files"
       :headers="headers"
+      :data="options"
       @input="updateValue"
     >
-      <NAvatar v-if="rounded" :src="image" class="xxl" />
-      <NThumbnail v-else :src="image" class="xxl" />
+      <NButton
+        class="outline"
+        :disabled="$refs.fileUpload && $refs.fileUpload.active"
+      >
+        {{
+          $refs.fileUpload && $refs.fileUpload.active
+            ? 'Uploading...'
+            : 'Browse...'
+        }}
+      </NButton>
     </file-upload>
-    <div v-if="error" class="text-danger ml-2 text-xs">Error: {{ error }}</div>
+    <span v-if="error" class="text-danger ml-2 text-xs">
+      Error: {{ error }}
+    </span>
+    <div v-if="resultFile" class="">
+      <a
+        :href="resultFile"
+        class="text-secondary ml-2 text-xs hover:underline"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {{ resultFile.substring(resultFile.lastIndexOf('/') + 1) }}
+      </a>
+    </div>
   </div>
 </template>
 
@@ -46,11 +68,15 @@ export default defineComponent({
       type: String,
       default: null,
     },
+    options: {
+      type: Object,
+      default: () => ({}),
+    },
   },
   setup(props, { emit }) {
     const files = ref([])
 
-    const image = ref(null)
+    const resultFile = ref(null)
 
     const { env, $apolloHelpers } = useContext()
 
@@ -75,14 +101,14 @@ export default defineComponent({
 
     watch(file, (value) => {
       if (value.success) {
-        emit('image-changed', value.response)
+        emit('file-changed', value.response)
       }
     })
 
     watch(
       source,
       (value) => {
-        image.value = value
+        resultFile.value = value
       },
       { immediate: true }
     )
@@ -92,14 +118,13 @@ export default defineComponent({
       if (!value[0]) {
         return false
       }
-      refs.imageFile.active = true
+      refs.fileUpload.active = true
     }
 
     return {
+      resultFile,
       files,
-      image,
       error,
-      file,
       headers,
       uploadEndpoint,
       updateValue,

@@ -49,7 +49,7 @@
         :feedback="validation.error('profile.avatar')"
         label="Avatar"
       >
-        <ImageUpload
+        <UiImageUpload
           path="/user/"
           :src="form.profile.avatar"
           @image-changed="onAvatarChanged"
