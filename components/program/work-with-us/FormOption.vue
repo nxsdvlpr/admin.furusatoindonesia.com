@@ -22,7 +22,7 @@
       </NInputGroup>
 
       <NInputGroup :feedback="validation.error('page.image')" label="Image">
-        <ImageUpload
+        <UiImageUpload
           path="/program/work-with-us/"
           :src="form.page.image"
           @image-changed="onImageChanged"

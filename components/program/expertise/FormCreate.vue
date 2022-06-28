@@ -51,7 +51,7 @@
         :feedback="validation.error('expertise.image')"
         label="Image"
       >
-        <ImageUpload
+        <UiImageUpload
           path="/program/expertise/"
           :src="form.expertise.image"
           @image-changed="onImageChanged"

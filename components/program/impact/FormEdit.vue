@@ -27,7 +27,7 @@
       </NInputGroup>
 
       <NInputGroup :feedback="validation.error('impact.image')" label="Image">
-        <ImageUpload
+        <UiImageUpload
           path="/program/impact/"
           :src="form.impact.image"
           @image-changed="onImageChanged"

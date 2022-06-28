@@ -46,7 +46,7 @@
         :feedback="validation.error('testimony.avatar')"
         label="Avatar"
       >
-        <ImageUpload
+        <UiImageUpload
           path="/testimony/"
           :src="form.testimony.avatar"
           @image-changed="onAvatarChanged"
